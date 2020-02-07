@@ -1,11 +1,10 @@
-# NG SALES ITO
+# [UI Sales In](https://github.com/stbndev) &middot;  [![npm version](https://img.shields.io/badge/license-The%20Chicken%20Dance%20License-blue)](https://github.com/supertunaman/cdl) [![npm version](https://img.shields.io/badge/donaciones-invitame%20una%20chela-blue)](https://drive.google.com/file/d/1OywGIRUcgP2goa4HpxHlbWji04L5pedO/view?usp=sharing)
 
-
-NG SALES ITO es un motor de un punto de venta simple que cubre los elementos necesarios para implementarlo en tu changarro, negocio o para actualizar y ajustarlo a tu necesidades.
+UI SALES ITO es la parte visual responsiba de un punto de venta simple que cubre los elementos necesarios para implementarlo en tu changarro, negocio o para actualizar y ajustarlo a tu necesidades.
 
 ## Instalacion
 
-El motor esta creado con NET y es necesario usar el IDE de su casa [Visual Studio](https://visualstudio.microsoft.com/es/vs/community/) ; ahora es multiplataforma y tiene una version 'gratuita'.
+El motor esta creado con Angular y es indispensable que este en tu ordenador [Node JS](nodejs.org) , [Angular CLI](https://cli.angular.io) y/o (opcional) usar para ediccion del codigo el editor [Visual Studio Code](https://code.visualstudio.com/) ; ahora es multiplataforma y tiene una version 'gratuita'.
 
 
 ```bash
