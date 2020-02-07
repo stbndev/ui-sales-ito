@@ -1,0 +1,10 @@
+.div-table-container {
+    display: flex; /* or inline-flex */
+    
+}
+
+.div-column{
+    display: flex;
+    flex-direction: column;
+    padding-right: 70px;
+}

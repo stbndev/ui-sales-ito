@@ -1,0 +1,35 @@
+<!-- <p>products works!</p> -->
+<div id='divSubMenu'>
+  <button (click)='openDialog()' mat-icon-button matTooltip='Agregar nuevo producto'>
+    <mat-icon>add_circle_outline</mat-icon>
+  </button>
+
+  <button mat-icon-button>
+    <mat-icon>create</mat-icon>
+  </button>
+
+  <button mat-icon-button>
+    <mat-icon>delete_sweep</mat-icon>
+  </button>
+</div>
+
+<br>
+<!-- start here another component -->
+
+<products-addset></products-addset>
+<!-- end here another component -->
+<br>
+
+<mat-grid-list cols='5' rowHeight='100px'>
+  <mat-grid-tile *ngFor='let item of products' [colspan]='1' [rowspan]='1' (click)="onSelect($event, item)">
+    <!-- -->
+    <!-- class='tile-image' -->
+    <img src='./../../assets/imgs/sol-tubi-papa.jpg'>
+    <mat-grid-tile-header>
+      <h3>{{item.name}} </h3>
+    </mat-grid-tile-header>
+    <mat-grid-tile-footer>
+      <h2>{{item.unitary_price}}</h2>
+    </mat-grid-tile-footer>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,56 @@
+<mat-card>
+    <mat-card-title>PRODUCTO </mat-card-title>
+    <mat-card-subtitle> {{model.name}} </mat-card-subtitle>
+    <mat-card-content>
+        <div class="div-table-container">
+            <div class="div-column">
+                <img [src]="imageSrc" (error)="onErrorDefaultPic()" alt="Preview Img" width="250" height="250"
+                    id="productImg">
+                <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen">
+                <input type="button" value="Remover">
+                <output id="list"></output>
+                <br>
+            </div>
+            <div class="div-column">
+                <mat-form-field>
+                    <input matInput placeholder='idproducts' [(ngModel)]='model.idproducts'>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder='Nombre' [(ngModel)]='model.name'>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder='Código de Barras o clave' name='barcode' [(ngModel)]='model.barcode'>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder='Estatus' name='idcstatus' [(ngModel)]='model.idcstatus'>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Estatus Actual</mat-label>
+                    <!--  (change)="onEventSelection($event.value)-->
+                    <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)">
+                        <mat-option *ngFor="let i of liststatus" [value]="i.value">
+                            {{i.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder='Precio' name='unitary_price' [(ngModel)]='model.unitary_price'>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder='Costo' name='unitary_cost' [(ngModel)]='model.unitary_cost'>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder='Existencias' name='existence' [(ngModel)]='model.existence'>
+                </mat-form-field>
+            </div>
+
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <!-- <button mat-raised-button type="submit" color="primary">Submit</button> -->
+        <button mat-button (click)='onSaveForm()'>ACEPTAR</button>
+        <button mat-button>CANCELAR</button>
+    </mat-card-actions>
+</mat-card>
