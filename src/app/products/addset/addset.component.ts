@@ -27,7 +27,8 @@ export class AddsetComponent implements OnInit {
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
   onErrorDefaultPic() {
-    this.imageSrc = './../../assets/imgs/defaultimg.jpeg';
+    // this.imageSrc = './../../assets/imgs/defaultimg.jpeg';
+    this.imageSrc = 'https://dl.dropbox.com/s/47do5hjkf8tmtbq/1581158330.jpg'
   }
 
   onChangeFileUpload(fileInput: any) {
