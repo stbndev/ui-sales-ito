@@ -5,6 +5,7 @@ import { CSTATUS } from "./../../config/enums-global.enum";
 // import { ConfigService } from "./../../config/config.service";
 import { ConfigService } from "./../../config/config-service.service";
 
+
 export class Productsmodel2 {
   // idproducts: number;
   // name: String;
@@ -39,6 +40,24 @@ export class AddsetComponent implements OnInit {
         this.imageSrc = e.target['result'];
       });
       reader.readAsDataURL(fileInput.target.files[0]);
+
+      // start
+      let files = this.elementRef.nativeElement.querySelector('#ProfilePhoto').files;
+      let formData: FormData = new FormData();
+
+      let file = files[0];
+      formData.append('ProfilePhoto', file, file.name);
+
+      this.service.Upload('DocFile', formData).subscribe(data => {
+        if (data.response) {
+          console.dir(data);
+          this.service.changeListProductsDataAdd(data.result);
+        }
+      }, (error) => {
+        console.dir(error);
+      });
+
+      // end
     }
   }
 

@@ -6,7 +6,7 @@
             <div class="div-column">
                 <img [src]="imageSrc" (error)="onErrorDefaultPic()" alt="Preview Img" width="250" height="250"
                     id="productImg">
-                <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen">
+                <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen" name="ProfilePhoto" id="ProfilePhoto" >
                 <input type="button" value="Remover">
                 <output id="list"></output>
                 <br>
