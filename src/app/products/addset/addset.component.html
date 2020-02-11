@@ -4,9 +4,10 @@
     <mat-card-content>
         <div class="div-table-container">
             <div class="div-column">
-                <img [src]="imageSrc" (error)="onErrorDefaultPic()" alt="Preview Img" width="250" height="250"
+                <img [src]="model.pathimg" (error)="onErrorDefaultPic()" alt="{{model.name}}" width="250" height="250"
                     id="productImg">
-                <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen" name="ProfilePhoto" id="ProfilePhoto" >
+                <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen"
+                    name="ProfilePhoto" id="ProfilePhoto">
                 <input type="button" value="Remover">
                 <output id="list"></output>
                 <br>
@@ -14,6 +15,9 @@
             <div class="div-column">
                 <mat-form-field>
                     <input matInput placeholder='idproducts' [(ngModel)]='model.idproducts'>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder='pathimg' [(ngModel)]='model.pathimg'>
                 </mat-form-field>
                 <mat-form-field>
                     <input matInput placeholder='Nombre' [(ngModel)]='model.name'>

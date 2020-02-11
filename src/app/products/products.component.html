@@ -24,7 +24,7 @@
   <mat-grid-tile *ngFor='let item of products' [colspan]='1' [rowspan]='1' (click)="onSelect($event, item)">
     <!-- -->
     <!-- class='tile-image' -->
-    <img src='https://dl.dropbox.com/s/47do5hjkf8tmtbq/1581158330.jpg'>
+    <img src='{{item.pathimg}}'>
     <mat-grid-tile-header>
       <h3>{{item.name}} </h3>
     </mat-grid-tile-header>

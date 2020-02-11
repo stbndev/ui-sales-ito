@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
   this.getProducts();
+  //TODO LOG 
  
   this.service.productsData.subscribe(
     res=> {

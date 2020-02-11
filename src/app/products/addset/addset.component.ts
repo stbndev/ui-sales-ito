@@ -6,11 +6,11 @@ import { CSTATUS } from "./../../config/enums-global.enum";
 import { ConfigService } from "./../../config/config-service.service";
 
 
-export class Productsmodel2 {
-  // idproducts: number;
-  // name: String;
-  constructor(public idproducts: number, public name: String) { }
-}
+// export class Productsmodel2 {
+//   // idproducts: number;
+//   // name: String;
+//   constructor(public idproducts: number, public name: String) { }
+// }
 
 @Component({
   selector: 'products-addset',
@@ -20,16 +20,19 @@ export class Productsmodel2 {
 export class AddsetComponent implements OnInit {
   // setup initial
   //model: any ;   
-  model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0);
-  selected = '2';
+  model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, '');
+  selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
 
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
+  onEventSelection(event){
+    this.model.idcstatus =  event;
+  }
   onErrorDefaultPic() {
     // this.imageSrc = './../../assets/imgs/defaultimg.jpeg';
-    this.imageSrc = 'https://dl.dropbox.com/s/47do5hjkf8tmtbq/1581158330.jpg'
+    this.imageSrc = 'https://dl.dropbox.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'
   }
 
   onChangeFileUpload(fileInput: any) {
@@ -41,7 +44,6 @@ export class AddsetComponent implements OnInit {
       });
       reader.readAsDataURL(fileInput.target.files[0]);
 
-      // start
       let files = this.elementRef.nativeElement.querySelector('#ProfilePhoto').files;
       let formData: FormData = new FormData();
 
@@ -49,15 +51,14 @@ export class AddsetComponent implements OnInit {
       formData.append('ProfilePhoto', file, file.name);
 
       this.service.Upload('DocFile', formData).subscribe(data => {
-        if (data.response) {
+        if (data) {
           console.dir(data);
-          this.service.changeListProductsDataAdd(data.result);
+          // this.service.changeListProductsDataAdd(data.result);
+          this.model.pathimg = data;
         }
       }, (error) => {
         console.dir(error);
       });
-
-      // end
     }
   }
 
@@ -86,6 +87,7 @@ export class AddsetComponent implements OnInit {
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
   ngOnInit() {
+    
     this.service.productsData.subscribe(res => {
       this.model = res;
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
