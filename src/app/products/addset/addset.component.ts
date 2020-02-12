@@ -2,21 +2,14 @@ import { AfterViewInit, ElementRef, Component, OnInit } from '@angular/core';
 import { Productsmodel } from "./../../models/productsmodel";
 import { Tipos } from "./../../config/enums-global.enum";
 import { CSTATUS } from "./../../config/enums-global.enum";
-// import { ConfigService } from "./../../config/config.service";
 import { ConfigService } from "./../../config/config-service.service";
-
-
-// export class Productsmodel2 {
-//   // idproducts: number;
-//   // name: String;
-//   constructor(public idproducts: number, public name: String) { }
-// }
 
 @Component({
   selector: 'products-addset',
   templateUrl: './addset.component.html',
   styleUrls: ['./addset.component.css']
 })
+
 export class AddsetComponent implements OnInit {
   // setup initial
   //model: any ;   
@@ -31,12 +24,10 @@ export class AddsetComponent implements OnInit {
     this.model.idcstatus =  event;
   }
   onErrorDefaultPic() {
-    // this.imageSrc = './../../assets/imgs/defaultimg.jpeg';
     this.imageSrc = 'https://dl.dropbox.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'
   }
 
   onChangeFileUpload(fileInput: any) {
-    // alert('img change sucess');
     if (fileInput.target.files && fileInput.target.files[0]) {
       const reader = new FileReader();
       reader.onload = ((e) => {
