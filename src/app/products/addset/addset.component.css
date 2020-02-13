@@ -11,4 +11,11 @@
 .hideComponent{
     /* visibility: hidden; */
     display: none;
+    /* display: block; */
+}
+
+.showComponent{
+    /* visibility: hidden; */
+    display: block;
+    /* display: block; */
 }

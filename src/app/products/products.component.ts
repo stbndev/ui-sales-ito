@@ -34,7 +34,18 @@ export class ProductsComponent implements OnInit {
   }
 
   // Events
-
+  ProductAddSet() {
+    // alert('test');
+    var element = document.getElementById("divProductAddSet");
+    console.dir(element);
+    if (element.className === 'hideComponent') {
+      element.classList.remove("hideComponent");
+      element.classList.add("showComponent");
+    } else {
+      element.classList.remove("showComponent");
+      element.classList.add("hideComponent");
+    }
+  }
   onSelect(event, item) {
     let tmp = Object.assign(this.model, item);
     this.service.changeProductsData(tmp);
@@ -42,7 +53,7 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.products = [];
-    
+
 
     this.service.Get('products').subscribe((data) => {
       if (data.response) {
