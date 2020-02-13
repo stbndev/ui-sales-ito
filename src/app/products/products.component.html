@@ -21,27 +21,31 @@
 <br>
 <mat-form-field>
   <mat-label>Mostrar</mat-label>
-  <!--  (change)="onEventSelection($event.value)-->
-  <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)">
-      <mat-option *ngFor="let i of liststatus" [value]="i.value">
-          {{i.viewValue}}
-      </mat-option>
+  <!--  (change)="onEventSelection($event.value)
+   (selectionChange)="onEventSelection($event.value)"
+  -->
+  <mat-select [(value)]="selected">
+    <mat-option *ngFor="let i of liststatus" [value]="i.value">
+      {{i.viewValue}}
+    </mat-option>
   </mat-select>
 </mat-form-field>
 
 <br>
 <mat-grid-list cols='5' rowHeight='100px'>
-  <mat-grid-tile *ngFor='let item of products' [colspan]='1' [rowspan]='1' (click)="onSelect($event, item)">
-    <!-- 
+  <div *ngFor='let item of products'>
+    <mat-grid-tile *ngIf='(item.idcstatus == selected)' [colspan]='1' [rowspan]='1' (click)="onSelect($event, item)">
+      <!-- 
        <button *ngIf="(item.data.type == 1)">{{item.data.name}}</button>
     -->
-    <!-- class='tile-image' -->
-    <img src='{{item.pathimg}}'>
-    <mat-grid-tile-header>
-      <h3>{{item.name}} </h3>
-    </mat-grid-tile-header>
-    <mat-grid-tile-footer>
-      <h2>{{item.unitary_price}}</h2>
-    </mat-grid-tile-footer>
-  </mat-grid-tile>
+      <!-- class='tile-image' -->
+      <img src='{{item.pathimg}}'>
+      <mat-grid-tile-header>
+        <h3>{{item.name}} </h3>
+      </mat-grid-tile-header>
+      <mat-grid-tile-footer>
+        <h2>{{item.unitary_price}}</h2>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </div>
 </mat-grid-list>

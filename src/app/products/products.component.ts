@@ -12,6 +12,8 @@ import { Tipos } from "./../config/enums-global.enum";
 })
 export class ProductsComponent implements OnInit {
   products: any = [];
+  selected = '1';
+  productstmp: any = [];
   model: Productsmodel;
   liststatus = CSTATUS;
 
@@ -19,7 +21,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
-    //TODO LOG 
 
     this.service.productsData.subscribe(
       res => {
@@ -33,9 +34,7 @@ export class ProductsComponent implements OnInit {
   }
 
   // Events
-  filterItemsOfType() {
-    return this.products.filter(x => x.data.type == 1);
-  }
+
   onSelect(event, item) {
     let tmp = Object.assign(this.model, item);
     this.service.changeProductsData(tmp);
@@ -43,7 +42,7 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.products = [];
-    this.productstmp = this.products;
+    
 
     this.service.Get('products').subscribe((data) => {
       if (data.response) {
