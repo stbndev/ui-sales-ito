@@ -1,16 +1,9 @@
-import { AfterViewInit, ElementRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ElementRef, Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Productsmodel } from "./../../models/productsmodel";
 import { Tipos } from "./../../config/enums-global.enum";
 import { CSTATUS } from "./../../config/enums-global.enum";
-// import { ConfigService } from "./../../config/config.service";
 import { ConfigService } from "./../../config/config-service.service";
 
-
-// export class Productsmodel2 {
-//   // idproducts: number;
-//   // name: String;
-//   constructor(public idproducts: number, public name: String) { }
-// }
 
 @Component({
   selector: 'products-addset',
@@ -24,16 +17,40 @@ export class AddsetComponent implements OnInit {
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
+  //@Output() open: EventEmitter<any> = new EventEmitter();
+
 
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
-  onToggleAction(){
+
+  onDelete() {
+    let tmpmethod: Tipos;
+    let tmpendpoint: String = 'products';
+
+    if (this.model.idproducts > 0) {
+      tmpmethod = Tipos.DELETE
+      tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
+
+      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
+        if (data.response) {
+          console.dir(data);
+          this.service.changeListProductsDataAdd(data.result);
+        }
+      }, (error) => {
+        console.dir(error);
+      });
+    } else {
+      alert('Debe seleccionar un productos')
+    }
+  }
+
+  onToggleAction() {
     console.dir('elevate');
     return 'display: none;';
   }
 
-  onEventSelection(event){
-    this.model.idcstatus =  event;
+  onEventSelection(event) {
+    this.model.idcstatus = event;
   }
   onErrorDefaultPic() {
     // this.imageSrc = './../../assets/imgs/defaultimg.jpeg';
@@ -67,6 +84,7 @@ export class AddsetComponent implements OnInit {
     }
   }
 
+
   onSaveForm() {
     let tmpmethod: Tipos;
     let tmpendpoint: String = 'products';
@@ -86,13 +104,14 @@ export class AddsetComponent implements OnInit {
       console.dir(error);
     });
   }
+
   ngAfterViewInit() {
     // <input type='text' id='loginInput' #abc/>
     // this.abc.nativeElement.value
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
   ngOnInit() {
-    
+
     this.service.productsData.subscribe(res => {
       this.model = res;
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';

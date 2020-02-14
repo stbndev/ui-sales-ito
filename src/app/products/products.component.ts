@@ -11,13 +11,16 @@ import { AddsetComponent } from "./addset/addset.component";
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+
 export class ProductsComponent implements OnInit {
+
+
   products: any = [];
   selected = '1';
   productstmp: any = [];
   model: Productsmodel;
   liststatus = CSTATUS;
-
+  @ViewChild(AddsetComponent, { static: false }) hijito: AddsetComponent;
 
   constructor(protected service: ConfigService) { }
 
@@ -36,9 +39,19 @@ export class ProductsComponent implements OnInit {
   }
 
   // Events
-  ProductAddSet() {
+  ProductDelete() {
+    this.hijito.onDelete();
+  }
+  ProductSet() {
+    this.hijito.onSaveForm();
+  }
+
+  // onOpen(e){
+  //   console.dir(e);
+  // }
+  ProductAdd() {
     // alert('test');
-    let tmpProduct : Productsmodel;
+    let tmpProduct = new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
     this.service.changeProductsData(tmpProduct);
 
     var element = document.getElementById("divProductAddSet");
@@ -53,15 +66,13 @@ export class ProductsComponent implements OnInit {
     // }
   }
   onSelect(event, item) {
-    this.ProductAddSet();
+    this.ProductAdd();
     let tmp = Object.assign(this.model, item);
     this.service.changeProductsData(tmp);
   }
 
   getProducts() {
     this.products = [];
-
-
     this.service.Get('products').subscribe((data) => {
       if (data.response) {
         this.service.changeListProductsData(data.result.slice());

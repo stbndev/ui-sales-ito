@@ -1,22 +1,24 @@
 <!-- <p>products works!</p> -->
 <div id='divSubMenu'>
-  <button (click)='ProductAddSet()' mat-icon-button matTooltip='Agregar nuevo producto'>
-    <mat-icon>add_circle_outline</mat-icon>
+  <button (click)='ProductAdd()' mat-icon-button matTooltip='Agregar nuevo producto'>
+    <mat-icon color="primary">add_circle_outline</mat-icon>
+  </button>
+  <!-- color="primary" svgIcon="archive"></mat-icon>
+  <mat-icon color="accent" svgIcon="archive"></mat-icon>
+  <mat-icon color="warn" sv -->
+  <button (click)='ProductSet()' mat-icon-button>
+    <mat-icon color="accent" >create</mat-icon>
   </button>
 
-  <button mat-icon-button>
-    <mat-icon>create</mat-icon>
-  </button>
-
-  <button mat-icon-button>
-    <mat-icon>delete_sweep</mat-icon>
+  <button (click)='ProductDelete()' mat-icon-button>
+    <mat-icon color="warn">delete_sweep</mat-icon>
   </button>
 </div>
 
 <br>
 <!-- start here another component -->
 
-<products-addset #component-child></products-addset>
+<products-addset></products-addset>
 <!-- end here another component -->
 <br>
 <mat-form-field>
