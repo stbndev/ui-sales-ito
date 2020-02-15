@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import { Tipos } from './enums-global.enum';
+import { eTipos, eCSTATUS } from './enums-global.enum';
 import { Productsmodel } from "./../models/productsmodel";
 
 @Injectable({
@@ -34,7 +34,6 @@ export class ConfigService {
   changeListProductsData(listproductsargs: []) {
     this._listproductsSource.next(listproductsargs)
   }
-
   changeListProductsDataAdd(pgs: Productsmodel) {
     let found = this._listproductsSource.getValue().find(element => element.idproducts == pgs.idproducts);
     if (found) {
@@ -54,16 +53,16 @@ export class ConfigService {
   Make(serviceName: String, tipo: any, data: any): Observable<any> {
 
     switch (tipo) {
-      case Tipos.POST:
+      case eTipos.POST:
         return this.http.post(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
 
-      case Tipos.PUT:
+      case eTipos.PUT:
         return this.http.put(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
 
-      case Tipos.PATCH:
+      case eTipos.PATCH:
         return this.http.patch(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
 
-      case Tipos.DELETE:
+      case eTipos.DELETE:
         return this.http.delete(`${this._uriResources}${serviceName}`).pipe(map(this.extractData));
 
       default:

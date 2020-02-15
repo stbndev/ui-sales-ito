@@ -1,6 +1,6 @@
 import { AfterViewInit, ElementRef, Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Productsmodel } from "./../../models/productsmodel";
-import { Tipos } from "./../../config/enums-global.enum";
+import { eTipos, eCSTATUS } from "./../../config/enums-global.enum";
 import { CSTATUS } from "./../../config/enums-global.enum";
 import { ConfigService } from "./../../config/config-service.service";
 
@@ -22,31 +22,39 @@ export class AddsetComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
-
-  onDelete() {
-    let tmpmethod: Tipos;
+  HideElement(iditem) {
+    var element = document.getElementById(`${iditem}`);
+    if (element.className === 'hideComponent') {
+      element.classList.remove("hideComponent");
+      element.classList.add("showComponent");
+    }
+    else {
+      element.classList.remove("showComponent");
+      element.classList.add("hideComponent");
+    }
+  }
+  onDelete(): any {
+    let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
 
     if (this.model.idproducts > 0) {
-      tmpmethod = Tipos.DELETE
+      this.model.idcstatus = eCSTATUS.ELIMINADO;
+      tmpmethod = eTipos.DELETE
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
 
       this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
         if (data.response) {
-          console.dir(data);
-          this.service.changeListProductsDataAdd(data.result);
+          this.service.changeListProductsDataAdd(this.model);
+          this.HideElement('divProductAddSet');
         }
       }, (error) => {
         console.dir(error);
+        return null;
       });
     } else {
-      alert('Debe seleccionar un productos')
+      alert('Debe seleccionar un productos');
+      return null;
     }
-  }
-
-  onToggleAction() {
-    console.dir('elevate');
-    return 'display: none;';
   }
 
   onEventSelection(event) {
@@ -86,13 +94,13 @@ export class AddsetComponent implements OnInit {
 
 
   onSaveForm() {
-    let tmpmethod: Tipos;
+    let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
     if (this.model.idproducts > 0) {
-      tmpmethod = Tipos.PUT
+      tmpmethod = eTipos.PUT
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
     } else {
-      tmpmethod = Tipos.POST
+      tmpmethod = eTipos.POST
     }
 
     this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {

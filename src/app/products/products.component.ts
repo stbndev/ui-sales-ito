@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Productsmodel } from "./../models/productsmodel";
 import { CSTATUS } from "./../config/enums-global.enum";
 import { ConfigService } from "./../config/config-service.service";
-import { Tipos } from "./../config/enums-global.enum";
+import { eTipos } from "./../config/enums-global.enum";
 import { AddsetComponent } from "./addset/addset.component";
 
 @Component({
@@ -40,30 +40,22 @@ export class ProductsComponent implements OnInit {
 
   // Events
   ProductDelete() {
-    this.hijito.onDelete();
+    let product = this.hijito.onDelete();
+    // this.service.changeListProductsDataAdd(product);
   }
   ProductSet() {
     this.hijito.onSaveForm();
   }
 
-  // onOpen(e){
-  //   console.dir(e);
-  // }
+  
   ProductAdd() {
     // alert('test');
     let tmpProduct = new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
     this.service.changeProductsData(tmpProduct);
 
-    var element = document.getElementById("divProductAddSet");
+    this.hijito.HideElement('divProductAddSet');
 
-    if (element.className === 'hideComponent') {
-      element.classList.remove("hideComponent");
-      element.classList.add("showComponent");
-    }
-    // else {
-    //   element.classList.remove("showComponent");
-    //   element.classList.add("hideComponent");
-    // }
+    
   }
   onSelect(event, item) {
     this.ProductAdd();

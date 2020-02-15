@@ -1,11 +1,16 @@
 export enum EnumsGlobal {
 }
 
-export enum Tipos {
+export enum eTipos {
     POST = 1,
     PUT = 2,
     PATCH = 3,
     DELETE = 4,
+}
+export enum eCSTATUS{
+    ACTIVO = 1,
+    INACTIVO = 2,
+    ELIMINADO = 3,
 }
 
 export var CSTATUS = [
