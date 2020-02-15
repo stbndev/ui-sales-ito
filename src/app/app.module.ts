@@ -25,6 +25,7 @@ import { FormsModule }   from '@angular/forms';
 import { AddsetComponent } from './products/addset/addset.component';
 import {MatCardModule} from '@angular/material/card';
 import { FilterProductsPipe } from './config/filter-products.pipe';
+import { SalesComponent } from './sales/sales.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FilterProductsPipe } from './config/filter-products.pipe';
     MainNavComponent,
     ProductsComponent,
     AddsetComponent,
-    FilterProductsPipe
+    FilterProductsPipe,
+    SalesComponent
   ],
   imports: [
     HttpClientModule,
