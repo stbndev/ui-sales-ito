@@ -26,6 +26,7 @@ import { AddsetComponent } from './products/addset/addset.component';
 import {MatCardModule} from '@angular/material/card';
 import { FilterProductsPipe } from './config/filter-products.pipe';
 import { SalesComponent } from './sales/sales.component';
+import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SalesComponent } from './sales/sales.component';
     MatInputModule,
     FormsModule,
     MatCardModule,
+    MatTabsModule,
     //
     BrowserModule,
     AppRoutingModule,
