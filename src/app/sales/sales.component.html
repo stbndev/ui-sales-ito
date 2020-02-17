@@ -1,26 +1,37 @@
-<mat-tab-group>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">favorite</mat-icon>
-        Favoritos
-      </ng-template>
-      Content 1
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">grain</mat-icon>
-        Todos los productos
-      </ng-template>
-      Content 2
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-        Third
-      </ng-template>
-  
-      Content 3
-    </mat-tab>
-  </mat-tab-group>
+<div class="flex-content">
+    <!-- role='group' -->
+<mat-card >
+    <mat-tab-group>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">favorite</mat-icon>
+                Favoritos
+            </ng-template>
+            <!-- start here another component -->
+
+            <app-griditems></app-griditems>
+            <!-- end here another component -->
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">grain</mat-icon>
+                Todos los productos
+            </ng-template>
+            Content 2
+        </mat-tab>
+
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">search</mat-icon>
+                Buscar
+            </ng-template>
+
+            Content 3
+        </mat-tab>
+    </mat-tab-group>
+</mat-card>
+<mat-card>
+    <app-placeorder></app-placeorder>
+</mat-card>
+</div>

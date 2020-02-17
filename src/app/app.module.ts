@@ -14,19 +14,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AddsetComponent } from './products/addset/addset.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { FilterProductsPipe } from './config/filter-products.pipe';
 import { SalesComponent } from './sales/sales.component';
 import { MatTabsModule } from '@angular/material';
+import { GriditemsComponent } from './sales/griditems/griditems.component';
+import { MatTableModule } from '@angular/material/table';
+import { PlaceorderComponent } from './sales/placeorder/placeorder.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { MatTabsModule } from '@angular/material';
     ProductsComponent,
     AddsetComponent,
     FilterProductsPipe,
-    SalesComponent
+    SalesComponent,
+    GriditemsComponent,
+    PlaceorderComponent
   ],
   imports: [
     HttpClientModule,
@@ -52,6 +58,7 @@ import { MatTabsModule } from '@angular/material';
     FormsModule,
     MatCardModule,
     MatTabsModule,
+    MatTableModule,
     //
     BrowserModule,
     AppRoutingModule,
