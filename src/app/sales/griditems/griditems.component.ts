@@ -8,8 +8,8 @@ import { ConfigService } from "./../../config/config-service.service";
 })
 export class GriditemsComponent implements OnInit {
   dataSource: Productsmodel[];
-  displayedColumns: string[] = [ 'pathimg','unitary_price', 'barcode', ];
-  
+  displayedColumns: string[] = ['pathimg', 'unitary_price', 'barcode',];
+
   constructor(protected service: ConfigService) { }
 
   ngOnInit() {
@@ -23,6 +23,13 @@ export class GriditemsComponent implements OnInit {
         console.dir(error);
         alert(error);
       });
+  }
+
+  add(e) {
+    console.dir(e);
+  }
+  substract(e) {
+    console.dir(e);
   }
 
 }

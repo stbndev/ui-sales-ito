@@ -34,11 +34,12 @@
         <th mat-header-cell *matHeaderCellDef> Cantidad </th>
         <td mat-cell *matCellDef="let element">
             <div class="divProductsCounter">
-                <i class="material-icons md-24">
+                <i aria-details="{element.idproducts}" class="material-icons md-24" (click)='substract($event)'>
                     remove_circle
                 </i>
-                <input value="0" type="text" style="border-radius: 100%;border: 1px solid #000; padding: 7px;  width: 20px;height: 15px;">
-                <i class="material-icons md-24">
+                <input aria-details="{element.idproducts}" value="0" type="text"
+                    style="border-radius: 100%;border: 1px solid #000; padding: 7px;  width: 20px;height: 15px;">
+                <i aria-details="{element.idproducts}" class="material-icons md-24" (click)='add($event)'>
                     add_circle
                 </i>
             </div>
