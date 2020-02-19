@@ -25,14 +25,18 @@ export class GriditemsComponent implements OnInit {
       });
   }
 
-  add(e) {
-    console.dir(e);
+  add(data,e) {
+    let inputTextId = 'canopee' + data.idproducts;
+    let input = (<HTMLInputElement>document.getElementById(inputTextId));
+    let inputValue = parseFloat(input.value) + 1;
+    input.value = inputValue.toString();
   }
   substract(data, e) {
     let inputTextId = 'canopee' + data.idproducts;
     let input = (<HTMLInputElement>document.getElementById(inputTextId));
     let inputValue = parseFloat(input.value) - 1;
-    input.value = inputValue;
+    input.value = inputValue.toString();
+    
   }
 
 }
