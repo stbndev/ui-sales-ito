@@ -30,13 +30,15 @@ export class GriditemsComponent implements OnInit {
     let input = (<HTMLInputElement>document.getElementById(inputTextId));
     let inputValue = parseFloat(input.value) + 1;
     input.value = inputValue.toString();
+    //TODO: Add listener ans subscribe to list products
+    data.quantity = inputValue;
+    this.service.changeListProductsDataAdd(data);
   }
   substract(data, e) {
     let inputTextId = 'canopee' + data.idproducts;
     let input = (<HTMLInputElement>document.getElementById(inputTextId));
     let inputValue = parseFloat(input.value) - 1;
     input.value = inputValue.toString();
-    
   }
 
 }
