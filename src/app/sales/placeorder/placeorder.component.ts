@@ -20,31 +20,33 @@ export class PlaceorderComponent implements OnInit {
       res => {
         this.products = res;
         let tmpquantity = 0;
-        let tmptotal = 0;
+        let tmptotal = [];
+        let tmptotal2 = 0;
+
         this.products.forEach(element => {
           tmpquantity += element.quantity;
-          let tmp = tmpquantity * element.unitary_price;
-          tmptotal = tmptotal + tmp;
+          let tmp = element.quantity * element.unitary_price;
+          tmptotal2 += element.quantity * element.unitary_price; 
+          tmptotal.push(tmp);
         });
         this.totalItemsOrder = tmpquantity;
-        this.totalOrder = tmptotal;
+       this.totalOrder = tmptotal2;
       },
       error => {
         console.dir(error);
         alert(error);
       }
-
     );
   }
 
   onPlaceOrder(e) {
-    
-    let  data = this.buildData();
-    
-    this.service.Make('sales',eTipos.POST,data).subscribe(
-      data =>{
+
+    let data = this.buildData();
+
+    this.service.Make('sales', eTipos.POST, data).subscribe(
+      data => {
         console.dir(data);
-      },error =>{
+      }, error => {
         console.dir(error);
         alert('placeorder.onPlaceOrder');
       }
@@ -57,12 +59,12 @@ export class PlaceorderComponent implements OnInit {
   private buildData() {
     // SaleDetails 
     let array = [];
-    
+
     this.products.forEach(element => {
       let sd = new SaleDetails(0, element.unitary_cost, element.unitary_price, element.quantity, element.idproducts);
       array.push(sd);
     });
-    let sm = new Salesmodel(this.totalOrder,eCSTATUS.ACTIVO,'devendra',0,array);
+    let sm = new Salesmodel(this.totalOrder, eCSTATUS.ACTIVO, 'devendra', 0, array);
     return sm;
   }
 
