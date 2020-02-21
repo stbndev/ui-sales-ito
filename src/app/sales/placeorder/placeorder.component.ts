@@ -3,17 +3,22 @@ import { Productsmodel } from "./../../models/productsmodel";
 import { eTipos, eCSTATUS } from './../../config/enums-global.enum';
 import { Salesmodel, SaleDetails } from "./../../models/salesmodel";
 import { ConfigService } from 'src/app/config/config-service.service';
-
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { TmpsaveorderComponent } from "./../tmpsaveorder/tmpsaveorder.component";
+  
 @Component({
   selector: 'app-placeorder',
   templateUrl: './placeorder.component.html',
   styleUrls: ['./placeorder.component.css']
 })
+
 export class PlaceorderComponent implements OnInit {
   products: any = [];
   totalOrder: number = 0;
   totalItemsOrder: number = 0;
-  constructor(protected service: ConfigService) { }
+  durationInSeconds = 50;
+
+  constructor(protected service: ConfigService,private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.service.listproductsData.subscribe(
@@ -39,21 +44,34 @@ export class PlaceorderComponent implements OnInit {
     );
   }
 
+  openSnackBar() {
+    this._snackBar.openFromComponent(  TmpsaveorderComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+    
+  }
+
   onPlaceOrder(e) {
+    //TODO:
+    // VALIDATE IN CORE WHEN I DONT HAVE PRODUCT EXISTS
+    // VALIDATE IN FRONTEND WHEN I DONT HAVE PRODUCTS\
+    // RESET PLACE ORDER AND CREATE PRINT PAPER 
 
     let data = this.buildData();
-
     this.service.Make('sales', eTipos.POST, data).subscribe(
       data => {
         console.dir(data);
+        alert('Orden pedida No.' + data.result.idsales);
       }, error => {
         console.dir(error);
         alert('placeorder.onPlaceOrder');
       }
     )
   }
+  
   onSaveOrder(e) {
     console.dir(this.buildData());
+
   }
 
   private buildData() {

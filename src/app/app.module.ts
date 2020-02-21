@@ -30,6 +30,8 @@ import { MatTabsModule } from '@angular/material';
 import { GriditemsComponent } from './sales/griditems/griditems.component';
 import { MatTableModule } from '@angular/material/table';
 import { PlaceorderComponent } from './sales/placeorder/placeorder.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { TmpsaveorderComponent } from './sales/tmpsaveorder/tmpsaveorder.component';
 
 
 @NgModule({
@@ -42,7 +44,8 @@ import { PlaceorderComponent } from './sales/placeorder/placeorder.component';
     FilterProductsPipe,
     SalesComponent,
     GriditemsComponent,
-    PlaceorderComponent
+    PlaceorderComponent,
+    TmpsaveorderComponent
   ],
   imports: [
     HttpClientModule,
@@ -59,6 +62,7 @@ import { PlaceorderComponent } from './sales/placeorder/placeorder.component';
     MatCardModule,
     MatTabsModule,
     MatTableModule,
+    MatSnackBarModule,
     //
     BrowserModule,
     AppRoutingModule,
