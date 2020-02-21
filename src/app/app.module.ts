@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
 import { PlaceorderComponent } from './sales/placeorder/placeorder.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TmpsaveorderComponent } from './sales/tmpsaveorder/tmpsaveorder.component';
+import { InventariesComponent } from './inventaries/inventaries.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { TmpsaveorderComponent } from './sales/tmpsaveorder/tmpsaveorder.compone
     SalesComponent,
     GriditemsComponent,
     PlaceorderComponent,
-    TmpsaveorderComponent
+    TmpsaveorderComponent,
+    InventariesComponent
   ],
   imports: [
     HttpClientModule,
