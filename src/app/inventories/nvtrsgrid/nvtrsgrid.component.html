@@ -1,0 +1,74 @@
+<table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="idproducts">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> 
+            {{element.idproducts}} 
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="pathimg">
+        <th mat-header-cell *matHeaderCellDef> Imagen Producto </th>
+        <td mat-cell *matCellDef="let element">
+            <img src="{{element.pathimg}}" alt='img' width="100" height="100">
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.name}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="barcode">
+        <th mat-header-cell *matHeaderCellDef> Codigo de Barras y/o Clave </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.barcode}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="idcstatus">
+        <th mat-header-cell *matHeaderCellDef> Estatus </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.idcstatus}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unitary_price">
+        <th mat-header-cell *matHeaderCellDef> Precio Unitario </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.unitary_price}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="unitary_cost">
+        <th mat-header-cell *matHeaderCellDef> Costo </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.unitary_cost}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="existence">
+        <th mat-header-cell *matHeaderCellDef> Existencias </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.existence}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="idproductentries">
+        <th mat-header-cell *matHeaderCellDef> idproductentries </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.idproductentries}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> quantity </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.quantity}}
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
