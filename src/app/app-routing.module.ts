@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductsComponent } from "./products/products.component";
 import { SalesComponent } from "./sales/sales.component";
 import { InventoriesComponent } from "./inventories/inventories.component";
+import { InventoryShrinkageComponent } from './inventory-shrinkage/inventory-shrinkage.component';
+
 const routes: Routes = [
   {
     path: 'products',
@@ -18,6 +20,11 @@ const routes: Routes = [
     path: 'inventories',
     component: InventoriesComponent,
     data: { title : 'Inventories Module' }
+  },
+  {
+    path: 'inventories-shrinkage',
+    component: InventoryShrinkageComponent,
+    data: { title : 'Inventory Shinkage Module' }
   }
 
 ];

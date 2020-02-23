@@ -35,6 +35,8 @@ import { TmpsaveorderComponent } from './sales/tmpsaveorder/tmpsaveorder.compone
 import { NvtrsgridComponent } from './inventories/nvtrsgrid/nvtrsgrid.component';
 import { InventoriesComponent } from './inventories/inventories.component';
 import { NvtrsitemComponent } from './inventories/nvtrsitem/nvtrsitem.component';
+import { InventoryShrinkageComponent } from './inventory-shrinkage/inventory-shrinkage.component';
+import { NvtrsrkgGridComponent } from './inventory-shrinkage/nvtrsrkg-grid/nvtrsrkg-grid.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { NvtrsitemComponent } from './inventories/nvtrsitem/nvtrsitem.component'
     TmpsaveorderComponent,
     NvtrsgridComponent,
     InventoriesComponent,
-    NvtrsitemComponent
+    NvtrsitemComponent,
+    InventoryShrinkageComponent,
+    NvtrsrkgGridComponent
   ],
   imports: [
     HttpClientModule,
