@@ -21,7 +21,7 @@ export class NvtrsgridComponent implements OnInit {
     'existence',
     'idproductentries',
     'quantity',
-    ];
+  ];
 
   constructor(protected service: ConfigService) { }
 
@@ -36,5 +36,9 @@ export class NvtrsgridComponent implements OnInit {
         console.dir(error);
         alert(error);
       });
+  }
+
+  onSelect(e, r) {
+    this.service.changeProductsData(r);
   }
 }

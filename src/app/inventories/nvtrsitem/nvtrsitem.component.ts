@@ -13,10 +13,15 @@ export class NvtrsitemComponent implements OnInit {
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
-  //@Output() open: EventEmitter<any> = new EventEmitter();
-
-
+  
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
+
+  ngOnInit() {
+    this.service.productsData.subscribe(res => {
+      this.model = res;
+      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
+    });
+  }
 
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
@@ -29,6 +34,7 @@ export class NvtrsitemComponent implements OnInit {
       element.classList.add("hideComponent");
     }
   }
+  
   onDelete(): any {
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
@@ -114,14 +120,7 @@ export class NvtrsitemComponent implements OnInit {
     // this.abc.nativeElement.value
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
-  ngOnInit() {
-
-    this.service.productsData.subscribe(res => {
-      this.model = res;
-      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
-    });
-
-  }
+  
 
 
 
