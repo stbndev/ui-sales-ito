@@ -30,13 +30,14 @@ import { MatTabsModule } from '@angular/material';
 import { GriditemsComponent } from './sales/griditems/griditems.component';
 import { MatTableModule } from '@angular/material/table';
 import { PlaceorderComponent } from './sales/placeorder/placeorder.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TmpsaveorderComponent } from './sales/tmpsaveorder/tmpsaveorder.component';
 import { NvtrsgridComponent } from './inventories/nvtrsgrid/nvtrsgrid.component';
 import { InventoriesComponent } from './inventories/inventories.component';
 import { NvtrsitemComponent } from './inventories/nvtrsitem/nvtrsitem.component';
 import { InventoryShrinkageComponent } from './inventory-shrinkage/inventory-shrinkage.component';
 import { NvtrsrkgGridComponent } from './inventory-shrinkage/nvtrsrkg-grid/nvtrsrkg-grid.component';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { NvtrsrkgGridComponent } from './inventory-shrinkage/nvtrsrkg-grid/nvtrs
     MatTabsModule,
     MatTableModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     //
     BrowserModule,
     AppRoutingModule,
