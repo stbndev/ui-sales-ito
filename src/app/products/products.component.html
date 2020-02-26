@@ -1,18 +1,25 @@
 <!-- <p>products works!</p> -->
 <div id='divSubMenu'>
-  <button (click)='ProductAdd()' mat-icon-button matTooltip='Agregar nuevo producto'>
-    <mat-icon color="primary">add_circle_outline</mat-icon>
-  </button>
-  <!-- color="primary" svgIcon="archive"></mat-icon>
-  <mat-icon color="accent" svgIcon="archive"></mat-icon>
-  <mat-icon color="warn" sv -->
-  <button (click)='ProductSet()' mat-icon-button>
-    <mat-icon color="accent" >create</mat-icon>
-  </button>
+  <span style="margin-right: 35px;">
+    <button (click)='ProductAdd()' mat-icon-button matTooltip='Agregar nuevo producto'>
+      <mat-icon color="primary" class="md-30">add_circle_outline</mat-icon>
+      &nbsp;<span class="aligned-with-icon" style="color:#293955;">NUEVO</span>
+    </button>
+  </span>
 
-  <button (click)='ProductDelete()' mat-icon-button>
-    <mat-icon color="warn">delete_sweep</mat-icon>
-  </button>
+  <span style="margin-right: 40px;">
+    <button (click)='ProductSet()' mat-icon-button matTooltip='Editar producto existente'>
+      <mat-icon color='accent' class="md-30">create</mat-icon>
+      &nbsp;<span class="aligned-with-icon" style="color:#0179bf;">EDITAR</span>
+    </button>
+  </span>
+
+  <span style="margin-right: 35px;">
+    <button (click)='ProductDelete()' mat-icon-button matTooltip='Borrar producto'>
+      <mat-icon color="warn">delete_sweep</mat-icon>
+      &nbsp;<span class="color:#fa0000;aligned-with-icon" style="color:#fa0000;">BORRAR</span>
+    </button>
+  </span>
 </div>
 
 <br>

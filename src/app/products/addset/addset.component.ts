@@ -22,6 +22,9 @@ export class AddsetComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
+  onCancel() {
+    this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+  }
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
     if (element.className === 'hideComponent') {
