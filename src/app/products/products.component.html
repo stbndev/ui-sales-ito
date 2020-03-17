@@ -44,11 +44,16 @@
 <mat-grid-list cols='5' rowHeight='100px'>
   <div *ngFor='let item of products'>
     <mat-grid-tile *ngIf='(item.idcstatus == selected)' [colspan]='1' [rowspan]='1' (click)="onSelect($event, item)">
-      <!-- 
-       <button *ngIf="(item.data.type == 1)">{{item.data.name}}</button>
-    -->
-      <!-- class='tile-image' -->
-      <img src='{{item.pathimg}}'>
+      <!-- A structural directive that conditionally includes a template based on the value of an expression coerced to Boolean -->
+      <!-- Una directiva estructural que incluye condicionalmente una plantilla basada en el valor de una expresión coaccionada a la booleana -->
+      <div *ngIf="item.pathimg == null || item.pathimg == ''; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <img src='https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'>
+      </ng-template>
+      <ng-template #elseBlock>
+        <img src={{item.pathimg}}>
+      </ng-template>
+
       <mat-grid-tile-header>
         <h3>{{item.name}} </h3>
       </mat-grid-tile-header>

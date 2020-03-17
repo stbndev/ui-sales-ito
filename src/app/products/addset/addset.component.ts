@@ -83,11 +83,11 @@ export class AddsetComponent implements OnInit {
       let file = files[0];
       formData.append('ProfilePhoto', file, file.name);
 
-      this.service.Upload('DocFile', formData).subscribe(data => {
+      this.service.Upload('docfile', formData).subscribe(data => {
         if (data) {
           //console.dir(data);
           // this.service.changeListProductsDataAdd(data.result);
-          this.model.pathimg = data;
+          this.model.pathimg = data.href;
         }
       }, (error) => {
         console.dir(error);

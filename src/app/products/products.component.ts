@@ -14,7 +14,6 @@ import { AddsetComponent } from "./addset/addset.component";
 
 export class ProductsComponent implements OnInit {
 
-
   products: any = [];
   selected = '1';
   productstmp: any = [];
@@ -50,7 +49,7 @@ export class ProductsComponent implements OnInit {
   
   ProductAdd() {
     // alert('test');
-    let tmpProduct = new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+    let tmpProduct = new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, '');
     this.service.changeProductsData(tmpProduct);
 
     this.hijito.HideElement('divProductAddSet');
