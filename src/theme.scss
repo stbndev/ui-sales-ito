@@ -1,0 +1,140 @@
+// @import '~@angular/material/theming';
+// @include mat-core();
+// // $my-app-primary: mat-palette($mat-blue-grey);
+// $my-app-primary: mat-palette($mat-blue-grey,A800,A800,A800);
+// $my-app-accent:  mat-palette($mat-pink, 100, 100, A100);
+// $my-app-warn:    mat-palette($mat-deep-orange);
+// $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+// @include angular-material-theme($my-app-theme);
+// .alternate-theme {
+//   $alternate-primary: mat-palette($mat-light-blue);
+//   $alternate-accent:  mat-palette($mat-yellow, 400);
+//   $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
+//   @include angular-material-theme($alternate-theme);
+// }
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+/* For use in src/lib/core/theming/_palette.scss */
+/* For use in src/lib/core/theming/_palette.scss */
+$md-mcgpalette0: (
+    50 : #e5e7eb,
+    100 : #bfc4cc,
+    200 : #949caa,
+    300 : #697488,
+    400 : #49576f,
+    500 : #293955,
+    600 : #24334e,
+    700 : #1f2c44,
+    800 : #19243b,
+    900 : #0f172a,
+    A100 : #6992ff,
+    A200 : #366dff,
+    A400 : #0348ff,
+    A700 : #0040e9,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$md-mcgpalette1: (
+    50 : #e1eff7,
+    100 : #b3d7ec,
+    200 : #80bcdf,
+    300 : #4da1d2,
+    400 : #278dc9,
+    500 : #0179bf,
+    600 : #0171b9,
+    700 : #0166b1,
+    800 : #015ca9,
+    900 : #00499b,
+    A100 : #c6ddff,
+    A200 : #93beff,
+    A400 : #609fff,
+    A700 : #4790ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-mcgpalette2: (
+    50 : #fee0e0,
+    100 : #feb3b3,
+    200 : #fd8080,
+    300 : #fc4d4d,
+    400 : #fb2626,
+    500 : #fa0000,
+    600 : #f90000,
+    700 : #f90000,
+    800 : #f80000,
+    900 : #f60000,
+    A100 : #ffffff,
+    A200 : #ffeaea,
+    A400 : #ffb7b7,
+    A700 : #ff9d9d,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$salesin-app-primary: mat-palette($md-mcgpalette0);
+$salesin-app-accent:  mat-palette($md-mcgpalette1);
+
+// The warn palette is optional (defaults to red).
+$salesin-app-warn:    mat-palette($md-mcgpalette2);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$salesin-app-theme: mat-light-theme($salesin-app-primary, $salesin-app-accent, $salesin-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($salesin-app-theme);

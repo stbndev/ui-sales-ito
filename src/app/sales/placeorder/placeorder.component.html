@@ -1,0 +1,65 @@
+<h2>
+    Tu Orden
+</h2>
+<h4>
+    Remover Todo
+</h4>
+<!-- <mat-grid-list cols='1' rowHeight='100px'>
+    <div *ngFor='let item of products'>
+      <mat-grid-tile [colspan]='1' [rowspan]='1' (click)="onDelete($event, item)">
+        <img src='{{item.pathimg}}'>
+        {{item.quantity}}
+        <mat-grid-tile-header>
+          <h3>{{item.name}} </h3>
+        </mat-grid-tile-header>
+        
+        <mat-grid-tile-footer>
+          <h2>{{item.unitary_price}}</h2>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </div>
+</mat-grid-list> -->
+
+<span>
+    <table>
+        <div *ngFor='let item of products'>
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.quantity}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="material-icons">
+                        clear
+                    </i>
+                </td>
+                <td>{{item.unitary_price}}</td>
+            </tr>
+        </div>
+    </table>
+</span>
+<span>
+    <table>
+        <tr>
+            <td>Total Productos</td>
+            <td>{{totalItemsOrder}}</td>
+        </tr>
+        <tr>
+            <td>
+                Total:
+            </td>
+            <td>{{totalOrder}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button (click)='onPlaceOrder($event)' mat-button color="primary">Pedir Orden</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button (click)='onSaveOrder($event)' mat-button color="primary">Guardar Orden</button>
+            </td>
+        </tr>
+    </table>
+</span>

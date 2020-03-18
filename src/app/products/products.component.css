@@ -8,8 +8,8 @@
 }
 
 .divSubMenu{
-	 display: flex;
-	 flex-grow: 5;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .tile-image {

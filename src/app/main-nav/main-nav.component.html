@@ -1,10 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
-     <mat-nav-list>
+    <mat-nav-list>
       <!-- <a mat-list-item href="#">Productos</a>
       <a mat-list-item href="#">Ventas</a>
       <a mat-list-item href="#">Perdidas</a> -->
@@ -20,19 +18,19 @@
         </i>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Productos
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item href="/sales">
         <i class="material-icons">
           add_shopping_cart
         </i>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ventas
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item href="/inventories">
         <i class="material-icons">
           donut_small
         </i>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inventario
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item href="/inventories-shrinkage">
         <i class="material-icons">
           trending_down
         </i>
@@ -42,11 +40,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
@@ -66,6 +60,7 @@
       </a>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <ng-content></ng-content>
+    <ng-content>
+    </ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,30 +1,28 @@
-import { AfterViewInit, ElementRef, Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Productsmodel } from "./../../models/productsmodel";
-import { eTipos, eCSTATUS } from "./../../config/enums-global.enum";
-import { CSTATUS } from "./../../config/enums-global.enum";
-import { ConfigService } from "./../../config/config-service.service";
-
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { Productsmodel } from 'src/app/models/productsmodel';
+import { CSTATUS, eTipos, eCSTATUS } from 'src/app/config/enums-global.enum';
+import { ConfigService } from 'src/app/config/config-service.service';
 
 @Component({
-  selector: 'products-addset',
-  templateUrl: './addset.component.html',
-  styleUrls: ['./addset.component.css']
+  selector: 'app-nvtrsitem',
+  templateUrl: './nvtrsitem.component.html',
+  styleUrls: ['./nvtrsitem.component.css']
 })
-export class AddsetComponent implements OnInit {
-  // setup initial
-  //model: any ;   
+export class NvtrsitemComponent implements OnInit {
   model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, '');
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
-  //@Output() open: EventEmitter<any> = new EventEmitter();
-
-
+  
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
-  onCancel() {
-    this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+  ngOnInit() {
+    this.service.productsData.subscribe(res => {
+      this.model = res;
+      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
+    });
   }
+
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
     if (element.className === 'hideComponent') {
@@ -36,6 +34,7 @@ export class AddsetComponent implements OnInit {
       element.classList.add("hideComponent");
     }
   }
+  
   onDelete(): any {
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
@@ -81,13 +80,13 @@ export class AddsetComponent implements OnInit {
       let formData: FormData = new FormData();
 
       let file = files[0];
-      formData.append('file', file, file.name);
+      formData.append('ProfilePhoto', file, file.name);
 
-      this.service.Upload('docfile', formData).subscribe(data => {
-        if (data.response) {
-          this.model.pathimg = data.result;
-        } else {
-          console.dir(data);
+      this.service.Upload('DocFile', formData).subscribe(data => {
+        if (data) {
+          //console.dir(data);
+          // this.service.changeListProductsDataAdd(data.result);
+          this.model.pathimg = data;
         }
       }, (error) => {
         console.dir(error);
@@ -121,14 +120,8 @@ export class AddsetComponent implements OnInit {
     // this.abc.nativeElement.value
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
-  ngOnInit() {
+  
 
-    this.service.productsData.subscribe(res => {
-      this.model = res;
-      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
-    });
-
-  }
 
 
 
