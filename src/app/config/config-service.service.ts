@@ -17,9 +17,9 @@ export class ConfigService {
   productsData = this._productsSource.asObservable()
   listproductsData = this._listproductsSource.asObservable()
   // configUrl = 'https://jsonplaceholder.typicode.com/posts/1/comments';
-  _uriResources = 'http://10.211.55.3/poshubdev/api/';
-  // uriResources = 'http://localhost/poshubdev/api/';
-  // _uriResources = 'https://localhost:44385/api/';
+  // _uriResources = 'https://localhost:44332/api/';
+  _uriResources = 'https://mrgvnservice.azurewebsites.net/api/';
+
   constructor(private http: HttpClient) { }
 
   extractData(res: Response) {
