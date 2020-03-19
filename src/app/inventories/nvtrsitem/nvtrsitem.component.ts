@@ -93,11 +93,10 @@ export class NvtrsitemComponent implements OnInit {
       });
     }
   }
-
-
+  
   onSaveForm() {
     let tmpmethod: eTipos;
-    let tmpendpoint: String = 'products';
+    let tmpendpoint: String = 'entries';
     if (this.model.idproducts > 0) {
       tmpmethod = eTipos.PUT
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
