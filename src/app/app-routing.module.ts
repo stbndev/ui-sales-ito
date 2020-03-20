@@ -17,12 +17,12 @@ const routes: Routes = [
     data: { title : 'Sales Module' }
   },
   {
-    path: 'inventories',
+    path: 'entries',
     component: InventoriesComponent,
     data: { title : 'Inventories Module' }
   },
   {
-    path: 'inventories-shrinkage',
+    path: 'shrinkages',
     component: InventoryShrinkageComponent,
     data: { title : 'Inventory Shinkage Module' }
   }

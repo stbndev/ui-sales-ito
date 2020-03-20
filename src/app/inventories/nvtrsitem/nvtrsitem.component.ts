@@ -13,7 +13,7 @@ export class NvtrsitemComponent implements OnInit {
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
-  
+
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class NvtrsitemComponent implements OnInit {
       element.classList.add("hideComponent");
     }
   }
-  
+
   onDelete(): any {
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
@@ -93,7 +93,7 @@ export class NvtrsitemComponent implements OnInit {
       });
     }
   }
-  
+
   onSaveForm() {
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'entries';
@@ -119,7 +119,7 @@ export class NvtrsitemComponent implements OnInit {
     // this.abc.nativeElement.value
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
-  
+
 
 
 

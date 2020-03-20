@@ -1,0 +1,16 @@
+.flex-container {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .column1 {
+    display: flex;
+    flex-direction: column;
+  }
+  .itemkey{
+      color:#28304b;
+      font-weight: bold;
+  }
+  .itemvalue{
+    color:#000;
+}

@@ -9,6 +9,16 @@ export class Productsmodel {
                 public existence: number,
                 public idproductsentries: number,
                 public quantity: number,
-                public pathimg: string 
+                public pathimg: string
         ) { }
 }
+
+export interface Productstestmodel {
+        //     id: number;
+        //     unitary_cost: number;
+        //     unitary_price: number;
+        //     quantity: number;
+        name: string
+
+}
+
