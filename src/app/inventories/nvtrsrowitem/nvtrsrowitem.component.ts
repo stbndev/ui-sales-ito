@@ -8,13 +8,14 @@ import { Productsmodel, Productstestmodel } from 'src/app/models/productsmodel';
 })
 export class NvtrsrowitemComponent implements OnInit {
   @Input() data :any;
-  entryproduct: Productstestmodel;
+  entryproduct: any;
   constructor() { 
     // console.dir(this.data);
   }
 
   ngOnInit() {
     console.dir(this.data);
+    this.entryproduct = Productstestmodel;
     this.entryproduct.name = 'test';
     // this.entryproduct.name = this.data.name;
   }
