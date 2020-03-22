@@ -1,7 +1,11 @@
-<div *ngFor='let item of dataSource'>
+<!-- *ngFor="let audio of audios" [soundBoardAudio]="audio" -->
+    <app-nvtrsrowitem *ngFor='let item of dataSource' [dataItem]="item">
+    </app-nvtrsrowitem>
+
+<!-- <div *ngFor='let item of dataSource'>
     <app-nvtrsrowitem [data]="dataSource">
     </app-nvtrsrowitem>
-</div>
+</div> -->
 <!-- <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="idproducts">
         <th mat-header-cell *matHeaderCellDef> ID </th>
