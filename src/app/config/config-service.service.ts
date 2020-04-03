@@ -11,14 +11,15 @@ import { Productsmodel } from "./../models/productsmodel";
 })
 
 export class ConfigService {
-  private _productsSource = new BehaviorSubject<Productsmodel>(new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0,'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'));
+  private _productsSource = new BehaviorSubject<Productsmodel>(new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'));
   private _listproductsSource = new BehaviorSubject<Productsmodel[]>([]);
   private _todos = new BehaviorSubject<any[]>([]);
   productsData = this._productsSource.asObservable()
   listproductsData = this._listproductsSource.asObservable()
   // configUrl = 'https://jsonplaceholder.typicode.com/posts/1/comments';
-  // _uriResources = 'https://localhost:44332/api/';
-  _uriResources = 'https://mrgvnservice.azurewebsites.net/api/';
+  _uriResources = 'https://localhost:44332/api/';
+  // _uriResources = 'https://mrgvnservice.azurewebsites.net/api/';
+
 
   constructor(private http: HttpClient) { }
 
@@ -51,13 +52,15 @@ export class ConfigService {
   }
 
   Make(serviceName: String, tipo: any, data: any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
 
     switch (tipo) {
       case eTipos.POST:
         return this.http.post(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
 
       case eTipos.PUT:
-        return this.http.put(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
+        return this.http.put(`${this._uriResources}${serviceName}`, data, { headers }).pipe(map(this.extractData));
 
       case eTipos.PATCH:
         return this.http.patch(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
@@ -73,6 +76,6 @@ export class ConfigService {
   Upload(serviceName: String, data: any): Observable<any> {
     return this.http.post(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
   }
-  
+
 
 }

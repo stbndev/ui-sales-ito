@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Productsmodel, Productstestmodel } from 'src/app/models/productsmodel';
+import { CSTATUS } from "./../../config/enums-global.enum";
 
 @Component({
   selector: 'app-nvtrsrowitem',
@@ -7,17 +8,25 @@ import { Productsmodel, Productstestmodel } from 'src/app/models/productsmodel';
   styleUrls: ['./nvtrsrowitem.component.css']
 })
 export class NvtrsrowitemComponent implements OnInit {
-  @Input() data :any;
-  entryproduct: Productstestmodel;
-  constructor(data2 : any ) { 
-    console.dir(data2);
+  @Input() data: any;
+  // entryproduct: Productstestmodel;
+  // constructor(data2 : any ) { 
+  // }
+  estatusname: String;
+  constructor() {
+
   }
 
   ngOnInit() {
-    // console.dir(this.data);
-    // this.entryproduct = Productstestmodel;
-    // this.entryproduct.name = 'test';
-    // this.entryproduct.name = this.data.name;
+    //console.dir(this.data)
+    let tmpidcstatus = this.data.idcstatus;
+    let t = CSTATUS.filter(function (x) {
+      // console.dir(x);
+      if (parseInt(x.value) === tmpidcstatus) {
+        return x;
+      }
+    });
+    this.estatusname = t[0].viewValue;
   }
 
 }

@@ -6,10 +6,16 @@
                     <mat-icon class="example-tab-icon">grain</mat-icon>
                     Productos
                 </ng-template>
-                <app-nvtrsrowitem></app-nvtrsrowitem>
-                <app-nvtrsitem class="hideComponent"></app-nvtrsitem>
-                
+                <!-- <app-nvtrsrowitem></app-nvtrsrowitem> -->
+                <!-- <app-nvtrsitem class="hideComponent"></app-nvtrsitem> -->
+                <app-nvtraddset></app-nvtraddset>
                 <app-nvtrsgrid></app-nvtrsgrid>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="example-tab-icon">grain</mat-icon>
+                    Entradas
+                </ng-template>
             </mat-tab>
         </mat-tab-group>
     </mat-card>

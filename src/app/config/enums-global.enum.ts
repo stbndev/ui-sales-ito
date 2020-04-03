@@ -11,10 +11,14 @@ export enum eCSTATUS{
     ACTIVO = 1,
     INACTIVO = 2,
     ELIMINADO = 3,
+    CANCELADO = 4,
+
 }
 
 export var CSTATUS = [
     { value: '1', viewValue: 'ACTIVO' },
     { value: '2', viewValue: 'INACTIVO' },
-    { value: '3', viewValue: 'ELIMINADO' }
+    { value: '3', viewValue: 'ELIMINADO' },
+    { value: '4', viewValue: 'CANCELADO' }
+
 ];

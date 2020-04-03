@@ -50,7 +50,7 @@ export class NvtrsitemComponent implements OnInit {
           this.HideElement('divProductAddSet');
         }
       }, (error) => {
-        console.dir(error);
+        alert(error);
         return null;
       });
     } else {
@@ -84,12 +84,11 @@ export class NvtrsitemComponent implements OnInit {
 
       this.service.Upload('DocFile', formData).subscribe(data => {
         if (data) {
-          //console.dir(data);
           // this.service.changeListProductsDataAdd(data.result);
           this.model.pathimg = data;
         }
       }, (error) => {
-        console.dir(error);
+        alert(error);
       });
     }
   }
@@ -106,11 +105,10 @@ export class NvtrsitemComponent implements OnInit {
 
     this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
       if (data.response) {
-        console.dir(data);
         this.service.changeListProductsDataAdd(data.result);
       }
     }, (error) => {
-      console.dir(error);
+      alert(error);
     });
   }
 

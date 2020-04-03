@@ -69,7 +69,6 @@ export class ProductsComponent implements OnInit {
         this.service.changeListProductsData(data.result.slice());
       }
     }, (error) => {
-      console.dir(error);
       alert(error);
     })
   }

@@ -51,7 +51,6 @@ export class AddsetComponent implements OnInit {
           this.HideElement('divProductAddSet');
         }
       }, (error) => {
-        console.dir(error);
         return null;
       });
     } else {
@@ -87,10 +86,10 @@ export class AddsetComponent implements OnInit {
         if (data.response) {
           this.model.pathimg = data.result;
         } else {
-          console.dir(data);
+          alert(data);
         }
       }, (error) => {
-        console.dir(error);
+        alert(error);
       });
     }
   }
@@ -108,11 +107,10 @@ export class AddsetComponent implements OnInit {
 
     this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
       if (data.response) {
-        console.dir(data);
         this.service.changeListProductsDataAdd(data.result);
       }
     }, (error) => {
-      console.dir(error);
+      alert(error);
     });
   }
 

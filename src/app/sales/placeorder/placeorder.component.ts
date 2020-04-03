@@ -38,7 +38,6 @@ export class PlaceorderComponent implements OnInit {
        this.totalOrder = tmptotal2;
       },
       error => {
-        console.dir(error);
         alert(error);
       }
     );
@@ -60,10 +59,8 @@ export class PlaceorderComponent implements OnInit {
     let data = this.buildData();
     this.service.Make('sales', eTipos.POST, data).subscribe(
       data => {
-        console.dir(data);
         alert('Orden pedida No.' + data.result.idsales);
       }, error => {
-        console.dir(error);
         alert('placeorder.onPlaceOrder');
       }
     )

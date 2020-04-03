@@ -33,7 +33,6 @@ export class NvtrsgridComponent implements OnInit {
         }
       },
       error => {
-        console.dir(error);
         alert(error);
       });
   }

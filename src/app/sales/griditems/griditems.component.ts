@@ -20,7 +20,6 @@ export class GriditemsComponent implements OnInit {
         }
       },
       error => {
-        console.dir(error);
         alert(error);
       });
   }

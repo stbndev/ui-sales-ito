@@ -32,7 +32,6 @@ export class NvtrsrkgGridComponent implements OnInit {
         }
       },
       error => {
-        console.dir(error);
         alert(error);
       });
   }

@@ -1,3 +1,4 @@
+<p>nvtraddset works!</p>
 <!-- <div id='divProductAddSet' class="hideComponent" > -->
 <div id='divProductAddSet' class="hideComponent">
     <mat-card>
@@ -8,10 +9,10 @@
                 <div class="div-column">
                     <img [src]="model.pathimg" (error)="onErrorDefaultPic()" alt="{{model.name}}" width="250"
                         height="250" id="productImg">
-                    <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen"
+                    <!-- <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen"
                         name="ProfilePhoto" id="ProfilePhoto">
                     <input type="button" value="Remover">
-                    <output id="list"></output>
+                    <output id="list"></output> -->
                     <br>
                 </div>
                 <div class="div-column">
@@ -43,13 +44,16 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Precio' name='unitary_price' [(ngModel)]='model.unitary_price'>
+                        <input type="number" name="unitary_price" min="1" max="999999" matInput placeholder='Precio'
+                            name='unitary_price' [(ngModel)]='model.unitary_price'>
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Costo' name='unitary_cost' [(ngModel)]='model.unitary_cost'>
+                        <input type="number" name="unitary_cost" min="1" max="999999" matInput placeholder='Costo'
+                            name='unitary_cost' [(ngModel)]='model.unitary_cost'>
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="text" name="quantity" min="1" max="999999" matInput placeholder='Existencias' name='existence' [(ngModel)]='model.existence' disabled>
+                        <input type="text" name="quantity" min="1" max="999999" matInput placeholder='Cantidad'
+                            name='quantity' [(ngModel)]='model.quantity'>
                     </mat-form-field>
                 </div>
 

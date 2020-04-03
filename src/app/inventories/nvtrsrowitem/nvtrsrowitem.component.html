@@ -3,34 +3,34 @@
         <img src="./../../../assets/imgs/logo.png" width="120" height="120">
     </div>
     <div class='column1'>
-        <!-- <div>
+        <div class="hideComponent">
             <label class="itemkey">Id</label>
-            <label class="itemvalue">id</label>
-            <label class="itemkey">identries</label>
-            <label class="itemvalue">identries</label>
-        </div> -->
+            <label class="itemvalue">{{data.id}}</label>
+            <label class="itemkey">idproducts</label>
+            <label class="itemvalue">{{data.idproducts}}</label>
+        </div>
         <div>
-            <label class="itemkey">entryproduct.name</label>
+            <label class="itemkey">{{data.name}}</label>
         </div>
         <div>
             <label class="itemkey">Codigo: </label>
-            <label class="itemvalue">7503020501623</label>
+            <label class="itemvalue">{{data.barcode}}</label>
         </div>
         <div>
             <label class="itemkey">Estatus: </label>
-            <label class="itemvalue">Activo</label>
+            <label class="itemvalue">{{estatusname}}</label>
         </div>
         <div>
             <label class="itemkey">Precio: </label>
-            <label class="itemvalue">$14.00</label>
+            <label class="itemvalue">$ {{data.unitary_price}}</label>
         </div>
         <div>
             <label class="itemkey">Costo: </label>
-            <label class="itemvalue">$9.50</label>
+            <label class="itemvalue">$ {{data.unitary_cost}}</label>
         </div>
         <div>
             <label class="itemkey">Existencias: </label>
-            <label class="itemvalue">10</label>
+            <label class="itemvalue"> {{data.existence}}</label>
         </div>
         <!-- <br>
         Precio: unitary_price
