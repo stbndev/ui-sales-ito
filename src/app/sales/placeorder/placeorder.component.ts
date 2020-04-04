@@ -67,7 +67,7 @@ export class PlaceorderComponent implements OnInit {
   }
   
   onSaveOrder(e) {
-    console.dir(this.buildData());
+   
 
   }
 

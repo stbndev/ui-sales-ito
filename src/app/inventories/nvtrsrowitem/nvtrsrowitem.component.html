@@ -1,6 +1,7 @@
-<div class="flex-container" matTooltip='SOL TUBIPAPA ORIGINAL 100 g|Papa frita con sal.'>
+<div class="flex-container" matTooltip='{{data.description}}' (click)='onSelect($event,data);'>
     <div class='column0'>
-        <img src="./../../../assets/imgs/logo.png" width="120" height="120">
+        <img src="{{data.pathimg}}" width="120" height="120">
+
     </div>
     <div class='column1'>
         <div class="hideComponent">

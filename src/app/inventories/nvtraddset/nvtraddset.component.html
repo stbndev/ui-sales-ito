@@ -1,12 +1,15 @@
 <p>nvtraddset works!</p>
-<!-- <div id='divProductAddSet' class="hideComponent" > -->
-<div id='divProductAddSet' class="hideComponent">
+<!-- <div id='divProductAddSet' class="hideComponent" > 
+onselect from nvtrsrowitem chance class hideComponent    
+-->
+<div id='divProductAddSet'>
     <mat-card>
         <mat-card-title>PRODUCTO </mat-card-title>
         <mat-card-subtitle> {{model.name}} </mat-card-subtitle>
         <mat-card-content>
             <div class="div-table-container">
                 <div class="div-column">
+                    <label>{{model2.idproducts}}</label>
                     <img [src]="model.pathimg" (error)="onErrorDefaultPic()" alt="{{model.name}}" width="250"
                         height="250" id="productImg">
                     <!-- <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen"
