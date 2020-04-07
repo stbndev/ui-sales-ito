@@ -127,9 +127,7 @@ export class NvtraddsetComponent implements OnInit {
       
       this.model = res;
       this.model2 = {
-        id: "test",
-        identries: 5,
-        idproducts : 4
+        date_add = this.model.date_add,
       }
       
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';

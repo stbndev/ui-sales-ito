@@ -11,7 +11,10 @@ import { Productsmodel } from "./../models/productsmodel";
 })
 
 export class ConfigService {
-  private _productsSource = new BehaviorSubject<Productsmodel>(new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'));
+  // private _productsSource = new BehaviorSubject<Productsmodel>(new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'));
+  private _productsSource = new BehaviorSubject<Productsmodel>(
+    new Productsmodel(0, '', '', '', 0, 0, 0, 0, 0, '', '', 0, '', 0, 0)
+  );
   private _listproductsSource = new BehaviorSubject<Productsmodel[]>([]);
   private _todos = new BehaviorSubject<any[]>([]);
   productsData = this._productsSource.asObservable()
