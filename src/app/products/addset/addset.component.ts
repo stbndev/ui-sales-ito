@@ -13,7 +13,7 @@ import { ConfigService } from "./../../config/config-service.service";
 export class AddsetComponent implements OnInit {
   // setup initial
   //model: any ;   
-  model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, '');
+  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
@@ -23,8 +23,10 @@ export class AddsetComponent implements OnInit {
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
   onCancel() {
-    this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+    // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
   }
+  
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
     if (element.className === 'hideComponent') {

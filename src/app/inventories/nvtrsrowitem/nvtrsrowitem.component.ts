@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Productsmodel, Productstestmodel } from 'src/app/models/productsmodel';
+import { Productsmodel } from 'src/app/models/productsmodel';
 import { ConfigService } from "./../../config/config-service.service";
 
 @Component({
@@ -9,9 +9,9 @@ import { ConfigService } from "./../../config/config-service.service";
 })
 export class NvtrsrowitemComponent implements OnInit {
   @Input() data: any;
-  @Input() dataItem: any
+  @Input() dataItem: any;
 
-  entryproduct: Productstestmodel;
+  // entryproduct: Productstestmodel;
   constructor(protected service: ConfigService) {
 
   }

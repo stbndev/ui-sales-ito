@@ -49,7 +49,8 @@ export class ProductsComponent implements OnInit {
   
   ProductAdd() {
     // alert('test');
-    let tmpProduct = new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, '');
+    let tmpProduct = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+    
     this.service.changeProductsData(tmpProduct);
 
     this.hijito.HideElement('divProductAddSet');

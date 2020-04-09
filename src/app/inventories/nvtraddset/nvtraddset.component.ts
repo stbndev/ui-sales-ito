@@ -11,21 +11,24 @@ import { ConfigService } from "./../../config/config-service.service";
   styleUrls: ['./nvtraddset.component.css']
 })
 export class NvtraddsetComponent implements OnInit {
-  // setup initial
-  //model: any ;   
 
-  model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, '');
+  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
   model2: Entriesmodel;
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
-  //@Output() open: EventEmitter<any> = new EventEmitter();
-
 
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
+  valuechange(newValue) {
+    this.model2.existence = this.model.existence + newValue; 
+    // mymodel = newValue;
+    
+  }
+
   onCancel() {
-    this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+    // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
   }
 
   HideElement(iditem) {
@@ -98,16 +101,26 @@ export class NvtraddsetComponent implements OnInit {
   }
 
   onSaveForm() {
+    
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'entries';
-    if (this.model.idproducts > 0) {
+    // start fill entry object
+    this.model2.idproducts = this.model.idproducts;
+    this.model2.unitary_cost = this.model.unitary_cost;
+    this.model2.quantity = this.model.quantity;
+    this.model2.idcstatus = this.model.idcstatus;
+    this.model2.idcompany = this.model.idcompany;
+    // get maker with user credentials logged
+    this.model2.maker = 'Angular webapp';
+    // end fil entry object
+    if (this.model2.identries > 0) {
       tmpmethod = eTipos.PUT
-      tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
+      tmpendpoint = `${tmpendpoint}/${this.model2.identries}`
     } else {
       tmpmethod = eTipos.POST
     }
 
-    this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
+    this.service.Make(tmpendpoint, tmpmethod, this.model2).subscribe((data) => {
       if (data.response) {
         this.service.changeListProductsDataAdd(data.result);
       }
@@ -122,17 +135,27 @@ export class NvtraddsetComponent implements OnInit {
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
   ngOnInit() {
-    
+
     this.service.productsData.subscribe(res => {
-      
       this.model = res;
       this.model2 = {
-        date_add = this.model.date_add,
+        idcstatus: this.model.idcstatus,
+        idproducts: this.model.idproducts,
+        identries: 0,
+        idcompany: this.model.idcompany,
+        id: '',
+        date_add: this.model.date_add,
+        date_set: this.model.date_set,
+        unitary_cost: this.model.unitary_cost,
+        unitary_price: this.model.unitary_price,
+        total: 0,
+        existence: this.model.existence,
+        quantity: this.model.quantity,
+        maker: this.model.maker
       }
-      
+
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
-      console.dir(this.model);
-      console.dir(this.model2);
+      // console.dir(this.model2);
     });
   }
 }

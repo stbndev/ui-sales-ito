@@ -9,7 +9,7 @@ import { ConfigService } from 'src/app/config/config-service.service';
   styleUrls: ['./nvtrsitem.component.css']
 })
 export class NvtrsitemComponent implements OnInit {
-  model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, '');
+  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;

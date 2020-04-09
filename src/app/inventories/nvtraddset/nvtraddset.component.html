@@ -9,28 +9,24 @@ onselect from nvtrsrowitem chance class hideComponent
         <mat-card-content>
             <div class="div-table-container">
                 <div class="div-column">
-                    <label>{{model2.idproducts}}</label>
+                    
                     <img [src]="model.pathimg" (error)="onErrorDefaultPic()" alt="{{model.name}}" width="250"
                         height="250" id="productImg">
-                    <!-- <input type="file" accept="image/*" (change)='onChangeFileUpload($event)' placeholder="Subir Imagen"
-                        name="ProfilePhoto" id="ProfilePhoto">
-                    <input type="button" value="Remover">
-                    <output id="list"></output> -->
                     <br>
                 </div>
                 <div class="div-column">
                     <mat-form-field class="hideComponent">
-                        <input matInput placeholder='idproducts' [(ngModel)]='model.idproducts'>
+                        <input matInput placeholder='idproducts' [(ngModel)]='model2.idproducts'>
                     </mat-form-field>
                     <mat-form-field class="hideComponent">
                         <input matInput placeholder='pathimg' [(ngModel)]='model.pathimg'>
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput placeholder='Nombre' [(ngModel)]='model.name'>
+                        <input matInput placeholder='Nombre' [(ngModel)]='model.name' disabled>
                     </mat-form-field>
                     <mat-form-field>
                         <input matInput placeholder='Código de Barras o clave' name='barcode'
-                            [(ngModel)]='model.barcode'>
+                            [(ngModel)]='model.barcode' disabled>
                     </mat-form-field>
 
                     <mat-form-field class="hideComponent">
@@ -40,7 +36,7 @@ onselect from nvtrsrowitem chance class hideComponent
                     <mat-form-field>
                         <mat-label>Estatus Actual</mat-label>
                         <!--  (change)="onEventSelection($event.value)-->
-                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)">
+                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)"  [disabled]="true">
                             <mat-option *ngFor="let i of liststatus" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
@@ -48,15 +44,19 @@ onselect from nvtrsrowitem chance class hideComponent
                     </mat-form-field>
                     <mat-form-field>
                         <input type="number" name="unitary_price" min="1" max="999999" matInput placeholder='Precio'
-                            name='unitary_price' [(ngModel)]='model.unitary_price'>
+                            name='unitary_price' [(ngModel)]='model.unitary_price' disabled>
                     </mat-form-field>
                     <mat-form-field>
                         <input type="number" name="unitary_cost" min="1" max="999999" matInput placeholder='Costo'
-                            name='unitary_cost' [(ngModel)]='model.unitary_cost'>
+                            name='unitary_cost' [(ngModel)]='model2.unitary_cost'>
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="text" name="quantity" min="1" max="999999" matInput placeholder='Cantidad'
-                            name='quantity' [(ngModel)]='model.quantity'>
+                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Cantidad a agregar'
+                            name='quantity' [(ngModel)]='model.quantity' (ngModelChange)="valuechange($event)">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" name="quantity" min="1" max="999999" matInput placeholder='En existencia'
+                            name='existence' [(ngModel)]='model2.existence' disabled>
                     </mat-form-field>
                 </div>
 
