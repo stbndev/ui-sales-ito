@@ -40,6 +40,7 @@ import { NvtrsrkgGridComponent } from './inventory-shrinkage/nvtrsrkg-grid/nvtrs
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NvtrsrowitemComponent } from './inventories/nvtrsrowitem/nvtrsrowitem.component';
 import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.component';
+import { NvtrsentriesComponent } from './inventories/nvtrsentries/nvtrsentries.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.compone
     InventoryShrinkageComponent,
     NvtrsrkgGridComponent,
     NvtrsrowitemComponent,
-    NvtraddsetComponent
+    NvtraddsetComponent,
+    NvtrsentriesComponent
   ],
   imports: [
     HttpClientModule,

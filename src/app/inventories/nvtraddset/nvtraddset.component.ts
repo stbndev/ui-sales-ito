@@ -21,9 +21,9 @@ export class NvtraddsetComponent implements OnInit {
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
   valuechange(newValue) {
-    this.model2.existence = this.model.existence + newValue; 
+    this.model2.existence = this.model.existence + newValue;
     // mymodel = newValue;
-    
+
   }
 
   onCancel() {
@@ -101,7 +101,7 @@ export class NvtraddsetComponent implements OnInit {
   }
 
   onSaveForm() {
-    
+
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'entries';
     // start fill entry object
@@ -122,7 +122,9 @@ export class NvtraddsetComponent implements OnInit {
 
     this.service.Make(tmpendpoint, tmpmethod, this.model2).subscribe((data) => {
       if (data.response) {
-        this.service.changeListProductsDataAdd(data.result);
+       // this.HideElement('divProductAddSet');
+        this.ngOnInit();
+        // this.service.changeListProductsDataAdd(data.result);
       }
     }, (error) => {
       alert(error);
@@ -155,7 +157,10 @@ export class NvtraddsetComponent implements OnInit {
       }
 
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
-      // console.dir(this.model2);
+
+      if (this.model2.idproducts > 0) {
+        this.HideElement('divProductAddSet');
+      }
     });
   }
 }
