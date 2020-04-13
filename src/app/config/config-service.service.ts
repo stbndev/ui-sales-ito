@@ -13,27 +13,30 @@ import { Productsmodel } from "./../models/productsmodel";
 export class ConfigService {
   // private _productsSource = new BehaviorSubject<Productsmodel>(new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'));
   private _productsSource = new BehaviorSubject<Productsmodel>(
-    //new Productsmodel(0, '', '', '', 0, 0, 0, 0, 0, '', '', 0, '', 0, 0)
-    new Productsmodel(0,0,0,0,0,0,0,0,0,'','','','','','')
+    new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '')
   );
 
   private _listproductsSource = new BehaviorSubject<Productsmodel[]>([]);
+  private _flag = new BehaviorSubject<Boolean>(false);
+
   private _todos = new BehaviorSubject<any[]>([]);
-  
+
   productsData = this._productsSource.asObservable()
   listproductsData = this._listproductsSource.asObservable()
-  // configUrl = 'https://jsonplaceholder.typicode.com/posts/1/comments';
-  // _uriResources = 'https://localhost:44332/api/';
+  refresh = this._flag.asObservable();
   _uriResources = 'https://mrgvnservice.azurewebsites.net/api/';
-
 
   constructor(private http: HttpClient) { }
 
   extractData(res: Response) {
     let body = res;
-    // return body || {};
     return body || {};
   }
+
+  RefreshComponent(flag: boolean) {
+    this._flag.next(flag);
+  }
+
   changeProductsData(productsargs: Productsmodel) {
     this._productsSource.next(productsargs);
   }
@@ -82,6 +85,7 @@ export class ConfigService {
   Upload(serviceName: String, data: any): Observable<any> {
     return this.http.post(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
   }
+
 
 
 }

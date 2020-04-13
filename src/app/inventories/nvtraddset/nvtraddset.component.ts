@@ -29,19 +29,28 @@ export class NvtraddsetComponent implements OnInit {
   onCancel() {
     // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
     this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+    //  HideElement('divProductAddSet');
+    this.HideElement('divProductAddSet');
   }
 
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
-    if (element.className === 'hideComponent') {
-      element.classList.remove("hideComponent");
-      element.classList.add("showComponent");
-    }
-    else {
+    // if (element.className === 'hideComponent') {
+    //   element.classList.remove("hideComponent");
+    //   element.classList.add("showComponent");
+    // }
+    // else {
       element.classList.remove("showComponent");
       element.classList.add("hideComponent");
-    }
+    // }
   }
+
+  ShowElement(iditem) {
+    var element = document.getElementById(`${iditem}`);
+    element.classList.remove("hideComponent");
+    element.classList.add("showComponent");
+  }
+
   onDelete(): any {
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
@@ -106,7 +115,7 @@ export class NvtraddsetComponent implements OnInit {
     let tmpendpoint: String = 'entries';
     // start fill entry object
     this.model2.idproducts = this.model.idproducts;
-    this.model2.unitary_cost = this.model.unitary_cost;
+    // this.model2.unitary_price = this.model.unitary_price;
     this.model2.quantity = this.model.quantity;
     this.model2.idcstatus = this.model.idcstatus;
     this.model2.idcompany = this.model.idcompany;
@@ -123,7 +132,9 @@ export class NvtraddsetComponent implements OnInit {
     this.service.Make(tmpendpoint, tmpmethod, this.model2).subscribe((data) => {
       if (data.response) {
        // this.HideElement('divProductAddSet');
-        this.ngOnInit();
+       this.service.RefreshComponent(true);
+        this.HideElement('divProductAddSet');
+        // this.ngOnInit();
         // this.service.changeListProductsDataAdd(data.result);
       }
     }, (error) => {
@@ -159,7 +170,7 @@ export class NvtraddsetComponent implements OnInit {
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
 
       if (this.model2.idproducts > 0) {
-        this.HideElement('divProductAddSet');
+        this.ShowElement('divProductAddSet');
       }
     });
   }

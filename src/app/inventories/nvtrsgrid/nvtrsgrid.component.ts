@@ -23,9 +23,18 @@ export class NvtrsgridComponent implements OnInit {
     'quantity',
   ];
 
-  constructor(protected service: ConfigService) { }
+  constructor(protected service: ConfigService) {
+    this.service.refresh.subscribe(res => {
+      console.dir(res);
+      if (res) {
+        this.ngOnInit();
+      }
+    });
+  }
 
   ngOnInit() {
+
+
     this.service.Get('products').subscribe(
       data => {
         if (data.response) {
