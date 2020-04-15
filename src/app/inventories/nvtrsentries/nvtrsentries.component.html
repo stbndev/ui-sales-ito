@@ -1,17 +1,17 @@
 <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="identries">
+        <th mat-header-cell *matHeaderCellDef> ID ENTRIES</th>
+        <td mat-cell *matCellDef="let element"> 
+            {{element.idproductentries}} 
+        </td>
+    </ng-container>
     <ng-container matColumnDef="idproducts">
         <th mat-header-cell *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let element"> 
             {{element.idproducts}} 
         </td>
     </ng-container>
-    <ng-container matColumnDef="pathimg">
-        <th mat-header-cell *matHeaderCellDef> Imagen Producto </th>
-        <td mat-cell *matCellDef="let element">
-            <img src="{{element.pathimg}}" alt='img' width="100" height="100">
-        </td>
-    </ng-container>
-
+    
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nombre </th>
         <td mat-cell *matCellDef="let element">
@@ -19,13 +19,7 @@
         </td>
     </ng-container>
 
-    <ng-container matColumnDef="barcode">
-        <th mat-header-cell *matHeaderCellDef> Codigo de Barras y/o Clave </th>
-        <td mat-cell *matCellDef="let element">
-            {{element.barcode}}
-        </td>
-    </ng-container>
-
+    
     <ng-container matColumnDef="idcstatus">
         <th mat-header-cell *matHeaderCellDef> Estatus </th>
         <td mat-cell *matCellDef="let element">
@@ -54,13 +48,7 @@
         </td>
     </ng-container>
 
-    <ng-container matColumnDef="idproductentries">
-        <th mat-header-cell *matHeaderCellDef> idproductentries </th>
-        <td mat-cell *matCellDef="let element">
-            {{element.idproductentries}}
-        </td>
-    </ng-container>
-
+    
     <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef> quantity </th>
         <td mat-cell *matCellDef="let element">

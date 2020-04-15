@@ -13,17 +13,17 @@ export class NvtrsentriesComponent implements OnInit {
     
     'identries',
     'idproducts',
-    'total',
-    'unitary_cost',
-    'unitary_price',
-    'quantity',
-    'existence',
-    'id',
-    'idcstatus',
-    'idcompany',
-    'maker',
-    'date_add',
-    'date_set'
+    // 'total',
+    // 'unitary_cost',
+    // 'unitary_price',
+    // 'quantity',
+    // 'existence',
+    // 'id',
+    // 'idcstatus',
+    // 'idcompany',
+    // 'maker',
+    // 'date_add',
+    // 'date_set'
   ];
 
   constructor(protected service: ConfigService) { }
