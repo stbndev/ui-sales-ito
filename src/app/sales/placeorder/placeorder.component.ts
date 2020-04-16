@@ -3,9 +3,9 @@ import { Productsmodel } from "./../../models/productsmodel";
 import { eTipos, eCSTATUS } from './../../config/enums-global.enum';
 import { Salesmodel, SaleDetails } from "./../../models/salesmodel";
 import { ConfigService } from 'src/app/config/config-service.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TmpsaveorderComponent } from "./../tmpsaveorder/tmpsaveorder.component";
-  
+
 @Component({
   selector: 'app-placeorder',
   templateUrl: './placeorder.component.html',
@@ -18,7 +18,7 @@ export class PlaceorderComponent implements OnInit {
   totalItemsOrder: number = 0;
   durationInSeconds = 50;
 
-  constructor(protected service: ConfigService,private _snackBar: MatSnackBar) { }
+  constructor(protected service: ConfigService, private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.service.listproductsData.subscribe(
@@ -31,11 +31,11 @@ export class PlaceorderComponent implements OnInit {
         this.products.forEach(element => {
           tmpquantity += element.quantity;
           let tmp = element.quantity * element.unitary_price;
-          tmptotal2 += element.quantity * element.unitary_price; 
+          tmptotal2 += element.quantity * element.unitary_price;
           tmptotal.push(tmp);
         });
         this.totalItemsOrder = tmpquantity;
-       this.totalOrder = tmptotal2;
+        this.totalOrder = tmptotal2;
       },
       error => {
         alert(error);
@@ -44,10 +44,10 @@ export class PlaceorderComponent implements OnInit {
   }
 
   openSnackBar() {
-    this._snackBar.openFromComponent(  TmpsaveorderComponent, {
+    this._snackBar.openFromComponent(TmpsaveorderComponent, {
       duration: this.durationInSeconds * 1000,
     });
-    
+
   }
 
   onPlaceOrder(e) {
@@ -65,9 +65,9 @@ export class PlaceorderComponent implements OnInit {
       }
     )
   }
-  
+
   onSaveOrder(e) {
-   
+
 
   }
 
@@ -76,10 +76,10 @@ export class PlaceorderComponent implements OnInit {
     let array = [];
 
     this.products.forEach(element => {
-      let sd = new SaleDetails(0, element.unitary_cost, element.unitary_price, element.quantity, element.idproducts);
+      let sd = new SaleDetails( element.unitary_cost, element.unitary_price, element.quantity, element.idproducts);
       array.push(sd);
     });
-    let sm = new Salesmodel(this.totalOrder, eCSTATUS.ACTIVO, 'devendra', 0, array);
+    let sm = new Salesmodel(this.totalOrder, 0, eCSTATUS.ACTIVO, 0, 'angularwebapp', 0, 0, array);
     return sm;
   }
 
