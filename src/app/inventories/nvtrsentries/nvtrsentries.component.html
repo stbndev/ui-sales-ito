@@ -2,7 +2,7 @@
     <ng-container matColumnDef="identries">
         <th mat-header-cell *matHeaderCellDef> ID ENTRIES</th>
         <td mat-cell *matCellDef="let element"> 
-            {{element.idproductentries}} 
+            {{element.identries}} 
         </td>
     </ng-container>
     <ng-container matColumnDef="idproducts">
@@ -11,26 +11,11 @@
             {{element.idproducts}} 
         </td>
     </ng-container>
-    
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nombre </th>
-        <td mat-cell *matCellDef="let element">
-            {{element.name}}
-        </td>
-    </ng-container>
 
-    
-    <ng-container matColumnDef="idcstatus">
-        <th mat-header-cell *matHeaderCellDef> Estatus </th>
+    <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> Total </th>
         <td mat-cell *matCellDef="let element">
-            {{element.idcstatus}}
-        </td>
-    </ng-container>
-
-    <ng-container matColumnDef="unitary_price">
-        <th mat-header-cell *matHeaderCellDef> Precio Unitario </th>
-        <td mat-cell *matCellDef="let element">
-            {{element.unitary_price}}
+            {{element.total}}
         </td>
     </ng-container>
 
@@ -41,6 +26,20 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="unitary_price">
+        <th mat-header-cell *matHeaderCellDef> Precio Unitario </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.unitary_price}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> quantity </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.quantity}}
+        </td>
+    </ng-container>
+
     <ng-container matColumnDef="existence">
         <th mat-header-cell *matHeaderCellDef> Existencias </th>
         <td mat-cell *matCellDef="let element">
@@ -48,11 +47,38 @@
         </td>
     </ng-container>
 
-    
-    <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef> quantity </th>
+    <ng-container matColumnDef="idcompany">
+        <th mat-header-cell *matHeaderCellDef> Compañia </th>
         <td mat-cell *matCellDef="let element">
-            {{element.quantity}}
+            {{element.idcompany}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="idcstatus">
+        <th mat-header-cell *matHeaderCellDef> Estatus </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.idcstatus}}
+        </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="maker">
+        <th mat-header-cell *matHeaderCellDef> Responsable </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.maker}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date_add">
+        <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.date_add}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date_set">
+        <th mat-header-cell *matHeaderCellDef> Fecha Modificacion </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.date_set}}
         </td>
     </ng-container>
 
