@@ -1,24 +1,26 @@
 export class Salesmodel {
-
     constructor(
-        public total:number,
-        public idcstatus: number,
-        public maker:string,
+        // public id: string,
+        public total: number,
         public idsales: number,
-        public SaleDetails: SaleDetails[]
-    ){
+        public idcstatus: number,
+        public idcompany: number,
+        public maker: string,
+        public date_add: number,
+        public date_set: number,
+        public details: SaleDetails[]
+    ) {
 
     }
-    
+
 }
-export class SaleDetails{
+export class SaleDetails {
     constructor(
-        public id:number,
         public unitary_cost: number,
         public unitary_price: number,
-        public quantity:number,
-        public idproducts : number
-    ){
+        public quantity: number,
+        public idproducts: number
+    ) {
 
     }
 }
