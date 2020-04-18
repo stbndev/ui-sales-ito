@@ -157,6 +157,7 @@ export class NvtraddsetComponent implements OnInit {
         identries: 0,
         idcompany: this.model.idcompany,
         id: '',
+        name:this.model.name,
         date_add: this.model.date_add,
         date_set: this.model.date_set,
         unitary_cost: this.model.unitary_cost,

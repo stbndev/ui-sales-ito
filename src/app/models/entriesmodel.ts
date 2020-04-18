@@ -10,6 +10,7 @@ export interface Entriesmodel {
     quantity: number,
     existence: number,
     id: string,
+    name: string,
     idcstatus: number,
     idcompany: number,
     maker: string,
