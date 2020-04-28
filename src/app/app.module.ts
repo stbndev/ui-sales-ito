@@ -42,6 +42,7 @@ import { NvtrsrowitemComponent } from './inventories/nvtrsrowitem/nvtrsrowitem.c
 import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.component';
 import { NvtrsentriesComponent } from './inventories/nvtrsentries/nvtrsentries.component';
 import { ReportComponent } from './sales/report/report.component';
+import { SignupComponent } from './users/signup/signup.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ReportComponent } from './sales/report/report.component';
     NvtrsrowitemComponent,
     NvtraddsetComponent,
     NvtrsentriesComponent,
-    ReportComponent
+    ReportComponent,
+    SignupComponent
   ],
   imports: [
     HttpClientModule,
