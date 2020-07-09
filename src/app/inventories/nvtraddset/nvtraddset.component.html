@@ -1,14 +1,13 @@
 <!-- <div id='divProductAddSet' class="hideComponent" > 
 onselect from nvtrsrowitem chance class hideComponent    
 -->
-<div id='divProductAddSet' class="hideComponent" >
+<div id='divProductAddSet' class="hideComponent">
     <mat-card>
         <mat-card-title>PRODUCTO </mat-card-title>
         <mat-card-subtitle> {{model.name}} </mat-card-subtitle>
         <mat-card-content>
             <div class="div-table-container">
                 <div class="div-column">
-                    
                     <img [src]="model.pathimg" (error)="onErrorDefaultPic()" alt="{{model.name}}" width="250"
                         height="250" id="productImg">
                     <br>
@@ -35,7 +34,8 @@ onselect from nvtrsrowitem chance class hideComponent
                     <mat-form-field>
                         <mat-label>Estatus Actual</mat-label>
                         <!--  (change)="onEventSelection($event.value)-->
-                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)"  [disabled]="true">
+                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)"
+                            [disabled]="true">
                             <mat-option *ngFor="let i of liststatus" [value]="i.value">
                                 {{i.viewValue}}
                             </mat-option>
@@ -50,15 +50,15 @@ onselect from nvtrsrowitem chance class hideComponent
                             name='unitary_cost' [(ngModel)]='model2.unitary_cost'>
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Cantidad a agregar'
-                            name='quantity' [(ngModel)]='model.quantity' (ngModelChange)="valuechange($event)">
+                        <input type="number" name="quantity" min="1" max="999999" matInput
+                            placeholder='Cantidad a agregar' name='quantity' [(ngModel)]='model.quantity'
+                            (ngModelChange)="valuechange($event)">
                     </mat-form-field>
                     <mat-form-field>
                         <input type="text" name="quantity" min="1" max="999999" matInput placeholder='En existencia'
-                            name='existence' [(ngModel)]='model2.existence' disabled>
+                            name='existence' [(ngModel)]='model2.existence'>
                     </mat-form-field>
                 </div>
-
             </div>
         </mat-card-content>
         <mat-card-actions>

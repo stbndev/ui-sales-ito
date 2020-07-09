@@ -1,0 +1,113 @@
+<!-- <h1>Detalles del pedido</h1>
+
+Pedido el #datepedido | Pedido n.º #idcompany-#idsales <input type="button" value="Ver o imprimir recibo">
+
+<table>
+  <tr>
+    <th>  Dirreción de envío </th>
+    <th>  Método de pago </th>
+    <th>  Resumen del pedido </th>
+  </tr>
+  <tr>
+    <td> #Client Name publico general 
+       #address ventanilla
+    </td>
+    <td> #paymentmethod efectivo</td>
+    <td> 
+      <div>
+        <div>Productos:</div>
+        <div>$0</div>
+      </div>
+
+      <div>
+        <div>Envios:</div>
+        <div>$0</div>
+      </div>
+      
+      <div>
+        <div>Subtotal:</div>
+        <div>$0</div>
+      </div>
+
+      <div>
+        <div>Promoción aplicada:</div>
+        <div>$0</div>
+      </div>
+
+      <div>
+        <div>Total (impuestos aplicables incluidos):</div>
+        <div>$0</div>
+      </div>
+      
+    </td>
+  </tr>
+</table>
+<hr>
+ -->
+
+ <img src='https://i.pinimg.com/originals/b7/14/20/b714200f6cc7c63187c05b9c0d2c0fe8.png' alt="report" width='100px' height="60px">
+
+<h1 style="color: #E47911;">Detalles finales del pedido  {{sales.idsales}}</h1>
+<a href="#">Imprima esta página para sus registros.</a>
+
+<div>
+  <strong>Pedido realizado:</strong> {{ sales.date_add }}
+  <strong>Pedido #inpipeline </strong> 
+  <strong>Total del pedido:</strong> $ {{ sales.total }}
+</div>
+
+<table>
+  <caption><b>Atención:</b> Esto no es una factura electrónica CFDI.</caption>
+  <tr>
+    <td colspan="3">
+      <strong>
+        Comprado el {{ sales.date_add }}
+      </strong>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">Productos comprados: {{ sales.details.length }}</td>
+    <td>Precio</td>
+  </tr>
+  <!-- start items purchased -->
+  
+  <tr *ngFor='let item of sales.details; index as i; first as isFirst' >
+    <td> 
+      <!-- {{ i }} / {{ item.idproducts }} 
+      <span *ngIf='isFirst'>default</span>  -->
+      {{ item.quantity }} de:
+    </td>
+    <td> #inpipeline sales.productname {{ item.unitary_cost }}</td>
+    <td> $ {{ item.unitary_price }} </td>
+  </tr>
+  <!-- end   items purchased -->
+  <!-- start payment method  purchased -->
+  <tr>
+    <td colspan="3"Información de pago></td>
+  </tr>
+  <tr>
+    <td colspan="2">Metodo de pago</td>
+    <td>:efectivo</td>
+  </tr>
+  
+  <tr>
+    <td></td>
+    <td>Subtotal:</td>
+    <td>$ {{ sales.total }}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Promocion aplicada:</td>
+    <td>$ 0.0</td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <strong>Total (impuestos incluidos):</strong>
+    </td>
+    <td>$ {{ sales.total }} </td>
+  </tr>
+  <!-- end   payment method -->
+  
+
+
+</table>

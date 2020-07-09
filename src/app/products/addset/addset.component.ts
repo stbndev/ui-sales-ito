@@ -98,6 +98,7 @@ export class AddsetComponent implements OnInit {
 
 
   onSaveForm() {
+    
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
     if (this.model.idproducts > 0) {
@@ -110,6 +111,7 @@ export class AddsetComponent implements OnInit {
     this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
       if (data.response) {
         this.service.changeListProductsDataAdd(data.result);
+        this.HideElement('divProductAddSet');
       }
     }, (error) => {
       alert(error);
@@ -126,6 +128,8 @@ export class AddsetComponent implements OnInit {
     this.service.productsData.subscribe(res => {
       this.model = res;
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
+      this.model.idcstatus = parseInt(this.selected);
+      
     });
 
   }

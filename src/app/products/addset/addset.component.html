@@ -22,15 +22,15 @@
                         <input matInput placeholder='pathimg' [(ngModel)]='model.pathimg'>
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput placeholder='Nombre' [(ngModel)]='model.name'>
+                        <input matInput placeholder='Nombre' [(ngModel)]='model.name' required>
                     </mat-form-field>
                     <mat-form-field>
                         <input matInput placeholder='Código de Barras o clave' name='barcode'
-                            [(ngModel)]='model.barcode'>
+                            [(ngModel)]='model.barcode' required>
                     </mat-form-field>
 
                     <mat-form-field class="hideComponent">
-                        <input matInput placeholder='Estatus' name='idcstatus' [(ngModel)]='model.idcstatus'>
+                        <input matInput placeholder='Estatus' name='idcstatus' [(ngModel)]='model.idcstatus' required>
                     </mat-form-field>
 
                     <mat-form-field>

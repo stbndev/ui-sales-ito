@@ -1,3 +1,13 @@
+// module String {
+//     export function isNullOrEmpty(s: string): boolean {
+//         return !s;
+//     }
+// }
+
+export var isNullOrEmpty = function (s: string) {
+    return !s;
+};
+
 export enum EnumsGlobal {
 }
 
@@ -7,7 +17,7 @@ export enum eTipos {
     PATCH = 3,
     DELETE = 4,
 }
-export enum eCSTATUS{
+export enum eCSTATUS {
     ACTIVO = 1,
     INACTIVO = 2,
     ELIMINADO = 3,

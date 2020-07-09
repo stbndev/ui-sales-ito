@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { eTipos, eCSTATUS } from './enums-global.enum';
 import { Productsmodel } from "./../models/productsmodel";
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +26,17 @@ export class ConfigService {
   productsData = this._productsSource.asObservable()
   listproductsData = this._listproductsSource.asObservable()
   refresh = this._flag.asObservable();
-  _uriResources = 'https://mrgvnservice.azurewebsites.net/api/';
+  _uriResources = ' http://azul200.azurewebsites.net/api/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookies: CookieService) { }
 
+  setToken(token: string) {
+    // this.cookies.delete("token");
+    this.cookies.set("token", token);
+  }
+  getToken() {
+    return this.cookies.get("token");
+  }
   extractData(res: Response) {
     let body = res;
     return body || {};
@@ -37,13 +46,17 @@ export class ConfigService {
     this._flag.next(flag);
   }
 
-  changeProductsData(productsargs: Productsmodel) {
+  changeProductsData(productsargs: Productsmodel,setup?:boolean) {
+    if(setup){
+      productsargs.setup = setup;
+    }
     this._productsSource.next(productsargs);
   }
 
   changeListProductsData(listproductsargs: []) {
     this._listproductsSource.next(listproductsargs)
   }
+
   changeListProductsDataAdd(pgs: Productsmodel) {
     let found = this._listproductsSource.getValue().find(element => element.idproducts == pgs.idproducts);
     if (found) {
@@ -56,13 +69,23 @@ export class ConfigService {
       this._listproductsSource.next(this._listproductsSource.getValue().concat(pgs));
     }
   }
+  
   Get(serviceName: String): Observable<any> {
-    return this.http.get(`${this._uriResources}${serviceName}`).pipe(map(this.extractData));
+    
+    let tmpToken = this.getToken();
+    
+    let headers = new HttpHeaders().set("Authorization",`Bearer ${tmpToken}`);
+
+    return this.http.get(`${this._uriResources}${serviceName}`, { headers } )
+                    .pipe(map(this.extractData));
   }
 
   Make(serviceName: String, tipo: any, data: any): Observable<any> {
+
+    let tmpToken = this.getToken();
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `Bearer ${tmpToken}`);
 
     switch (tipo) {
       case eTipos.POST:

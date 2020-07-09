@@ -4,6 +4,7 @@ import { Entriesmodel } from "./../../models/entriesmodel";
 import { eTipos, eCSTATUS } from "./../../config/enums-global.enum";
 import { CSTATUS } from "./../../config/enums-global.enum";
 import { ConfigService } from "./../../config/config-service.service";
+import { debug } from 'util';
 
 @Component({
   selector: 'app-nvtraddset',
@@ -22,14 +23,11 @@ export class NvtraddsetComponent implements OnInit {
 
   valuechange(newValue) {
     this.model2.existence = this.model.existence + newValue;
-    // mymodel = newValue;
-
   }
 
   onCancel() {
     // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
     this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
-    //  HideElement('divProductAddSet');
     this.HideElement('divProductAddSet');
   }
 
@@ -150,7 +148,10 @@ export class NvtraddsetComponent implements OnInit {
   ngOnInit() {
 
     this.service.productsData.subscribe(res => {
+     //  debugger;
+
       this.model = res;
+
       this.model2 = {
         idcstatus: this.model.idcstatus,
         idproducts: this.model.idproducts,
@@ -167,6 +168,11 @@ export class NvtraddsetComponent implements OnInit {
         quantity: this.model.quantity,
         maker: this.model.maker
       }
+
+      // if(!this.model.setup === undefined){
+      //   this.model2
+      // }
+      
 
       this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
 

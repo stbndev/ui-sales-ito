@@ -23,10 +23,14 @@ export class GriditemsComponent implements OnInit {
         alert(error);
       });
   }
+  onSearchChange(searchValue: string): void {  
+    console.log(searchValue);
+  }
 
   add(data, e) {
     this.makeOperation(data, +1);
   }
+  
   substract(data, e) {
     this.makeOperation(data, -1);
   }

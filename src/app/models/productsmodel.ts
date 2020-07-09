@@ -1,7 +1,7 @@
 export class Productsmodel {
         constructor(
                 public idproducts: number,
-                public idcstatus: number = 2,
+                public idcstatus: number ,
                 public idcompany: number,
                 public unitary_price: number,
                 public unitary_cost: number,
@@ -14,8 +14,9 @@ export class Productsmodel {
                 public description: string,
                 public barcode: string,
                 public pathimg: string,
-                public maker: string
+                public maker: string,
         ) { }
+         public setup:boolean;
 }
 // export interface Productstestmodel {
 //         //     id: number;

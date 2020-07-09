@@ -14,3 +14,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: none;
     /* display: block; */
 }
+.hideComponent2{
+    visibility: hidden;
+    /* display: none; */
+    /* display: block; */
+}
+
+.div-table-container {
+    display: flex; /* or inline-flex */
+    
+}
+
+.div-column{
+    display: flex;
+    flex-direction: column;
+    padding-right: 70px;
+}

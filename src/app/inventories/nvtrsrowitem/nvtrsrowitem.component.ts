@@ -12,16 +12,12 @@ export class NvtrsrowitemComponent implements OnInit {
   @Input() dataItem: any;
 
   // entryproduct: Productstestmodel;
-  constructor(protected service: ConfigService) {
-
-  }
+  constructor(protected service: ConfigService) { }
 
   ngOnInit() {  }
 
-  onSelect(e, d) {
-    // this.ProductAdd();
-    // let tmp = Object.assign(this.model, item);
-    this.service.changeProductsData(d);
+  onSelect(event, data) {
+    this.service.changeProductsData(data);
   }
 
 }

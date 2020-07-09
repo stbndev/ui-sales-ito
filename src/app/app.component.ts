@@ -9,6 +9,6 @@ import { ThemePalette, ProgressSpinnerMode } from '@angular/material';
 export class AppComponent {
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'indeterminate';
-  value = 50;
-  title = 'salesin-ui';
+  // value = 50;
+  title = 'La casera';
 }

@@ -1,3 +1,25 @@
+export class SaleDetailsModel {
+     unitary_cost: number;
+     unitary_price: number;
+     quantity: number;
+     idproducts: number;
+     
+
+}
+
+export class Sales2Model {
+    id: string;
+    total: number;
+    idsales: number;
+    idcstatus: number;
+    idcompany: number;
+    maker: string;
+    date_add: number;
+    date_set: number;
+    details: SaleDetailsModel[];
+    getNumber(): number { return this.idsales };
+}
+
 export class Salesmodel {
     constructor(
         // public id: string,

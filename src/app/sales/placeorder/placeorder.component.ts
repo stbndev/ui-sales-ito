@@ -5,6 +5,7 @@ import { Salesmodel, SaleDetails } from "./../../models/salesmodel";
 import { ConfigService } from 'src/app/config/config-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TmpsaveorderComponent } from "./../tmpsaveorder/tmpsaveorder.component";
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-placeorder',
@@ -17,12 +18,31 @@ export class PlaceorderComponent implements OnInit {
   totalOrder: number = 0;
   totalItemsOrder: number = 0;
   durationInSeconds = 50;
+  mySubscription: any;
 
-  constructor(protected service: ConfigService, private _snackBar: MatSnackBar) { }
+  constructor(private router: Router,protected service: ConfigService, private _snackBar: MatSnackBar) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
 
   ngOnInit() {
     this.service.listproductsData.subscribe(
       res => {
+        
         this.products = res;
         let tmpquantity = 0;
         let tmptotal = [];
@@ -53,17 +73,22 @@ export class PlaceorderComponent implements OnInit {
   onPlaceOrder(e) {
     //TODO:
     // VALIDATE IN CORE WHEN I DONT HAVE PRODUCT EXISTS
-    // VALIDATE IN FRONTEND WHEN I DONT HAVE PRODUCTS\
+    // OK.VALIDATE IN FRONTEND WHEN I DONT HAVE PRODUCTS
     // RESET PLACE ORDER AND CREATE PRINT PAPER 
-
+    
     let data = this.buildData();
     this.service.Make('sales', eTipos.POST, data).subscribe(
       data => {
         alert('Orden pedida No.' + data.result.idsales);
+        let purchase = JSON.stringify(data.result);
+        window.open(`/orderdetails?data=${purchase}`,'_blank');
+        window.location.reload();
       }, error => {
         alert('placeorder.onPlaceOrder');
-      }
-    )
+      } 
+    ).add(() => {
+      console.log('end');
+    });
   }
 
   onSaveOrder(e) {

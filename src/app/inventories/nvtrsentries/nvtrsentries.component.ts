@@ -48,7 +48,6 @@ export class NvtrsentriesComponent implements OnInit {
                     this.dataSource[i].name = this.dataProducts[ip].name;
                   }
                 }
-
               }
             }
           },

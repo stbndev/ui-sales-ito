@@ -1,29 +1,101 @@
-<div class="col-md-6 col-md-offset-3">
-    <h2>Register</h2>
-    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-        
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
-            <label for="name">Nombre Completo</label>
-            <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" required />
-            <div *ngIf="f.submitted && !name.valid" class="help-block">Nombre es requerido</div>
-        </div>
+<div id='divsignchoose'>
+    <mat-card>
+        <mat-card-title>
+            <img src="./../../../assets/imgs/happy_32px.png">
+            Acceder
+        </mat-card-title>
+        <!-- <mat-card-subtitle> Continuar  </mat-card-subtitle> -->
+        <mat-card-content>
+            <div class="div-table-container">
+                <div class="div-column">
+                    <!-- <div>
+                        <img matPrefix src="https://dl.dropbox.com/s/n7nyjpcjys6qz2g/1581186550.jpg" width="50px"
+                            height="50px">
+                    </div> -->
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Ingresa tú Email</mat-label>
+                        <input matInput placeholder='pat@example.com' [formControl]='email' [(ngModel)]='model.email' required>
+                        <!--
+                            name='email' [(ngModel)]='model.email'
+                             ¿Olvidaste la contraseña? 
+                        <mat-hint>Ingresar información</mat-hint>-->
+                    </mat-form-field>
+                    <div>
+                     <button mat-button color='accent' (click)='onForwardPassword()'> ¿Olvidaste la contraseña?</button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button color='accent' (click)='onShowAccountDiv()'>Crear cuenta</button>
+            <button mat-stroked-button color='warn' (click)='onShowSigninDiv()'>Ingresar</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
 
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
-            <div *ngIf="f.submitted && !email.valid" class="help-block">Email es requerido</div>
-        </div>
+<div id='divsignup' class="hideComponent">
+    <mat-card>
+        <mat-card-title>Usuario </mat-card-title>
+        <mat-card-subtitle> Bienvenido {{model.name}} </mat-card-subtitle>
+        <mat-card-content>
+            <div class="div-table-container">
+                <div class="div-column">
+                    <!-- <div>
+                        <img matPrefix src="https://dl.dropbox.com/s/n7nyjpcjys6qz2g/1581186550.jpg" width="50px"
+                            height="50px">
+                    </div> -->
+                    <mat-form-field>
+                        <input matInput placeholder='Nombre' [(ngModel)]='model.name'>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder='Email' name='email' [(ngModel)]='model.email'>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder='Contraseña' name='password' [(ngModel)]='model.password'
+                            type="password">
+                        <input matInput [(ngModel)]='model.id' class="hideComponent">
+                        <input matInput [(ngModel)]='model.idrol' class="hideComponent">
+                        <input matInput [(ngModel)]='model.date_add' class="hideComponent">
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button color='accent' (click)='onSaveForm()'>ACEPTAR </button>
+            <button mat-stroked-button color='warn' (click)='onCancel()'>CANCELAR</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
 
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password es requerido</div>
-        </div>
-        
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-        </div>
-    </form>
+<div id='divsignin' class="hideComponent">
+    <mat-card>
+        <mat-card-title>
+            <img src="./../../../assets/imgs/key_32px.png"> Ingresar </mat-card-title>
+        <mat-card-subtitle> <!-- Bienvenido {{model.name}}  --></mat-card-subtitle>
+        <mat-card-content>
+            <div class="div-table-container">
+                <div class="div-column">
+                    <!-- <div>
+                        <img matPrefix src="https://dl.dropbox.com/s/n7nyjpcjys6qz2g/1581186550.jpg" width="50px"
+                            height="50px">
+                    </div>
+                -->
+                    <mat-form-field>
+                        <input matInput placeholder='Email' name='email' [(ngModel)]='model.email'>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder='Contraseña' name='password' [(ngModel)]='model.password'
+                            type="password">
+                        <input matInput [(ngModel)]='model.id' class="hideComponent">
+                        <input matInput [(ngModel)]='model.idrol' class="hideComponent">
+                        <input matInput [(ngModel)]='model.date_add' class="hideComponent">
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button color='accent' (click)='onSignin()'>ACEPTAR LOGIN</button>
+            <button mat-stroked-button color='warn' (click)='onCancel()'>CANCELAR</button>
+        </mat-card-actions>
+    </mat-card>
 </div>
