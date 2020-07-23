@@ -47,16 +47,17 @@ onselect from nvtrsrowitem chance class hideComponent
                     </mat-form-field>
                     <mat-form-field>
                         <input type="number" name="unitary_cost" min="1" max="999999" matInput placeholder='Costo'
-                            name='unitary_cost' [(ngModel)]='model2.unitary_cost'>
+                            name='unitary_cost' [(ngModel)]='model2.unitary_cost' 
+                            [disabled]="!isDisabled ? 'disabled': null">
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="number" name="quantity" min="1" max="999999" matInput
-                            placeholder='Cantidad a agregar' name='quantity' [(ngModel)]='model.quantity'
+                        <input type="number" name="quantity" min="1" max="999999"
+                            matInput placeholder='Cantidad a agregar' name='quantity' [(ngModel)]='model.quantity'
                             (ngModelChange)="valuechange($event)">
                     </mat-form-field>
                     <mat-form-field>
                         <input type="text" name="quantity" min="1" max="999999" matInput placeholder='En existencia'
-                            name='existence' [(ngModel)]='model2.existence'>
+                            name='existence' [(ngModel)]='model2.existence' disabled>
                     </mat-form-field>
                 </div>
             </div>

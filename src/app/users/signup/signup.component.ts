@@ -36,6 +36,7 @@ export class SignupComponent implements OnInit {
     console.log('result breakpoint')
 
   }
+  
   onDummyMethod(myRawToken: string) {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(myRawToken);
@@ -101,15 +102,16 @@ export class SignupComponent implements OnInit {
     this.service.Make('auth/login', eTipos.POST, data).subscribe(
       data => {
         if (data.response) {
-          this.service.setToken(data.message);
-          this.router.navigateByUrl('/products');
+          this.service.buildingToken(data);
           // this.onDummyMethod(data.message);
+          this.router.navigateByUrl('/products');
         } else {
           alert('Verificar usuario/contraseña');
         }
       }, error => {
         this.loading = false;
-        alert(error);
+        const  e = `Incidencia  ${error.statusText} ${error.name} ${error.message}`;
+        alert(e);
       }
     ).add(() => {
       this.loading = false;

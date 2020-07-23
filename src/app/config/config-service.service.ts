@@ -5,8 +5,9 @@ import { map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { eTipos, eCSTATUS } from './enums-global.enum';
 import { Productsmodel } from "./../models/productsmodel";
+import { Usersmodel } from "./../models/usersmodel";
 import { CookieService } from 'ngx-cookie-service';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +21,60 @@ export class ConfigService {
 
   private _listproductsSource = new BehaviorSubject<Productsmodel[]>([]);
   private _flag = new BehaviorSubject<Boolean>(false);
-
   private _todos = new BehaviorSubject<any[]>([]);
+  private _userInfo = new BehaviorSubject<Usersmodel>(new Usersmodel('','','','','',0));
 
-  productsData = this._productsSource.asObservable()
-  listproductsData = this._listproductsSource.asObservable()
+  productsData = this._productsSource.asObservable();
+  listproductsData = this._listproductsSource.asObservable();
   refresh = this._flag.asObservable();
-  _uriResources = ' http://azul200.azurewebsites.net/api/';
+  userInfo = this._userInfo.asObservable();
+  // _uriResources = ' http://azul200.azurewebsites.net/api/';
+  // https://localhost:44332/weatherforecast
+  _uriResources = 'https://localhost:44332/api/';
+
 
   constructor(private http: HttpClient, private cookies: CookieService) { }
 
-  setToken(token: string) {
-    // this.cookies.delete("token");
-    this.cookies.set("token", token);
+  buildingToken(data:any) {
+    //this.changeUserInfo(data.result);
+    let root = new Array();
+    let user = new Object();
+    user = data.result; 
+    
+    let tmp0 = {'user':'esteban blanquel'};
+    let tmp1 = {'data':'aaaAAAbbbBBB'};
+
+    root[0] = tmp0;
+    root[1] = tmp1;
+
+    this.cookies.deleteAll();
+    this.cookies.set("token", data.message);
+    this.cookies.set('root',JSON.stringify(root));
+    
+    //this.descryptedToken(token);
   }
+
+  changeUserInfo(userInfo: any) {
+    this._userInfo.next(userInfo);
+  }
+
+  setTokens(token: any) {
+    // this.cookies.delete("token");
+    
+    
+  }
+
+  descryptedToken(token:string){
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);    
+    // let obj = JSON.parse(decodedToken.data);  
+    this.cookies.set("token_descrypted", decodedToken.data);
+  }
+
   getToken() {
     return this.cookies.get("token");
   }
+
   extractData(res: Response) {
     let body = res;
     return body || {};

@@ -18,10 +18,11 @@ export class NvtraddsetComponent implements OnInit {
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
-
+  isDisabled = true;
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
   valuechange(newValue) {
+    this.isDisabled = false;
     this.model2.existence = this.model.existence + newValue;
   }
 

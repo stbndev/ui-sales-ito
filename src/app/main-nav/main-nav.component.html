@@ -52,13 +52,21 @@
           settings_applications
         </i>
       </a>
-      <a routerLink="/users">
-        <!-- mat-list-item href="/products" -->
-        <i class="material-icons md-36">
-          account_circle
-        </i>
-        Ingresar
-      </a>
+
+      <div *ngIf="(model.name); else elseBlock">
+        <a href="#">
+          <img src="https://img.icons8.com/doodle/48/000000/english-mustache.png" />
+          {{ model.name }}
+        </a>
+      </div>
+      <ng-template #elseBlock>
+        <a routerLink="/users">
+          <i class="material-icons md-36">
+            account_circle
+          </i>
+          Ingresar
+        </a>
+      </ng-template>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content>
