@@ -17,7 +17,6 @@ export class AddsetComponent implements OnInit {
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
-  //@Output() open: EventEmitter<any> = new EventEmitter();
 
 
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }

@@ -33,6 +33,9 @@ export class PlaceorderComponent implements OnInit {
     });
   }
 
+  remove(){
+    alert('remove all in building');
+  }
   ngOnDestroy() {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();

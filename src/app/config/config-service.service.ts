@@ -22,7 +22,7 @@ export class ConfigService {
   private _listproductsSource = new BehaviorSubject<Productsmodel[]>([]);
   private _flag = new BehaviorSubject<Boolean>(false);
   private _todos = new BehaviorSubject<any[]>([]);
-  private _userInfo = new BehaviorSubject<Usersmodel>(new Usersmodel('','','','','',0));
+  private _userInfo = new BehaviorSubject<Usersmodel>(new Usersmodel('', '', '', '', '', 0));
 
   productsData = this._productsSource.asObservable();
   listproductsData = this._listproductsSource.asObservable();
@@ -35,38 +35,42 @@ export class ConfigService {
 
   constructor(private http: HttpClient, private cookies: CookieService) { }
 
-  buildingToken(data:any) {
-    //this.changeUserInfo(data.result);
-    let root = new Array();
-    let user = new Object();
-    user = data.result; 
-    
-    let tmp0 = {'user':'esteban blanquel'};
-    let tmp1 = {'data':'aaaAAAbbbBBB'};
-
-    root[0] = tmp0;
-    root[1] = tmp1;
-
+  buildingToken(data: any, pagetitle: string) {
     this.cookies.deleteAll();
+    this.changeUserInfo(data.result, pagetitle);
     this.cookies.set("token", data.message);
-    this.cookies.set('root',JSON.stringify(root));
-    
-    //this.descryptedToken(token);
+
+    // let info = new Object();
+    // info = { 'user': data.result };
+
+    // this.cookies.set('info', JSON.stringify(info));
+    // let tmp0 = { 'user': 'esteban blanquel' };
+    // let tmp1 = { 'data': 'aaaAAAbbbBBB' };
+    // root[0] = tmp0;
+    // root[1] = tmp1;
+    // let titleUser = 'user';
+    // user = {
+    //   [titleUser]: root[0],
+    //   ['data3']: root[1]
+    // };
+    // this.descryptedToken(token);
+
   }
 
-  changeUserInfo(userInfo: any) {
-    this._userInfo.next(userInfo);
+  changeUserInfo(userInfo: any, pagetitle: string) {
+    userInfo.pagetitle = pagetitle,
+      this._userInfo.next(userInfo);
   }
 
   setTokens(token: any) {
     // this.cookies.delete("token");
-    
-    
+
+
   }
 
-  descryptedToken(token:string){
+  descryptedToken(token: string) {
     const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(token);    
+    const decodedToken = helper.decodeToken(token);
     // let obj = JSON.parse(decodedToken.data);  
     this.cookies.set("token_descrypted", decodedToken.data);
   }
@@ -84,8 +88,8 @@ export class ConfigService {
     this._flag.next(flag);
   }
 
-  changeProductsData(productsargs: Productsmodel,setup?:boolean) {
-    if(setup){
+  changeProductsData(productsargs: Productsmodel, setup?: boolean) {
+    if (setup) {
       productsargs.setup = setup;
     }
     this._productsSource.next(productsargs);
@@ -107,15 +111,15 @@ export class ConfigService {
       this._listproductsSource.next(this._listproductsSource.getValue().concat(pgs));
     }
   }
-  
-  Get(serviceName: String): Observable<any> {
-    
-    let tmpToken = this.getToken();
-    
-    let headers = new HttpHeaders().set("Authorization",`Bearer ${tmpToken}`);
 
-    return this.http.get(`${this._uriResources}${serviceName}`, { headers } )
-                    .pipe(map(this.extractData));
+  Get(serviceName: String): Observable<any> {
+
+    let tmpToken = this.getToken();
+
+    let headers = new HttpHeaders().set("Authorization", `Bearer ${tmpToken}`);
+
+    return this.http.get(`${this._uriResources}${serviceName}`, { headers })
+      .pipe(map(this.extractData));
   }
 
   Make(serviceName: String, tipo: any, data: any): Observable<any> {

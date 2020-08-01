@@ -18,10 +18,10 @@ export class SignupComponent implements OnInit {
   durationInSeconds = 5;
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor( protected service: ConfigService, protected router: Router) { }
+  constructor(protected service: ConfigService, protected router: Router) { }
 
   ngOnInit() { }
-  
+
   onGetUserWithTokenBearer() {
     this.service.Get('users').subscribe(
       data => {
@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
     console.log('result breakpoint')
 
   }
-  
+
   onDummyMethod(myRawToken: string) {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(myRawToken);
@@ -102,15 +102,16 @@ export class SignupComponent implements OnInit {
     this.service.Make('auth/login', eTipos.POST, data).subscribe(
       data => {
         if (data.response) {
-          this.service.buildingToken(data);
+          const pagetitle = 'products'
+          this.service.buildingToken(data, pagetitle);
           // this.onDummyMethod(data.message);
-          this.router.navigateByUrl('/products');
+          this.router.navigateByUrl('/' + pagetitle);
         } else {
           alert('Verificar usuario/contraseña');
         }
       }, error => {
         this.loading = false;
-        const  e = `Incidencia  ${error.statusText} ${error.name} ${error.message}`;
+        const e = `Incidencia  ${error.statusText} ${error.name} ${error.message}`;
         alert(e);
       }
     ).add(() => {

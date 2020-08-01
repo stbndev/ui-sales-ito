@@ -67,6 +67,7 @@ export class ProductsComponent implements OnInit {
     this.products = [];
     this.service.Get('products').subscribe((data) => {
       if (data.response) {
+        debugger;
         this.service.changeListProductsData(data.result.slice());
       }
     }, (error) => {

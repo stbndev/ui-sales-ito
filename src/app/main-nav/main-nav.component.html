@@ -6,34 +6,37 @@
       <!-- <a mat-list-item href="#">Productos</a>
       <a mat-list-item href="#">Ventas</a>
       <a mat-list-item href="#">Perdidas</a> -->
-      <a mat-list-item href="#">
-        <i class="material-icons">
-          home
-        </i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inicio
+      <!-- <a mat-list-item href="#"> -->
+      <!-- <a mat-list-item routerLink='/' routerLinkActive='active'> -->
+      <a mat-list-item (click)="redirect('');">
+      <i class="material-icons">
+        home
+      </i>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inicio
       </a>
-      <a mat-list-item href="/products">
+      <a mat-list-item (click)="redirect('products');">
         <i class="material-icons">
           fastfood
         </i>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Productos
       </a>
-      <a mat-list-item href="/sales">
+      <a mat-list-item (click)="redirect('sales');">
         <i class="material-icons">
           add_shopping_cart
         </i>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ventas
       </a>
-      <a mat-list-item href="/entries">
+      <a mat-list-item (click)="redirect('entries');">
         <i class="material-icons">
           donut_small
         </i>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inventario
       </a>
-      <a mat-list-item href="/shrinkages">
+      <a mat-list-item (click)="redirect('shrinkages');">
         <i class="material-icons">
           trending_down
         </i>
+
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perdidas
       </a>
     </mat-nav-list>
@@ -44,7 +47,9 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>salesin-ui</span>
+      <span>
+        {{ model.pagetitle }}
+      </span>
       <span class="spacer">
       </span>
       <a routerLink="/products">
