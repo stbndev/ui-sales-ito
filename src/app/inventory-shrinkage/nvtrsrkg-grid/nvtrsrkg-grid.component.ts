@@ -26,9 +26,9 @@ export class NvtrsrkgGridComponent implements OnInit {
 
   ngOnInit() {
     this.service.Get('products').subscribe(
-      data => {
-        if (data.response) {
-          this.dataSource = data.result;
+      d => {
+        if (d.flag) {
+          this.dataSource = d.data;
         }
       },
       error => {

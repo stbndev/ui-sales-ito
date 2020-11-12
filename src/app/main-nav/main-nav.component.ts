@@ -18,10 +18,10 @@ export class MainNavComponent {
   flag: boolean = false;
 
   ngOnInit() {
-
+    debugger;
     this.service.userInfo.subscribe(
       x => {
-        debugger;
+        
         this.model = x;
         this.adjustName(this.model.pagetitle);
         //  this.user = this.model.name;

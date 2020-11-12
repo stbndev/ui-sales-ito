@@ -31,15 +31,15 @@ export class NvtrsentriesComponent implements OnInit {
   constructor(protected service: ConfigService) { }
 
   ngOnInit() {
-    this.service.Get('products').subscribe(dp => {
-      if (dp.response) {
-        this.dataProducts = dp.result;
+    this.service.Get('products').subscribe(d => {
+      if (d.flag > 1) {
+        this.dataProducts = d.data;
 
         // entry details
         this.service.Get('entries').subscribe(
-          data => {
-            if (data.response) {
-              this.dataSource = data.result;
+          d => {
+            if (d.flag) {
+              this.dataSource = d.data;
               // Object.defineProperty(Entriesmodel, prop, descriptor)
               for (let i = 0; i < this.dataSource.length; i++) {
                 for (let ip = 0; ip < this.dataProducts.length; ip++) {

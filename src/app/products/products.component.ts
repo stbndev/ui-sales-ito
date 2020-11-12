@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
   
   ProductAdd() {
     // alert('test');
-    let tmpProduct = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+    let tmpProduct = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
     
     this.service.changeProductsData(tmpProduct);
 
@@ -65,10 +65,9 @@ export class ProductsComponent implements OnInit {
 
   getProducts() {
     this.products = [];
-    this.service.Get('products').subscribe((data) => {
-      if (data.response) {
-        debugger;
-        this.service.changeListProductsData(data.result.slice());
+    this.service.Get('products').subscribe((d) => {
+      if (d.flag) {
+        this.service.changeListProductsData(d.data.slice());
       }
     }, (error) => {
       alert(error);

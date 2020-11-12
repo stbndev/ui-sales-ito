@@ -14,9 +14,17 @@ export class GriditemsComponent implements OnInit {
 
   ngOnInit() {
     this.service.Get('products').subscribe(
-      data => {
-        if (data.response) {
-          this.dataSource = data.result;
+      d => {
+        if (d.data) {
+          // let itemsbestseller = [];
+          // itemsbestseller = d.flag;
+          // itemsbestseller.filter(function (value,index,array) {
+          //   if(value.bestseller === 1){
+          //     return value;
+          //   }
+          // });
+          // debugger;
+          this.dataSource = d.data;
         }
       },
       error => {
@@ -36,6 +44,7 @@ export class GriditemsComponent implements OnInit {
   }
 
   makeOperation(data, value) {
+    debugger;
     let inputTextId = 'canopee' + data.idproducts;
     let input = (<HTMLInputElement>document.getElementById(inputTextId));
 

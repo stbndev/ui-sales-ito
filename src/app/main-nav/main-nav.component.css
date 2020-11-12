@@ -1,3 +1,14 @@
+.center {
+  /* original */
+  cursor: progress;
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
 .sidenav-container {
   height: 100%;
 }

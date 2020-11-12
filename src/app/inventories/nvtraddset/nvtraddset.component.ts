@@ -13,7 +13,7 @@ import { debug } from 'util';
 })
 export class NvtraddsetComponent implements OnInit {
 
-  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
   model2: Entriesmodel;
   selected = '1';
   liststatus = CSTATUS;
@@ -28,7 +28,7 @@ export class NvtraddsetComponent implements OnInit {
 
   onCancel() {
     // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
-    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
     this.HideElement('divProductAddSet');
   }
 
@@ -59,8 +59,8 @@ export class NvtraddsetComponent implements OnInit {
       tmpmethod = eTipos.DELETE
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
 
-      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
-        if (data.response) {
+      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
+        if (d.flag) {
           this.service.changeListProductsDataAdd(this.model);
           this.HideElement('divProductAddSet');
         }
@@ -96,11 +96,11 @@ export class NvtraddsetComponent implements OnInit {
       let file = files[0];
       formData.append('file', file, file.name);
 
-      this.service.Upload('docfile', formData).subscribe(data => {
-        if (data.response) {
-          this.model.pathimg = data.result;
+      this.service.Upload('docfile', formData).subscribe(d => {
+        if (d.flag) {
+          this.model.pathimg = d.data;
         } else {
-          alert(data);
+          alert(d);
         }
       }, (error) => {
         alert(error);
@@ -128,13 +128,13 @@ export class NvtraddsetComponent implements OnInit {
       tmpmethod = eTipos.POST
     }
 
-    this.service.Make(tmpendpoint, tmpmethod, this.model2).subscribe((data) => {
-      if (data.response) {
+    this.service.Make(tmpendpoint, tmpmethod, this.model2).subscribe((d) => {
+      if (d.flag) {
        // this.HideElement('divProductAddSet');
        this.service.RefreshComponent(true);
         this.HideElement('divProductAddSet');
         // this.ngOnInit();
-        // this.service.changeListProductsDataAdd(data.result);
+        // this.service.changeListProductsDataAdd(d.data);
       }
     }, (error) => {
       alert(error);
@@ -149,7 +149,6 @@ export class NvtraddsetComponent implements OnInit {
   ngOnInit() {
 
     this.service.productsData.subscribe(res => {
-     //  debugger;
 
       this.model = res;
 

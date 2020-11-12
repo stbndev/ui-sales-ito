@@ -42,6 +42,12 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-spinner mode='determinate' 
+    value='50'
+    diameter='40'
+    class="center"
+    color='accent'
+    ></mat-spinner>
     <mat-toolbar color="primary">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">

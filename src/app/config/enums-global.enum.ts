@@ -4,6 +4,19 @@
 //     }
 // }
 
+// export var ValidateEmail = function (mail) {
+//     var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+//     if (mail) {
+//         // if (typeof (mail) != "undefined" && mail.match(mailformat)) {
+//         if (mail.match(mailformat)) {
+//             return true;
+//         } else {
+//             return false;
+//         }
+//     }
+
+// }
+
 export var isNullOrEmpty = function (s: string) {
     return !s;
 };
@@ -22,7 +35,6 @@ export enum eCSTATUS {
     INACTIVO = 2,
     ELIMINADO = 3,
     CANCELADO = 4,
-
 }
 
 export var CSTATUS = [

@@ -1,101 +1,103 @@
-<div id='divsignchoose'>
-    <mat-card>
-        <mat-card-title>
-            <img src="./../../../assets/imgs/happy_32px.png">
-            Acceder
-        </mat-card-title>
-        <!-- <mat-card-subtitle> Continuar  </mat-card-subtitle> -->
-        <mat-card-content>
-            <div class="div-table-container">
-                <div class="div-column">
-                    <!-- <div>
-                        <img matPrefix src="https://dl.dropbox.com/s/n7nyjpcjys6qz2g/1581186550.jpg" width="50px"
-                            height="50px">
-                    </div> -->
-                    <mat-form-field appearance='fill'>
-                        <mat-label>Ingresa tú Email</mat-label>
-                        <input matInput placeholder='pat@example.com' [formControl]='email' [(ngModel)]='model.email' required>
-                        <!--
-                            name='email' [(ngModel)]='model.email'
-                             ¿Olvidaste la contraseña? 
-                        <mat-hint>Ingresar información</mat-hint>-->
-                    </mat-form-field>
-                    <div>
-                     <button mat-button color='accent' (click)='onForwardPassword()'> ¿Olvidaste la contraseña?</button>
+<ng-template #dialogRef let-data>
+    <button mat-button (click)="openDialog()" style='display: none;'>Open dialog</button>
+    <div id='divsignchoose'>
+        <mat-card>
+            <mat-card-title>
+                <img src="./../../../assets/imgs/happy_32px.png">
+                Acceder
+            </mat-card-title>
+            <!-- <mat-card-subtitle> Continuar  </mat-card-subtitle> -->
+            <mat-card-content>
+                <div class="div-table-container">
+
+                    <div class="div-column">
+
+                        <mat-form-field appearance='fill'>
+                            <mat-label>Ingresa tú Email</mat-label>
+                            <input matInput placeholder='correo@ejemplo.com' [formControl]='email'
+                                [(ngModel)]='model.email'>
+                            <!-- <input matInput placeholder='correo@ejemplo.com' formControlName='email'
+                                    [(ngModel)]='model.email'>  -->
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder='Contraseña' name='password' [(ngModel)]='model.password'
+                                type="password">
+                            <input matInput [(ngModel)]='model.id' class="hideComponent">
+                            <input matInput [(ngModel)]='model.idrol' class="hideComponent">
+                            <input matInput [(ngModel)]='model.date_add' class="hideComponent">
+                        </mat-form-field>
+                        <div>
+                            <button mat-button color='accent' (click)='onForwardPassword()'> ¿Olvidaste la
+                                contraseña?</button>
+                        </div>
+                    </div>
+
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <!-- <button mat-stroked-button color='accent' (click)='onShowAccountDiv()'>Crear cuenta</button> -->
+                <button mat-stroked-button color='accent' (click)='onSignin()'>Ingresar</button>
+                <button mat-stroked-button color='warn' (click)='onCancel()'>Cancelar</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <!-- <div id='divsignup' class="hideComponent">
+        <mat-card>
+            <mat-card-title>Usuario </mat-card-title>
+            <mat-card-subtitle> Bienvenido {{model.name}} </mat-card-subtitle>
+            <mat-card-content>
+                <div class="div-table-container">
+                    <div class="div-column">
+                        <mat-form-field>
+                            <input matInput placeholder='Nombre' [(ngModel)]='model.name'>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder='Email' name='email' [(ngModel)]='model.email'>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder='Contraseña' name='password' [(ngModel)]='model.password'
+                                type="password">
+                            <input matInput [(ngModel)]='model.id' class="hideComponent">
+                            <input matInput [(ngModel)]='model.idrol' class="hideComponent">
+                            <input matInput [(ngModel)]='model.date_add' class="hideComponent">
+                        </mat-form-field>
                     </div>
                 </div>
-            </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-stroked-button color='accent' (click)='onShowAccountDiv()'>Crear cuenta</button>
-            <button mat-stroked-button color='warn' (click)='onShowSigninDiv()'>Ingresar</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-stroked-button color='accent' (click)='onSaveForm()'>ACEPTAR </button>
+                <button mat-stroked-button color='warn' (click)='onCancel()'>CANCELAR</button>
+            </mat-card-actions>
+        </mat-card>
+    </div> -->
 
-<div id='divsignup' class="hideComponent">
-    <mat-card>
-        <mat-card-title>Usuario </mat-card-title>
-        <mat-card-subtitle> Bienvenido {{model.name}} </mat-card-subtitle>
-        <mat-card-content>
-            <div class="div-table-container">
-                <div class="div-column">
-                    <!-- <div>
-                        <img matPrefix src="https://dl.dropbox.com/s/n7nyjpcjys6qz2g/1581186550.jpg" width="50px"
-                            height="50px">
-                    </div> -->
-                    <mat-form-field>
-                        <input matInput placeholder='Nombre' [(ngModel)]='model.name'>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder='Email' name='email' [(ngModel)]='model.email'>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder='Contraseña' name='password' [(ngModel)]='model.password'
-                            type="password">
-                        <input matInput [(ngModel)]='model.id' class="hideComponent">
-                        <input matInput [(ngModel)]='model.idrol' class="hideComponent">
-                        <input matInput [(ngModel)]='model.date_add' class="hideComponent">
-                    </mat-form-field>
-                </div>
-            </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-stroked-button color='accent' (click)='onSaveForm()'>ACEPTAR </button>
-            <button mat-stroked-button color='warn' (click)='onCancel()'>CANCELAR</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
-
-<div id='divsignin' class="hideComponent">
-    <mat-card>
-        <mat-card-title>
-            <img src="./../../../assets/imgs/key_32px.png"> Ingresar </mat-card-title>
-        <mat-card-subtitle> <!-- Bienvenido {{model.name}}  --></mat-card-subtitle>
-        <mat-card-content>
-            <div class="div-table-container">
-                <div class="div-column">
-                    <!-- <div>
-                        <img matPrefix src="https://dl.dropbox.com/s/n7nyjpcjys6qz2g/1581186550.jpg" width="50px"
-                            height="50px">
+    <!-- <div id='divsignin'>
+        <mat-card>
+            <mat-card-title>
+                <img src="./../../../assets/imgs/key_32px.png"> Ingresar </mat-card-title>
+            <mat-card-subtitle>
+            </mat-card-subtitle>
+            <mat-card-content>
+                <div class="div-table-container">
+                    <div class="div-column">
+                        <mat-form-field>
+                            <input matInput placeholder='Email' name='email' [(ngModel)]='model.email'>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder='Contraseña' name='password' [(ngModel)]='model.password'
+                                type="password">
+                            <input matInput [(ngModel)]='model.id' class="hideComponent">
+                            <input matInput [(ngModel)]='model.idrol' class="hideComponent">
+                            <input matInput [(ngModel)]='model.date_add' class="hideComponent">
+                        </mat-form-field>
                     </div>
-                -->
-                    <mat-form-field>
-                        <input matInput placeholder='Email' name='email' [(ngModel)]='model.email'>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput placeholder='Contraseña' name='password' [(ngModel)]='model.password'
-                            type="password">
-                        <input matInput [(ngModel)]='model.id' class="hideComponent">
-                        <input matInput [(ngModel)]='model.idrol' class="hideComponent">
-                        <input matInput [(ngModel)]='model.date_add' class="hideComponent">
-                    </mat-form-field>
                 </div>
-            </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-stroked-button color='accent' (click)='onSignin()'>ACEPTAR LOGIN</button>
-            <button mat-stroked-button color='warn' (click)='onCancel()'>CANCELAR</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-stroked-button color='accent' (click)='onSignin()'>ACEPTAR</button>
+                <button mat-stroked-button color='warn' (click)='onCancel()'>CANCELAR</button>
+            </mat-card-actions>
+        </mat-card>
+    </div> -->
+</ng-template>

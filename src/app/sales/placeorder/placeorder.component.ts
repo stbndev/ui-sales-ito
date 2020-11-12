@@ -20,11 +20,13 @@ export class PlaceorderComponent implements OnInit {
   durationInSeconds = 50;
   mySubscription: any;
 
-  constructor(private router: Router,protected service: ConfigService, private _snackBar: MatSnackBar) { 
+  constructor(private router: Router,
+    protected service: ConfigService,
+    private _snackBar: MatSnackBar) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-    
+
     this.mySubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Trick the Router into believing it's last link wasn't previously loaded
@@ -33,9 +35,24 @@ export class PlaceorderComponent implements OnInit {
     });
   }
 
-  remove(){
-    alert('remove all in building');
+  removeProduct(arg) {
+    // console.dir(this.products);
+
+    let filtered = this.products.filter(function (value, index, arr) {
+      return value.id != arg.id
+    });
+
+
+    this.products = this.products.splice(0, this.products.length);
+    this.products = filtered;
+
   }
+  remove() {
+    // A.splice(0,A.length)
+    this.products = this.products.splice(0, this.products.length);
+    // this.products =[];
+  }
+
   ngOnDestroy() {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
@@ -45,7 +62,7 @@ export class PlaceorderComponent implements OnInit {
   ngOnInit() {
     this.service.listproductsData.subscribe(
       res => {
-        
+
         this.products = res;
         let tmpquantity = 0;
         let tmptotal = [];
@@ -78,17 +95,17 @@ export class PlaceorderComponent implements OnInit {
     // VALIDATE IN CORE WHEN I DONT HAVE PRODUCT EXISTS
     // OK.VALIDATE IN FRONTEND WHEN I DONT HAVE PRODUCTS
     // RESET PLACE ORDER AND CREATE PRINT PAPER 
-    
+
     let data = this.buildData();
     this.service.Make('sales', eTipos.POST, data).subscribe(
-      data => {
-        alert('Orden pedida No.' + data.result.idsales);
-        let purchase = JSON.stringify(data.result);
-        window.open(`/orderdetails?data=${purchase}`,'_blank');
+      d => {
+        alert('Orden pedida No.' + d.data.idsales);
+        let purchase = JSON.stringify(data);
+        window.open(`/orderdetails?data=${purchase}`, '_blank');
         window.location.reload();
       }, error => {
         alert('placeorder.onPlaceOrder');
-      } 
+      }
     ).add(() => {
       console.log('end');
     });
@@ -104,7 +121,7 @@ export class PlaceorderComponent implements OnInit {
     let array = [];
 
     this.products.forEach(element => {
-      let sd = new SaleDetails( element.unitary_cost, element.unitary_price, element.quantity, element.idproducts);
+      let sd = new SaleDetails(element.unitary_cost, element.unitary_price, element.quantity, element.idproducts);
       array.push(sd);
     });
     let sm = new Salesmodel(this.totalOrder, 0, eCSTATUS.ACTIVO, 0, 'angularwebapp', 0, 0, array);

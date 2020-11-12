@@ -43,7 +43,6 @@ import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.compone
 import { NvtrsentriesComponent } from './inventories/nvtrsentries/nvtrsentries.component';
 import { ReportComponent } from './sales/report/report.component';
 import { SignupComponent } from './users/signup/signup.component';
-import { SigninComponent } from './users/signin/signin.component';
 import { CookieService } from 'ngx-cookie-service';
 import { OrderdetailsComponent } from './sales/orderdetails/orderdetails.component';
 
@@ -70,7 +69,6 @@ import { OrderdetailsComponent } from './sales/orderdetails/orderdetails.compone
     NvtrsentriesComponent,
     ReportComponent,
     SignupComponent,
-    SigninComponent,
     OrderdetailsComponent
   ],
   imports: [

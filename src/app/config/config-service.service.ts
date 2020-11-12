@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { eTipos, eCSTATUS } from './enums-global.enum';
 import { Productsmodel } from "./../models/productsmodel";
 import { Usersmodel } from "./../models/usersmodel";
 import { CookieService } from 'ngx-cookie-service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ResponseNocheServices } from '../models/response-ws';
 
 @Injectable({
   providedIn: 'root'
@@ -16,32 +17,33 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class ConfigService {
   // private _productsSource = new BehaviorSubject<Productsmodel>(new Productsmodel(0, '', '', 2, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'));
   private _productsSource = new BehaviorSubject<Productsmodel>(
-    new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '')
+    new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0,'', '', '', '', '', '')
   );
 
   private _listproductsSource = new BehaviorSubject<Productsmodel[]>([]);
+  private _listproductsincart = new BehaviorSubject<Productsmodel[]>([]);
+
   private _flag = new BehaviorSubject<Boolean>(false);
   private _todos = new BehaviorSubject<any[]>([]);
   private _userInfo = new BehaviorSubject<Usersmodel>(new Usersmodel('', '', '', '', '', 0));
 
   productsData = this._productsSource.asObservable();
   listproductsData = this._listproductsSource.asObservable();
+  
   refresh = this._flag.asObservable();
   userInfo = this._userInfo.asObservable();
-  // _uriResources = ' http://azul200.azurewebsites.net/api/';
-  // https://localhost:44332/weatherforecast
-  _uriResources = 'https://localhost:44332/api/';
-
-
+  // _uriResources = 'http://noche-service.azurewebsites.net/api/';
+  _uriResources = 'http://10.211.55.3:9091/api/';
+  
   constructor(private http: HttpClient, private cookies: CookieService) { }
 
   buildingToken(data: any, pagetitle: string) {
     this.cookies.deleteAll();
-    this.changeUserInfo(data.result, pagetitle);
+    this.changeUserInfo(data, pagetitle);
     this.cookies.set("token", data.message);
 
     // let info = new Object();
-    // info = { 'user': data.result };
+    // info = { 'user': data };
 
     // this.cookies.set('info', JSON.stringify(info));
     // let tmp0 = { 'user': 'esteban blanquel' };
@@ -64,8 +66,6 @@ export class ConfigService {
 
   setTokens(token: any) {
     // this.cookies.delete("token");
-
-
   }
 
   descryptedToken(token: string) {
@@ -99,9 +99,11 @@ export class ConfigService {
     this._listproductsSource.next(listproductsargs)
   }
 
+  
   changeListProductsDataAdd(pgs: Productsmodel) {
     let found = this._listproductsSource.getValue().find(element => element.idproducts == pgs.idproducts);
     if (found) {
+      debugger;
       let tmplist = this._listproductsSource.getValue();
       tmplist.splice(tmplist.indexOf(found), 1);
       tmplist = tmplist.concat(pgs);
@@ -111,18 +113,23 @@ export class ConfigService {
       this._listproductsSource.next(this._listproductsSource.getValue().concat(pgs));
     }
   }
-
-  Get(serviceName: String): Observable<any> {
+  handleError():void{
+    debugger;
+    // search how work catchError 
+    console.dir("x");
+  }
+  Get(serviceName: String): Observable<ResponseNocheServices> {
 
     let tmpToken = this.getToken();
 
     let headers = new HttpHeaders().set("Authorization", `Bearer ${tmpToken}`);
 
-    return this.http.get(`${this._uriResources}${serviceName}`, { headers })
-      .pipe(map(this.extractData));
+    // return this.http.get<ResponseNocheServices>(`${this._uriResources}${serviceName}`, { headers }).pipe(map(this.extractData));
+    return this.http.get<ResponseNocheServices>(`${this._uriResources}${serviceName}`, { headers }).pipe(map( rns => rns ) );
+
   }
 
-  Make(serviceName: String, tipo: any, data: any): Observable<any> {
+  Make(serviceName: String, tipo: any, data: any): Observable<ResponseNocheServices> {
 
     let tmpToken = this.getToken();
     let headers = new HttpHeaders();
@@ -131,16 +138,16 @@ export class ConfigService {
 
     switch (tipo) {
       case eTipos.POST:
-        return this.http.post(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
+        return this.http.post<ResponseNocheServices>(`${this._uriResources}${serviceName}`, data).pipe(map(rns => rns));
 
       case eTipos.PUT:
-        return this.http.put(`${this._uriResources}${serviceName}`, data, { headers }).pipe(map(this.extractData));
+        return this.http.put<ResponseNocheServices>(`${this._uriResources}${serviceName}`, data, { headers }).pipe(map( rns => rns));
 
       case eTipos.PATCH:
-        return this.http.patch(`${this._uriResources}${serviceName}`, data).pipe(map(this.extractData));
+        return this.http.patch<ResponseNocheServices>(`${this._uriResources}${serviceName}`, data).pipe(map( rns => rns));
 
       case eTipos.DELETE:
-        return this.http.delete(`${this._uriResources}${serviceName}`).pipe(map(this.extractData));
+        return this.http.delete<ResponseNocheServices>(`${this._uriResources}${serviceName}`).pipe(map( rns => rns));
 
       default:
         return null;

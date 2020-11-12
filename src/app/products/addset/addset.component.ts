@@ -13,7 +13,7 @@ import { ConfigService } from "./../../config/config-service.service";
 export class AddsetComponent implements OnInit {
   // setup initial
   //model: any ;   
-  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
@@ -23,7 +23,7 @@ export class AddsetComponent implements OnInit {
 
   onCancel() {
     // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
-    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
   }
   
   HideElement(iditem) {
@@ -46,8 +46,8 @@ export class AddsetComponent implements OnInit {
       tmpmethod = eTipos.DELETE
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
 
-      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
-        if (data.response) {
+      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
+        if (d.flag) {
           this.service.changeListProductsDataAdd(this.model);
           this.HideElement('divProductAddSet');
         }
@@ -83,11 +83,11 @@ export class AddsetComponent implements OnInit {
       let file = files[0];
       formData.append('file', file, file.name);
 
-      this.service.Upload('docfile', formData).subscribe(data => {
-        if (data.response) {
-          this.model.pathimg = data.result;
+      this.service.Upload('docfile', formData).subscribe(d => {
+        if (d.flag) {
+          this.model.pathimg = d.data;
         } else {
-          alert(data);
+          alert(d);
         }
       }, (error) => {
         alert(error);
@@ -107,9 +107,9 @@ export class AddsetComponent implements OnInit {
       tmpmethod = eTipos.POST
     }
 
-    this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
-      if (data.response) {
-        this.service.changeListProductsDataAdd(data.result);
+    this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
+      if (d.flag) {
+        this.service.changeListProductsDataAdd(d.data);
         this.HideElement('divProductAddSet');
       }
     }, (error) => {

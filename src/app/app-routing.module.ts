@@ -10,6 +10,12 @@ import { CanActivateViaGuard } from './config/can-activate-via.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    component: SignupComponent,
+    pathMatch: 'full',
+    data: { title: 'Ingresar' }
+  },
+  {
     path: 'orderdetails',
     component: OrderdetailsComponent,
     pathMatch: 'full',

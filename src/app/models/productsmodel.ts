@@ -9,12 +9,13 @@ export class Productsmodel {
                 public quantity: number,
                 public date_add: number,
                 public date_set: number,
+                public bestseller:number,
                 public id: string,
                 public name: string,
                 public description: string,
                 public barcode: string,
                 public pathimg: string,
-                public maker: string,
+                public maker: string
         ) { }
          public setup:boolean;
 }

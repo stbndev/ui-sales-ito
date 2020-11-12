@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ConfigService } from 'src/app/config/config-service.service';
 import { eTipos, eCSTATUS } from './../../config/enums-global.enum';
-import { FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
+import { ResponseNocheServices } from "./../../models/response-ws";
 
 @Component({
   selector: 'app-signup',
@@ -12,23 +15,40 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
   model: any = {};
   loading = false;
   durationInSeconds = 5;
-  email = new FormControl('', [Validators.required, Validators.email]);
+  email = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
 
-  constructor(protected service: ConfigService, protected router: Router) { }
+  @ViewChild('dialogRef', { static: true }) dialogRef: TemplateRef<any>;
 
-  ngOnInit() { }
+  constructor(public dialog: MatDialog,
+    protected service: ConfigService,
+    protected router: Router) { }
+
+  ngOnInit() {
+    this.openDialog();
+  }
+
+  closeDialog() {
+    alert('close dialog in pipeline');
+    this.dialog.closeAll();
+  }
+
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(this.dialogRef, dialogConfig);
+  }
 
   onGetUserWithTokenBearer() {
     this.service.Get('users').subscribe(
-      data => {
-        console.dir(data);
+      d => {
+        // console.dir(data);
       },
       error => {
-        console.dir(error);
+        // console.dir(error);
       }
     ).add(() => {
       console.log('e n d');
@@ -44,8 +64,7 @@ export class SignupComponent implements OnInit {
     // Other functions
     const expirationDate = helper.getTokenExpirationDate(myRawToken);
     const isExpired = helper.isTokenExpired(myRawToken);
-    // console.log('decodedToken');
-    // console.dir(decodedToken);
+
     this.onGetUserWithTokenBearer();
 
   }
@@ -62,15 +81,15 @@ export class SignupComponent implements OnInit {
     element.classList.add("showComponent");
   }
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      // return 'You must enter a value';
-      return 'Ingresa un valor valido';
-    }
+  // getErrorMessage() {
+  //   if (this.email.hasError('required')) {
+  //     // return 'You must enter a value';
+  //     return 'Ingresa un valor valido';
+  //   }
 
-    //return this.email.hasError('email') ? 'Not a valid email' : '';
-    return this.email.hasError('email') ? 'Email incorrecto' : '';
-  }
+  //   //return this.email.hasError('email') ? 'Not a valid email' : '';
+  //   return this.email.hasError('email') ? 'Email incorrecto' : '';
+  // }
 
   onShowAccountDiv() {
     // alert('show AccountDiv in building');
@@ -78,15 +97,23 @@ export class SignupComponent implements OnInit {
   }
 
   onShowSigninDiv() {
+    // var tmp = ValidateEmail(this.email.value);
+    // if (this.email.valid) {
+    //   // this.ShowElement('divsignin');
+    //   this.HideElement('divsignchoose');
+    // } else {
+    //   alert('* Verificar email por favor');
+    //   return false;
+    // }
     // alert('show SigninDiv in building');
     // email
-    if (this.email.hasError('email')) {
-      alert('Verificar email');
-      return false;
-    } else {
-      this.ShowElement('divsignin');
-      this.HideElement('divsignchoose');
-    }
+    // if (this.email.hasError('email')  || !this.email.valid ) {
+    //   alert('* Verificar email por favor');
+    //   return false;
+    // } else {
+    //   this.ShowElement('divsignin');
+    //   this.HideElement('divsignchoose');
+    // }
   }
 
   onForwardPassword() {
@@ -94,17 +121,22 @@ export class SignupComponent implements OnInit {
   }
 
   onSignin() {
+    if (this.email.hasError('pattern') || this.email.hasError('required')) {
+      alert('Verificar email');
+      return false;
+    }
+
     let data = {
       'email': this.model.email,
       'password': this.model.password,
     }
 
     this.service.Make('auth/login', eTipos.POST, data).subscribe(
-      data => {
-        if (data.response) {
+      res  => {
+        if (res.flag > 1) {
           const pagetitle = 'products'
           this.service.buildingToken(data, pagetitle);
-          // this.onDummyMethod(data.message);
+          this.dialog.closeAll();
           this.router.navigateByUrl('/' + pagetitle);
         } else {
           alert('Verificar usuario/contraseña');
@@ -119,28 +151,29 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  onSaveForm() {
-    let data = this.model;
-    this.service.Make('users', eTipos.POST, data).subscribe(
-      data => {
-        this.loading = false;
-        alert('Usuario creado.' + data.result.idsales);
-      }, error => {
-        this.loading = false;
-        alert(error);
-      }
-    );
-  }
+  // onSaveForm() {
+  //   debugger;
+  //   let data = this.model;
+  //   this.service.Make('users', eTipos.POST, data).subscribe(
+  //     d => {
+  //       this.loading = false;
+  //       alert('Usuario creado.' + d.data.idsales);
+  //     }, error => {
+  //       this.loading = false;
+  //       alert(error);
+  //     }
+  //   );
+  // }
 
-  onCancel() {
-    this.model = {};
-  }
+  // onCancel() {
+  //   this.model = {};
+  // }
 
   register() {
     this.loading = true;
     // this.userService.create(this.model)
     //   .subscribe(
-    //     data => {
+    //     d => {
     //       this.alertService.success('Registration successful', true);
     //       this.router.navigate(['/login']);
     //     },
@@ -151,9 +184,9 @@ export class SignupComponent implements OnInit {
 
     let data = this.model;
     this.service.Make('users', eTipos.POST, data).subscribe(
-      data => {
+      d => {
         this.loading = false;
-        alert('Usuario creado.' + data.result.idsales);
+        alert('Usuario creado.' + data.idsales);
       }, error => {
         this.loading = false;
         alert(error);

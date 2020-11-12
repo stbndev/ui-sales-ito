@@ -9,7 +9,7 @@ import { ConfigService } from 'src/app/config/config-service.service';
   styleUrls: ['./nvtrsitem.component.css']
 })
 export class NvtrsitemComponent implements OnInit {
-  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
   selected = '1';
   liststatus = CSTATUS;
   imageSrc: any;
@@ -44,8 +44,8 @@ export class NvtrsitemComponent implements OnInit {
       tmpmethod = eTipos.DELETE
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
 
-      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
-        if (data.response) {
+      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
+        if (d.flag) {
           this.service.changeListProductsDataAdd(this.model);
           this.HideElement('divProductAddSet');
         }
@@ -82,10 +82,10 @@ export class NvtrsitemComponent implements OnInit {
       let file = files[0];
       formData.append('ProfilePhoto', file, file.name);
 
-      this.service.Upload('DocFile', formData).subscribe(data => {
-        if (data) {
-          // this.service.changeListProductsDataAdd(data.result);
-          this.model.pathimg = data;
+      this.service.Upload('DocFile', formData).subscribe(d => {
+        if (d) {
+          // this.service.changeListProductsDataAdd(d.data);
+          this.model.pathimg = d.data;
         }
       }, (error) => {
         alert(error);
@@ -103,9 +103,9 @@ export class NvtrsitemComponent implements OnInit {
       tmpmethod = eTipos.POST
     }
 
-    this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
-      if (data.response) {
-        this.service.changeListProductsDataAdd(data.result);
+    this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
+      if (d.flag) {
+        this.service.changeListProductsDataAdd(d.data);
       }
     }, (error) => {
       alert(error);
