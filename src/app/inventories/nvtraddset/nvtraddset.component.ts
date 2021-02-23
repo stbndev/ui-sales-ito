@@ -1,9 +1,10 @@
 import { AfterViewInit, ElementRef, Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Productsmodel } from "./../../models/productsmodel";
-import { Entriesmodel } from "./../../models/entriesmodel";
-import { eTipos, eCSTATUS } from "./../../config/enums-global.enum";
-import { CSTATUS } from "./../../config/enums-global.enum";
-import { ConfigService } from "./../../config/config-service.service";
+import { Productsmodel } from "./../../models/models-sales";
+import { IEntries, IProducts } from "./../../models/interfaces-sales";
+import { eTipos, CSTATUS_PRODUCTS } from "./../../config/enums-global.enum";
+// import { CSTATUS } from "./../../config/enums-global.enum";
+import { ConfigService } from "../../services/config-service.service";
+import { debug } from 'util';
 
 @Component({
   selector: 'app-nvtraddset',
@@ -11,45 +12,57 @@ import { ConfigService } from "./../../config/config-service.service";
   styleUrls: ['./nvtraddset.component.css']
 })
 export class NvtraddsetComponent implements OnInit {
-  // setup initial
-  //model: any ;   
 
-  model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, '');
-  model2: Entriesmodel;
-  selected = '1';
-  liststatus = CSTATUS;
+  // model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+  model = {} as IProducts;
+  model2 = {} as IEntries;
+  selected = 1;
+  liststatus = CSTATUS_PRODUCTS;
   imageSrc: any;
-  //@Output() open: EventEmitter<any> = new EventEmitter();
-
-
+  // isDisabled = true;
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
 
+  valuechange(newValue) {
+    // this.isDisabled = false;
+    this.model2.existence = this.model.existence + newValue;
+  }
+
   onCancel() {
-    this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+    // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
+    this.model = {} as IProducts;
+    this.HideElement('divProductAddSet');
   }
 
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
-    if (element.className === 'hideComponent') {
-      element.classList.remove("hideComponent");
-      element.classList.add("showComponent");
-    }
-    else {
-      element.classList.remove("showComponent");
-      element.classList.add("hideComponent");
-    }
+    // if (element.className === 'hideComponent') {
+    //   element.classList.remove("hideComponent");
+    //   element.classList.add("showComponent");
+    // }
+    // else {
+    element.classList.remove("showComponent");
+    element.classList.add("hideComponent");
+    // }
   }
+
+  ShowElement(iditem) {
+    var element = document.getElementById(`${iditem}`);
+    element.classList.remove("hideComponent");
+    element.classList.add("showComponent");
+  }
+
   onDelete(): any {
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
 
     if (this.model.idproducts > 0) {
-      this.model.idcstatus = eCSTATUS.ELIMINADO;
+      let ELIMINADO = CSTATUS_PRODUCTS.find(x => x.value == "ELIMINADO").id;
+      this.model.idcstatus = ELIMINADO;
       tmpmethod = eTipos.DELETE
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
 
-      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
-        if (data.response) {
+      this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
+        if (d.flag) {
           this.service.changeListProductsDataAdd(this.model);
           this.HideElement('divProductAddSet');
         }
@@ -85,11 +98,11 @@ export class NvtraddsetComponent implements OnInit {
       let file = files[0];
       formData.append('file', file, file.name);
 
-      this.service.Upload('docfile', formData).subscribe(data => {
-        if (data.response) {
-          this.model.pathimg = data.result;
+      this.service.Upload('docfile', formData).subscribe(d => {
+        if (d.flag) {
+          this.model.pathimg = d.data;
         } else {
-          alert(data);
+          alert(d);
         }
       }, (error) => {
         alert(error);
@@ -100,16 +113,27 @@ export class NvtraddsetComponent implements OnInit {
   onSaveForm() {
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'entries';
-    if (this.model.idproducts > 0) {
+    // start fill entry object
+    this.model2.idproducts = this.model.idproducts;
+    this.model2.unitary_price = this.model.unitary_price;
+    this.model2.quantity = this.model.quantity;
+    this.model2.idcstatus = this.model.idcstatus;
+    this.model2.idcompany = this.model.idcompany;
+    this.model2.maker = this.service.userData.id;
+    if (this.model2.identries > 0) {
       tmpmethod = eTipos.PUT
-      tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
+      tmpendpoint = `${tmpendpoint}/${this.model2.identries}`
     } else {
       tmpmethod = eTipos.POST
     }
 
-    this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((data) => {
-      if (data.response) {
-        this.service.changeListProductsDataAdd(data.result);
+    this.service.Make(tmpendpoint, tmpmethod, this.model2).subscribe((d) => {
+      if (d.flag) {
+        // this.HideElement('divProductAddSet');
+        this.service.RefreshComponent(true);
+        this.HideElement('divProductAddSet');
+        // this.ngOnInit();
+        // this.service.changeListProductsDataAdd(d.data);
       }
     }, (error) => {
       alert(error);
@@ -122,17 +146,31 @@ export class NvtraddsetComponent implements OnInit {
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
   ngOnInit() {
-    
+
     this.service.productsData.subscribe(res => {
-      
+
       this.model = res;
+
       this.model2 = {
-        date_add = this.model.date_add,
+        idcstatus: this.model.idcstatus,
+        idproducts: this.model.idproducts,
+        identries: 0,
+        idcompany: this.model.idcompany,
+        id: '',
+        name: this.model.name,
+        date_add: this.model.date_add,
+        date_set: this.model.date_set,
+        unitary_cost: this.model.unitary_cost,
+        unitary_price: this.model.unitary_price,
+        total: 0,
+        existence: this.model.existence,
+        quantity: this.model.quantity,
+        maker: this.model.maker
       }
-      
-      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
-      console.dir(this.model);
-      console.dir(this.model2);
+      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus : 1;
+      if (this.model2.idproducts > 0) {
+        this.ShowElement('divProductAddSet');
+      }
     });
   }
 }

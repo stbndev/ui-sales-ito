@@ -22,31 +22,34 @@
                         <input matInput placeholder='pathimg' [(ngModel)]='model.pathimg'>
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput placeholder='Nombre' [(ngModel)]='model.name'>
+                        <input matInput placeholder='Nombre' [(ngModel)]='model.name' required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <textarea cols="4" rows="4" matInput placeholder='Descripción' [(ngModel)]='model.description'></textarea>
                     </mat-form-field>
                     <mat-form-field>
                         <input matInput placeholder='Código de Barras o clave' name='barcode'
-                            [(ngModel)]='model.barcode'>
+                            [(ngModel)]='model.barcode' required>
                     </mat-form-field>
 
                     <mat-form-field class="hideComponent">
-                        <input matInput placeholder='Estatus' name='idcstatus' [(ngModel)]='model.idcstatus'>
+                        <input matInput placeholder='Estatus' name='idcstatus' [(ngModel)]='model.idcstatus' required>
                     </mat-form-field>
 
-                    <mat-form-field>
+                    <mat-form-field >
                         <mat-label>Estatus Actual</mat-label>
                         <!--  (change)="onEventSelection($event.value)-->
-                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)">
-                            <mat-option *ngFor="let i of liststatus" [value]="i.value">
-                                {{i.viewValue}}
+                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)" [disabled]="selected > 0">
+                            <mat-option *ngFor="let i of liststatus" [value]="i.id">
+                                {{i.value}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Precio' name='unitary_price' [(ngModel)]='model.unitary_price'>
+                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Precio' name='unitary_price' [(ngModel)]='model.unitary_price' disabled>
                     </mat-form-field>
                     <mat-form-field>
-                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Costo' name='unitary_cost' [(ngModel)]='model.unitary_cost'>
+                        <input type="number" name="quantity" min="1" max="999999" matInput placeholder='Costo' name='unitary_cost' [(ngModel)]='model.unitary_cost' disabled>
                     </mat-form-field>
                     <mat-form-field>
                         <input type="text" name="quantity" min="1" max="999999" matInput placeholder='Existencias' name='existence' [(ngModel)]='model.existence' disabled>

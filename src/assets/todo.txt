@@ -1,3 +1,6 @@
+20200511.1001
+Find way of call component without masterpage
+
 20200226.1147
 Put set default img in a global export settings
 

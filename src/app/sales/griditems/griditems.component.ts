@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Productsmodel } from "./../../models/productsmodel";
-import { ConfigService } from "./../../config/config-service.service";
+import { Productsmodel } from "./../../models/models-sales";
+import { ConfigService } from "../../services/config-service.service";
 @Component({
   selector: 'app-griditems',
   templateUrl: './griditems.component.html',
@@ -14,9 +14,16 @@ export class GriditemsComponent implements OnInit {
 
   ngOnInit() {
     this.service.Get('products').subscribe(
-      data => {
-        if (data.response) {
-          this.dataSource = data.result;
+      d => {
+        if (d.data) {
+          let itemsbestseller = [];
+          // itemsbestseller = d.flag;
+          itemsbestseller = d.data.filter(function (value, index, array) {
+            if (value.bestseller === 1) {
+              return value;
+            }
+          });
+          this.dataSource = itemsbestseller;
         }
       },
       error => {
@@ -24,9 +31,12 @@ export class GriditemsComponent implements OnInit {
       });
   }
 
+  onSearchChange(searchValue: string): void {}
+
   add(data, e) {
     this.makeOperation(data, +1);
   }
+
   substract(data, e) {
     this.makeOperation(data, -1);
   }
@@ -34,12 +44,13 @@ export class GriditemsComponent implements OnInit {
   makeOperation(data, value) {
     let inputTextId = 'canopee' + data.idproducts;
     let input = (<HTMLInputElement>document.getElementById(inputTextId));
-
     let inputValue = value >= 1 ? parseFloat(input.value) + 1 : parseFloat(input.value) - 1;
     input.value = inputValue.toString();
     //TODO: Add listener ans subscribe to list products
     data.quantity = inputValue;
-    this.service.changeListProductsDataAdd(data);
-  }
 
-}
+    // let tmp : Productsmodel = data as Productsmodel;
+    let tmp = data as Productsmodel;
+    this.service.ProductsInCart(tmp);
+  }
+} 

@@ -13,7 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -21,7 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AddsetComponent } from './products/addset/addset.component';
 import { MatCardModule } from '@angular/material/card';
 import { FilterProductsPipe } from './config/filter-products.pipe';
@@ -40,6 +40,12 @@ import { NvtrsrkgGridComponent } from './inventory-shrinkage/nvtrsrkg-grid/nvtrs
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NvtrsrowitemComponent } from './inventories/nvtrsrowitem/nvtrsrowitem.component';
 import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.component';
+import { NvtrsentriesComponent } from './inventories/nvtrsentries/nvtrsentries.component';
+import { ReportComponent } from './sales/report/report.component';
+import { SignupComponent } from './users/signup/signup.component';
+import { CookieService } from 'ngx-cookie-service';
+import { OrderdetailsComponent } from './sales/orderdetails/orderdetails.component';
+import { JwtInterceptor } from './security/jwt.interceptor';
 
 
 @NgModule({
@@ -60,7 +66,11 @@ import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.compone
     InventoryShrinkageComponent,
     NvtrsrkgGridComponent,
     NvtrsrowitemComponent,
-    NvtraddsetComponent
+    NvtraddsetComponent,
+    NvtrsentriesComponent,
+    ReportComponent,
+    SignupComponent,
+    OrderdetailsComponent
   ],
   imports: [
     HttpClientModule,
@@ -80,6 +90,7 @@ import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.compone
     MatSnackBarModule,
     MatProgressSpinnerModule,
     //
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -90,7 +101,7 @@ import { NvtraddsetComponent } from './inventories/nvtraddset/nvtraddset.compone
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

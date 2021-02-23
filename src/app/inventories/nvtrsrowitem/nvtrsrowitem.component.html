@@ -18,8 +18,11 @@
             <label class="itemvalue">{{data.barcode}}</label>
         </div>
         <div>
-            <label class="itemkey">Estatus: </label>
-            <label class="itemvalue">{{estatusname}}</label>
+            <label class="itemkey">Estatus : </label>
+            <!-- <label class="itemkey">{{ data.statusname }} </label> -->
+            <label class="itemvalue">{{ getcstatusname() }}</label>
+            <!-- <label class="itemvalue">{{ data.sgetcstatusname() }}</label> -->
+
         </div>
         <div>
             <label class="itemkey">Precio: </label>
@@ -33,12 +36,5 @@
             <label class="itemkey">Existencias: </label>
             <label class="itemvalue"> {{data.existence}}</label>
         </div>
-        <!-- <br>
-        Precio: unitary_price
-        <br>
-        Precio: unitary_cost
-        <br>
-        Existencias: existence
-        <br> -->
     </div>
 </div>
