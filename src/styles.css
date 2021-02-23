@@ -1,32 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-30 { font-size: 30px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
+/*
 
-.hideComponent{
-    /* visibility: hidden; */
-    display: none;
-    /* display: block; */
-}
 .hideComponent2{
     visibility: hidden;
-    /* display: none; */
-    /* display: block; */
 }
-
-.div-table-container {
-    display: flex; /* or inline-flex */
-    
-}
-
-.div-column{
-    display: flex;
-    flex-direction: column;
-    padding-right: 70px;
-}
+ */

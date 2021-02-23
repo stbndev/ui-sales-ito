@@ -6,50 +6,50 @@ import { InventoriesComponent } from "./inventories/inventories.component";
 import { InventoryShrinkageComponent } from './inventory-shrinkage/inventory-shrinkage.component';
 import { SignupComponent } from "./users/signup/signup.component";
 import { OrderdetailsComponent } from "./sales/orderdetails/orderdetails.component";
-import { CanActivateViaGuard } from './config/can-activate-via.guard';
+import { AuthGuard } from './security/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: SignupComponent,
-    pathMatch: 'full',
-    data: { title: 'Ingresar' }
+    canActivate: [AuthGuard],
+    component: ProductsComponent,
+    // data: { title: 'Productos' },
   },
   {
+    path: 'login',
+    component: SignupComponent,
+    pathMatch: 'full',
+  //  data:{ title:'Ingresar'}
+  },
+  {
+    canActivate: [AuthGuard],
     path: 'orderdetails',
     component: OrderdetailsComponent,
-    pathMatch: 'full',
-    data: { title: 'Order Details' }
+//    data: { title: 'Ordenes' }
   },
-  {
-    path: 'users',
-    component: SignupComponent,
-    pathMatch: 'full',
-    data: { title: 'Users Module' }
-  },
-  {
-   canActivate:[CanActivateViaGuard],
+    {
+    canActivate: [AuthGuard],
     path: 'products',
     component: ProductsComponent,
-    data: { title: 'Products Module' }
+    // data: { title: 'Productos' }
   },
   {
-    canActivate:[CanActivateViaGuard],
+    canActivate: [AuthGuard],
     path: 'sales',
     component: SalesComponent,
-    data: { title : 'Sales Module' }
+    data: { title: 'Ventas' }
   },
   {
-    canActivate:[CanActivateViaGuard],
+    canActivate: [AuthGuard],
     path: 'entries',
     component: InventoriesComponent,
-    data: { title : 'Inventories Module' }
+    data: { title: 'Inventories Module' }
   },
   {
-    canActivate:[CanActivateViaGuard],
+    canActivate: [AuthGuard],
     path: 'shrinkages',
     component: InventoryShrinkageComponent,
-    data: { title : 'Inventory Shinkage Module' }
+    data: { title: 'Inventory Shinkage Module' }
   }
 ];
 

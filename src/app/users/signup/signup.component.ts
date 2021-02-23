@@ -1,73 +1,91 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { ConfigService } from 'src/app/config/config-service.service';
-import { eTipos, eCSTATUS } from './../../config/enums-global.enum';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material/dialog';
-import { ResponseNocheServices } from "./../../models/response-ws";
+import { Component, OnInit, ViewChild, TemplateRef } from "@angular/core";
+import { ConfigService } from "src/app/services/config-service.service";
+import { IUser } from "src/app/models/interfaces-sales";
+import { eTipos, eCSTATUS } from "./../../config/enums-global.enum";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from "@angular/forms";
+import { Router } from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  selector: "app-signup",
+  templateUrl: "./signup.component.html",
+  styleUrls: ["./signup.component.css"],
 })
 export class SignupComponent implements OnInit {
-  model: any = {};
-  loading = false;
+  // model: any = {};
+  // loading = false;
   durationInSeconds = 5;
-  email = new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
 
-  @ViewChild('dialogRef', { static: true }) dialogRef: TemplateRef<any>;
+  public loginForm = this.formBuilder.group({
+    email: ["", Validators.required],
+    password: ["", Validators.required],
+  });
 
-  constructor(public dialog: MatDialog,
-    protected service: ConfigService,
-    protected router: Router) { }
+  @ViewChild("dialogRef", { static: true }) dialogRef: TemplateRef<any>;
 
-  ngOnInit() {
-    this.openDialog();
+  constructor(
+    private service: ConfigService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    // if (this.service.userData) {
+    //   this.router.navigateByUrl('/products');
+    // }
+  }
+
+  ngOnInit() {}
+
+  onSignin() {
+    let flag: boolean = false;
+    this.service
+      .Login("auth/login", this.loginForm.value)
+      .subscribe(
+        (rsps) => {
+          debugger;
+          if (rsps.flag == eCSTATUS.OK) {
+            flag = true;
+            // this.router.navigateByUrl("/products");
+            this.router.navigateByUrl("/products");
+            window.location.reload();
+          } else {
+            alert("Verificar usuario/contraseña");
+          }
+        },
+        (error) => {
+          const e = `Incidencia  ${error.statusText} ${error.name} ${error.message}`;
+          alert(e);
+        }
+      )
+      .add(() => {
+        if (flag) {
+          console.log("success");
+        }
+      });
+  }
+
+  redirectTo(uri: string) {
+    this.router.navigateByUrl("/", { skipLocationChange: false }).then(() => {
+      debugger;
+      this.router.navigate([uri]);
+    });
   }
 
   closeDialog() {
-    alert('close dialog in pipeline');
-    this.dialog.closeAll();
+    // this.dialog.closeAll();
   }
 
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    this.dialog.open(this.dialogRef, dialogConfig);
-  }
-
-  onGetUserWithTokenBearer() {
-    this.service.Get('users').subscribe(
-      d => {
-        // console.dir(data);
-      },
-      error => {
-        // console.dir(error);
-      }
-    ).add(() => {
-      console.log('e n d');
-    });
-    console.log('result breakpoint')
-
-  }
-
-  onDummyMethod(myRawToken: string) {
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(myRawToken);
-
-    // Other functions
-    const expirationDate = helper.getTokenExpirationDate(myRawToken);
-    const isExpired = helper.isTokenExpired(myRawToken);
-
-    this.onGetUserWithTokenBearer();
-
-  }
+  // openDialog() {
+  // const dialogConfig = new MatDialogConfig();
+  // dialogConfig.disableClose = true;
+  // dialogConfig.autoFocus = true;
+  // this.dialog.open(this.dialogRef, dialogConfig);
+  // }
 
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
@@ -93,7 +111,7 @@ export class SignupComponent implements OnInit {
 
   onShowAccountDiv() {
     // alert('show AccountDiv in building');
-    this.ShowElement('divsignup');
+    this.ShowElement("divsignup");
   }
 
   onShowSigninDiv() {
@@ -117,42 +135,10 @@ export class SignupComponent implements OnInit {
   }
 
   onForwardPassword() {
-    alert('reenvio de contraseña pendiente');
-  }
-
-  onSignin() {
-    if (this.email.hasError('pattern') || this.email.hasError('required')) {
-      alert('Verificar email');
-      return false;
-    }
-
-    let data = {
-      'email': this.model.email,
-      'password': this.model.password,
-    }
-
-    this.service.Make('auth/login', eTipos.POST, data).subscribe(
-      res  => {
-        if (res.flag > 1) {
-          const pagetitle = 'products'
-          this.service.buildingToken(data, pagetitle);
-          this.dialog.closeAll();
-          this.router.navigateByUrl('/' + pagetitle);
-        } else {
-          alert('Verificar usuario/contraseña');
-        }
-      }, error => {
-        this.loading = false;
-        const e = `Incidencia  ${error.statusText} ${error.name} ${error.message}`;
-        alert(e);
-      }
-    ).add(() => {
-      this.loading = false;
-    });
+    alert("reenvio de contraseña pendiente");
   }
 
   // onSaveForm() {
-  //   debugger;
   //   let data = this.model;
   //   this.service.Make('users', eTipos.POST, data).subscribe(
   //     d => {
@@ -170,7 +156,7 @@ export class SignupComponent implements OnInit {
   // }
 
   register() {
-    this.loading = true;
+    // this.loading = true;
     // this.userService.create(this.model)
     //   .subscribe(
     //     d => {
@@ -182,17 +168,31 @@ export class SignupComponent implements OnInit {
     //       this.loading = false;
     //     });
 
-    let data = this.model;
-    this.service.Make('users', eTipos.POST, data).subscribe(
-      d => {
-        this.loading = false;
-        alert('Usuario creado.' + data.idsales);
-      }, error => {
-        this.loading = false;
+    //  let data = this.model;
+    this.service.Make("users", eTipos.POST, {}).subscribe(
+      () => {
+        // this.loading = false;
+        // alert('Usuario creado.' + data.idsales);
+      },
+      (error) => {
+        // this.loading = false;
         alert(error);
       }
     );
-
+  }
+  onGetUserWithTokenBearer() {
+    this.service
+      .Get("users")
+      .subscribe(
+        () => {},
+        () => {}
+      )
+      .add(() => {});
   }
 
+  onDummyMethod(myRawToken: string) {
+    const helper = new JwtHelperService();
+    // Other functions
+    this.onGetUserWithTokenBearer();
+  }
 }

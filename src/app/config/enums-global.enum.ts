@@ -30,17 +30,28 @@ export enum eTipos {
     PATCH = 3,
     DELETE = 4,
 }
-export enum eCSTATUS {
+
+export enum eCSTATUS{
+    OK = 1, 
+    ERROR = -1,
     ACTIVO = 1,
     INACTIVO = 2,
     ELIMINADO = 3,
     CANCELADO = 4,
+    PENDIENTE = 5,
 }
+// export enum CSTATUS_PRODUCTS {
+//     ACTIVO = 1,
+//     INACTIVO = 2,
+//     ELIMINADO = 3,
+//     CANCELADO = 4,
+//     PENDIENTE = 5,
+// }
 
-export var CSTATUS = [
-    { value: '1', viewValue: 'ACTIVO' },
-    { value: '2', viewValue: 'INACTIVO' },
-    { value: '3', viewValue: 'ELIMINADO' },
-    { value: '4', viewValue: 'CANCELADO' }
-
+export var CSTATUS_PRODUCTS = [
+    { id: 1, value: 'ACTIVO' },
+    { id: 2, value: 'INACTIVO' },
+    { id: 3, value: 'ELIMINADO' },
+    { id: 4, value: 'CANCELADO' },
+    { id: 5, value: 'PENDIENTE' }
 ];

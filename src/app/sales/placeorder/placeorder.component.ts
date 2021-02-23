@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Productsmodel } from "./../../models/productsmodel";
-import { eTipos, eCSTATUS } from './../../config/enums-global.enum';
-import { Salesmodel, SaleDetails } from "./../../models/salesmodel";
-import { ConfigService } from 'src/app/config/config-service.service';
+import { Productsmodel } from "./../../models/models-sales";
+import { eTipos, CSTATUS_PRODUCTS } from './../../config/enums-global.enum';
+import { Salesmodel, SaleDetails } from "../../models/models-sales";
+import { ConfigService } from 'src/app/services/config-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TmpsaveorderComponent } from "./../tmpsaveorder/tmpsaveorder.component";
 import { NavigationEnd, Router } from '@angular/router';
@@ -14,19 +14,16 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 
 export class PlaceorderComponent implements OnInit {
-  products: any = [];
+  products: Productsmodel[] = [];
   totalOrder: number = 0;
-  totalItemsOrder: number = 0;
+  totalOrderItems: number = 0;
   durationInSeconds = 50;
   mySubscription: any;
 
-  constructor(private router: Router,
-    protected service: ConfigService,
-    private _snackBar: MatSnackBar) {
+  constructor(private router: Router, protected service: ConfigService, private _snackBar: MatSnackBar) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-
     this.mySubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Trick the Router into believing it's last link wasn't previously loaded
@@ -35,21 +32,46 @@ export class PlaceorderComponent implements OnInit {
     });
   }
 
-  removeProduct(arg) {
-    // console.dir(this.products);
+  ngOnInit() {
+    this.service.listProductsInCart.subscribe(
+      res => {
+        // start clear stage 
+        this.products = [];
+        this.totalOrder = 0;
+        this.totalOrderItems = 0;
+        // end clear stage
+        this.products = res;
+        // this.products.forEach( (item,index,self) => {
+        //   this.totalOrderItems += self[index].quantity;
+        //   this.totalOrder += (self[index].quantity * self[index].unitary_price);
+        // });
 
-    let filtered = this.products.filter(function (value, index, arr) {
-      return value.id != arg.id
-    });
+        this.products.forEach(element => {
+          this.totalOrderItems += element.quantity;
+          this.totalOrder += (element.quantity * element.unitary_price);
+        });
+      },
+      error => {
+        alert(error);
+      }
+    );
+  }
 
-
-    this.products = this.products.splice(0, this.products.length);
-    this.products = filtered;
+  removeProduct(p) {
+    this.service.ProductsInCart(p, true, false);
+    let inputTextId = 'canopee' + p.idproducts;
+    let input = (<HTMLInputElement>document.getElementById(inputTextId));
+    let inputValue = 0;
+    input.value = inputValue.toString();
+    //TODO: Add listener ans subscribe to list products
+    
 
   }
   remove() {
     // A.splice(0,A.length)
-    this.products = this.products.splice(0, this.products.length);
+    // this.products = this.products.splice(0, this.products.length);
+    this.products = [];
+    this.service.ProductsInCart(null, true);
     // this.products =[];
   }
 
@@ -58,43 +80,13 @@ export class PlaceorderComponent implements OnInit {
       this.mySubscription.unsubscribe();
     }
   }
-
-  ngOnInit() {
-    this.service.listproductsData.subscribe(
-      res => {
-
-        this.products = res;
-        let tmpquantity = 0;
-        let tmptotal = [];
-        let tmptotal2 = 0;
-
-        this.products.forEach(element => {
-          tmpquantity += element.quantity;
-          let tmp = element.quantity * element.unitary_price;
-          tmptotal2 += element.quantity * element.unitary_price;
-          tmptotal.push(tmp);
-        });
-        this.totalItemsOrder = tmpquantity;
-        this.totalOrder = tmptotal2;
-      },
-      error => {
-        alert(error);
-      }
-    );
-  }
-
-  openSnackBar() {
+  openSnackBar() {   
     this._snackBar.openFromComponent(TmpsaveorderComponent, {
       duration: this.durationInSeconds * 1000,
     });
-
   }
 
   onPlaceOrder(e) {
-    //TODO:
-    // VALIDATE IN CORE WHEN I DONT HAVE PRODUCT EXISTS
-    // OK.VALIDATE IN FRONTEND WHEN I DONT HAVE PRODUCTS
-    // RESET PLACE ORDER AND CREATE PRINT PAPER 
 
     let data = this.buildData();
     this.service.Make('sales', eTipos.POST, data).subscribe(
@@ -107,7 +99,7 @@ export class PlaceorderComponent implements OnInit {
         alert('placeorder.onPlaceOrder');
       }
     ).add(() => {
-      console.log('end');
+      
     });
   }
 
@@ -124,7 +116,9 @@ export class PlaceorderComponent implements OnInit {
       let sd = new SaleDetails(element.unitary_cost, element.unitary_price, element.quantity, element.idproducts);
       array.push(sd);
     });
-    let sm = new Salesmodel(this.totalOrder, 0, eCSTATUS.ACTIVO, 0, 'angularwebapp', 0, 0, array);
+    let ACTIVO = CSTATUS_PRODUCTS.find(x=> x.value == "ACTIVO" ).id;
+    let sm = new Salesmodel(this.totalOrder, 0,ACTIVO, 0, 'angularwebapp', 0, 0, array);
+    
     return sm;
   }
 

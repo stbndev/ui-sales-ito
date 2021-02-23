@@ -13,7 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -45,6 +45,7 @@ import { ReportComponent } from './sales/report/report.component';
 import { SignupComponent } from './users/signup/signup.component';
 import { CookieService } from 'ngx-cookie-service';
 import { OrderdetailsComponent } from './sales/orderdetails/orderdetails.component';
+import { JwtInterceptor } from './security/jwt.interceptor';
 
 
 @NgModule({
@@ -100,7 +101,7 @@ import { OrderdetailsComponent } from './sales/orderdetails/orderdetails.compone
     MatIconModule,
     MatListModule
   ],
-  providers: [CookieService],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true}, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

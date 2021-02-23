@@ -1,0 +1,2 @@
+component: addset.component.ts
+Get all Estatus from cstatus

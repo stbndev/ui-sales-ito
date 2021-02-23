@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { Productsmodel } from 'src/app/models/productsmodel';
-import { CSTATUS, eTipos, eCSTATUS } from 'src/app/config/enums-global.enum';
-import { ConfigService } from 'src/app/config/config-service.service';
+import { Productsmodel } from 'src/app/models/models-sales';
+import { CSTATUS_PRODUCTS, eTipos } from 'src/app/config/enums-global.enum';
+import { ConfigService } from 'src/app/services/config-service.service';
 
 @Component({
   selector: 'app-nvtrsitem',
@@ -10,8 +10,8 @@ import { ConfigService } from 'src/app/config/config-service.service';
 })
 export class NvtrsitemComponent implements OnInit {
   model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
-  selected = '1';
-  liststatus = CSTATUS;
+  selected = 1;
+  liststatus = CSTATUS_PRODUCTS;
   imageSrc: any;
 
   constructor(private elementRef: ElementRef, protected service: ConfigService) { }
@@ -19,7 +19,7 @@ export class NvtrsitemComponent implements OnInit {
   ngOnInit() {
     this.service.productsData.subscribe(res => {
       this.model = res;
-      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
+      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus :1;
     });
   }
 
@@ -40,7 +40,8 @@ export class NvtrsitemComponent implements OnInit {
     let tmpendpoint: String = 'products';
 
     if (this.model.idproducts > 0) {
-      this.model.idcstatus = eCSTATUS.ELIMINADO;
+      let ELIMINADO = CSTATUS_PRODUCTS.find(x=> x.value == "ELIMINADO").id;
+      this.model.idcstatus = ELIMINADO;
       tmpmethod = eTipos.DELETE
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
 

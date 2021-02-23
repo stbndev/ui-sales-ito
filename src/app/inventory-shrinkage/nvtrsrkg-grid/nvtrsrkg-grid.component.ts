@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Productsmodel } from 'src/app/models/productsmodel';
-import { ConfigService } from 'src/app/config/config-service.service';
+import { Productsmodel } from 'src/app/models/models-sales';
+import { ConfigService } from 'src/app/services/config-service.service';
 
 @Component({
   selector: 'app-nvtrsrkg-grid',

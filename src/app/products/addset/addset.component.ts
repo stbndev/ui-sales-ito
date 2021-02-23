@@ -1,8 +1,8 @@
 import { AfterViewInit, ElementRef, Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Productsmodel } from "./../../models/productsmodel";
-import { eTipos, eCSTATUS } from "./../../config/enums-global.enum";
-import { CSTATUS } from "./../../config/enums-global.enum";
-import { ConfigService } from "./../../config/config-service.service";
+import { Productsmodel } from "./../../models/models-sales";
+import { eTipos, CSTATUS_PRODUCTS } from "./../../config/enums-global.enum";
+// import { CSTATUS } from "./../../config/enums-global.enum";
+import { ConfigService } from "../../services/config-service.service";
 
 
 @Component({
@@ -13,9 +13,9 @@ import { ConfigService } from "./../../config/config-service.service";
 export class AddsetComponent implements OnInit {
   // setup initial
   //model: any ;   
-  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
-  selected = '1';
-  liststatus = CSTATUS;
+  model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
+  selected = 5;
+  liststatus = CSTATUS_PRODUCTS;
   imageSrc: any;
 
 
@@ -23,9 +23,9 @@ export class AddsetComponent implements OnInit {
 
   onCancel() {
     // this.model = new Productsmodel(0, '', '', 0, 0, 0, 0, 0, 0, 'https://dl.dropboxusercontent.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg');
-    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0,0, '', '', '', '', '', '');
+    this.model = new Productsmodel(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '');
   }
-  
+
   HideElement(iditem) {
     var element = document.getElementById(`${iditem}`);
     if (element.className === 'hideComponent') {
@@ -42,10 +42,10 @@ export class AddsetComponent implements OnInit {
     let tmpendpoint: String = 'products';
 
     if (this.model.idproducts > 0) {
-      this.model.idcstatus = eCSTATUS.ELIMINADO;
+       let ELIMINADO = CSTATUS_PRODUCTS.find(x=> x.value == "ELIMINADO").id;
+      this.model.idcstatus = ELIMINADO;
       tmpmethod = eTipos.DELETE
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
-
       this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
         if (d.flag) {
           this.service.changeListProductsDataAdd(this.model);
@@ -61,8 +61,9 @@ export class AddsetComponent implements OnInit {
   }
 
   onEventSelection(event) {
-    this.model.idcstatus = event;
+    this.model.idcstatus = parseInt(event);
   }
+
   onErrorDefaultPic() {
     // this.imageSrc = './../../assets/imgs/defaultimg.jpeg';
     this.imageSrc = 'https://dl.dropbox.com/s/6x9dqmz6ewpdj1w/1581413154.jpeg'
@@ -97,16 +98,20 @@ export class AddsetComponent implements OnInit {
 
 
   onSaveForm() {
-    
+    this.service.flagSpinner.next(true);
     let tmpmethod: eTipos;
     let tmpendpoint: String = 'products';
+    this.model.maker = this.service.userData.id;
+    
     if (this.model.idproducts > 0) {
       tmpmethod = eTipos.PUT
       tmpendpoint = `${tmpendpoint}/${this.model.idproducts}`
     } else {
       tmpmethod = eTipos.POST
     }
-
+    //TODO
+    // Validation sale when no there items for buy
+    
     this.service.Make(tmpendpoint, tmpmethod, this.model).subscribe((d) => {
       if (d.flag) {
         this.service.changeListProductsDataAdd(d.data);
@@ -114,6 +119,8 @@ export class AddsetComponent implements OnInit {
       }
     }, (error) => {
       alert(error);
+    }).add(() => {
+      this.service.flagSpinner.next(false);
     });
   }
 
@@ -123,14 +130,11 @@ export class AddsetComponent implements OnInit {
     // this.elementRef.nativeElement.('fileProductImg').addEventListener('change', this.handleFileSelect.bind(this), false);
   }
   ngOnInit() {
-
     this.service.productsData.subscribe(res => {
       this.model = res;
-      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus.toString() : '1';
-      this.model.idcstatus = parseInt(this.selected);
-      
+      this.selected = this.model.idcstatus > 0 ? this.model.idcstatus :1;
+      this.model.idcstatus = (this.selected);
     });
-
   }
 
 

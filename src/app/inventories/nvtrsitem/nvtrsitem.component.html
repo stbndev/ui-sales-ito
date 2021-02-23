@@ -40,8 +40,8 @@
                             <mat-label>Estatus Actual</mat-label>
                             <!--  (change)="onEventSelection($event.value)-->
                             <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)">
-                                <mat-option *ngFor="let i of liststatus" [value]="i.value">
-                                    {{i.viewValue}}
+                                <mat-option *ngFor="let i of liststatus" [value]="i.id">
+                                    {{i.value}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>

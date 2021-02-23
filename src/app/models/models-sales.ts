@@ -1,3 +1,36 @@
+import { CSTATUS_PRODUCTS } from "../config/enums-global.enum";
+export class Usersmodel {
+    constructor(
+        public id: string,
+        public name: string,
+        public email: string,
+        public password: string,
+        public idrol: string,
+        public date_add: number
+    ) { }
+}
+export class Productsmodel {
+        constructor(
+                public idproducts: number,
+                public idcstatus: number,
+                public idcompany: number,
+                public unitary_price: number,
+                public unitary_cost: number,
+                public existence: number,
+                public quantity: number,
+                public date_add: number,
+                public date_set: number,
+                public bestseller: number,
+                public id: string,
+                public name: string,
+                public description: string,
+                public barcode: string,
+                public pathimg: string,
+                public maker: string
+        ) {
+        }
+        public setup: boolean;
+}
 export class SaleDetailsModel {
      unitary_cost: number;
      unitary_price: number;

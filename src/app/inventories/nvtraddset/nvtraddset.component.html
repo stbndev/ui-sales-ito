@@ -33,22 +33,21 @@ onselect from nvtrsrowitem chance class hideComponent
 
                     <mat-form-field>
                         <mat-label>Estatus Actual</mat-label>
-                        <!--  (change)="onEventSelection($event.value)-->
-                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)"
-                            [disabled]="true">
-                            <mat-option *ngFor="let i of liststatus" [value]="i.value">
-                                {{i.viewValue}}
+                        <!--  (change)="onEventSelection($event.value) [disabled]="true"-->
+                        <mat-select [(value)]="selected" (selectionChange)="onEventSelection($event.value)">
+                            <mat-option *ngFor="let i of liststatus" [value]="i.id">
+                                {{i.value}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field>
                         <input type="number" name="unitary_price" min="1" max="999999" matInput placeholder='Precio'
-                            name='unitary_price' [(ngModel)]='model.unitary_price' disabled>
+                            name='unitary_price' [(ngModel)]='model.unitary_price' >
                     </mat-form-field>
                     <mat-form-field>
                         <input type="number" name="unitary_cost" min="1" max="999999" matInput placeholder='Costo'
-                            name='unitary_cost' [(ngModel)]='model2.unitary_cost' 
-                            [disabled]="!isDisabled ? 'disabled': null">
+                            name='unitary_cost' [(ngModel)]='model2.unitary_cost' >
+                            <!-- [disabled]="!isDisabled ? 'disabled': null" -->
                     </mat-form-field>
                     <mat-form-field>
                         <input type="number" name="quantity" min="1" max="999999"

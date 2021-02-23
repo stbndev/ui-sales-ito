@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Entriesmodel } from 'src/app/models/entriesmodel';
-import { ConfigService } from 'src/app/config/config-service.service';
-import { Productsmodel } from 'src/app/models/productsmodel';
+import { IEntries } from 'src/app/models/interfaces-sales';
+import { ConfigService } from 'src/app/services/config-service.service';
+import { Productsmodel } from 'src/app/models/models-sales';
 
 @Component({
   selector: 'app-nvtrsentries',
@@ -10,7 +10,8 @@ import { Productsmodel } from 'src/app/models/productsmodel';
 })
 
 export class NvtrsentriesComponent implements OnInit {
-  dataSource: Entriesmodel[];
+  // dataSource: Entriesmodel[];
+  dataSource = [] as IEntries[];
   dataProducts: Productsmodel[];
   displayedColumns: string[] = [
     // 'identries',
@@ -44,7 +45,7 @@ export class NvtrsentriesComponent implements OnInit {
               for (let i = 0; i < this.dataSource.length; i++) {
                 for (let ip = 0; ip < this.dataProducts.length; ip++) {
                   if (this.dataSource[i].idproducts === this.dataProducts[ip].idproducts) {
-                    // console.dir(this.dataProducts[i].name);
+                    
                     this.dataSource[i].name = this.dataProducts[ip].name;
                   }
                 }
