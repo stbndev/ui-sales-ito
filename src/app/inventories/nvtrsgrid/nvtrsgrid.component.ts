@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from 'src/app/config/config-service.service';
-import { Productsmodel } from 'src/app/models/productsmodel';
+import { ConfigService } from 'src/app/services/config-service.service';
+import { Productsmodel } from 'src/app/models/models-sales';
 
 @Component({
   selector: 'app-nvtrsgrid',
@@ -23,13 +23,20 @@ export class NvtrsgridComponent implements OnInit {
     'quantity',
   ];
 
-  constructor(protected service: ConfigService) { }
+  constructor(protected service: ConfigService) {
+    this.service.refresh.subscribe(res => {
+      
+      if (res) {
+        this.ngOnInit();
+      }
+    });
+  }
 
   ngOnInit() {
     this.service.Get('products').subscribe(
-      data => {
-        if (data.response) {
-          this.dataSource = data.result;
+      d => {
+        if (d.flag) {
+          this.dataSource = d.data;
         }
       },
       error => {

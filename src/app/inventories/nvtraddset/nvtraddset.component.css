@@ -1,0 +1,6 @@
+
+.hideComponent{
+    /* visibility: hidden; */
+    display: none;
+    /* display: block; */
+}

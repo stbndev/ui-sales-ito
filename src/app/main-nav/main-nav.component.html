@@ -3,48 +3,55 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <!-- <a mat-list-item href="#">Productos</a>
-      <a mat-list-item href="#">Ventas</a>
-      <a mat-list-item href="#">Perdidas</a> -->
-      <a mat-list-item href="#">
+      <a mat-list-item (click)="redirect('');">
         <i class="material-icons">
           home
         </i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inicio
+        &nbsp;&nbsp;&nbsp;&nbsp;Inicio
       </a>
-      <a mat-list-item href="/products">
+      <a mat-list-item (click)="redirect('products');">
         <i class="material-icons">
           fastfood
         </i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Productos
+        &nbsp;&nbsp;&nbsp;&nbsp;Productos
       </a>
-      <a mat-list-item href="/sales">
+      <a mat-list-item (click)="redirect('sales');">
         <i class="material-icons">
           add_shopping_cart
         </i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ventas
+        &nbsp;&nbsp;&nbsp;&nbsp;Ventas
       </a>
-      <a mat-list-item href="/entries">
+      <a mat-list-item (click)="redirect('entries');">
         <i class="material-icons">
           donut_small
         </i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inventario
+        &nbsp;&nbsp;&nbsp;&nbsp;Inventario
       </a>
-      <a mat-list-item href="/shrinkages">
+      <a mat-list-item (click)="redirect('shrinkages');">
         <i class="material-icons">
           trending_down
         </i>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perdidas
+
+        &nbsp;&nbsp;&nbsp;&nbsp;Perdidas
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
+    <!-- <div class="loading-indicator">
+      <mat-progress-spinner mode="indeterminate" color="accent"></mat-progress-spinner>
+    </div> -->
+    <div class="loading-indicator" *ngIf='(flagSpinner)'>
+      <mat-spinner  mode='indeterminate' class="loading-indicator" value='100' diameter='80'
+        class="center" color='accent'></mat-spinner>
+    </div>
     <mat-toolbar color="primary">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>salesin-ui</span>
+      <span>
+        {{ model.pagetitle }}
+      </span>
       <span class="spacer">
       </span>
       <a routerLink="/products">
@@ -52,12 +59,21 @@
           settings_applications
         </i>
       </a>
-      <a routerLink="#">
-        <i class="material-icons md-36">
-          account_circle
-        </i>
-        Ingresar
-      </a>
+      <div *ngIf="(model.username); else elseBlock">
+        <a href="#">
+          <img src="https://img.icons8.com/doodle/48/000000/english-mustache.png" />
+          {{ model.username }}
+        </a>
+      </div>
+      <ng-template #elseBlock>
+        <a routerLink="/users">
+          <i class="material-icons md-36">
+            account_circle
+          </i>
+          Ingresar
+        </a>
+      </ng-template>
+      <a (click)='logout()' *ngIf='user'>Cerrar Sesión</a>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content>

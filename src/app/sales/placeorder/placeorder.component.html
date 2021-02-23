@@ -1,7 +1,7 @@
 <h2>
     Tu Orden
 </h2>
-<h4>
+<h4 (click)='remove()' class="select-sales">
     Remover Todo
 </h4>
 <!-- <mat-grid-list cols='1' rowHeight='100px'>
@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <td>
-                    <i class="material-icons">
+                    <i (click)='removeProduct(item)' class="material-icons select-sales">
                         clear
                     </i>
                 </td>
@@ -42,7 +42,7 @@
     <table>
         <tr>
             <td>Total Productos</td>
-            <td>{{totalItemsOrder}}</td>
+            <td>{{totalOrderItems}}</td>
         </tr>
         <tr>
             <td>
