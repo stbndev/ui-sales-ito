@@ -1,0 +1,59 @@
+SALESITO
+#FRONTEND 
+#Component Products
+Cambiar alert por snackbar
+ocultar menu si no esta autentificado
+acomodar boton cancelar
+una vez ingresar mandar a pagina de productos :
+ > indagar roles para ver que funcionalidades tiene permitida el usuario
+ > poner empresa o compania para filtrar informacion
+ > acorde al rol verificar si pueda add , edit or delete products 
+ > si selecciono un producto y da click en cancelar cerar el div y limpiar formulario
+agregar estilo y funcion a cerrar sesion
+
+#Component Entries
+Arreglar titulo , cambiar por entradas
+Arreglar formulario diseno
+Validar formulario dentro del frontend y backend
+realizar la funcionalidad de entradas tabla maestro detalle en el front
+
+#Component Sales
+Realizar Tabla maestro-detalle de todo los productos
+Realizar formulario para buscar producto
+Cuando es un solo producto no actualiza el total de productos , total
+Guardar orden esta sin funcionalidad (idea es guardar en localstorage la venta y ponerla con un badge como pendoiente)
+
+
+#BACKEND
+#LOGIN 
+resolver el error An error occurred while deserializing the idrol property of class noche.Context.Users: Cannot deserialize a 'String' from BsonType 'Int32'."
+
+#Component Products
+una vez ingresar mandar a pagina de productos :
+ > indagar roles para ver que funcionalidades tiene permitida el usuario
+ > poner empresa o compania para filtrar informacion
+ > acorde al rol verificar si pueda ver ,add , edit or delete products 
+ > acorde al rol verificar si pueda ver ,add , edit or delete inventario
+
+#Component Entries
+Validar formulario dentro del frontend y backend
+realizar la funcionalidad de entradas tabla maestro detalle en el backend
+
+#Component Sales
+Realizar Tabla maestro-detalle de todo los productos
+Realizar formulario para buscar producto
+Cuando es un solo producto no actualiza el total de productos , total
+Pedir orden ya no funciona
+
+20200511.1001
+Find way of call component without masterpage
+
+20200226.1147
+Put set default img in a global export settings
+
+20200222.1311
+#without fancy visually
+sales.keep the place order in local or offline and visually 
+losses products-inventories.everything is missing
+inventories.everything is missing
+
