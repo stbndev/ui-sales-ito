@@ -26,7 +26,13 @@ Guardar orden esta sin funcionalidad (idea es guardar en localstorage la venta y
 
 #BACKEND
 #LOGIN 
-resolver el error An error occurred while deserializing the idrol property of class noche.Context.Users: Cannot deserialize a 'String' from BsonType 'Int32'."
+OK resolver el error An error occurred while deserializing the idrol property of class noche.Context.Users: Cannot deserialize a 'String' from BsonType 'Int32'." 
+
+#Roles
+OK Implementar al menos 3 perfiles 
+	> Administrator
+	> Seller 
+	> Supervisor
 
 #Component Products
 una vez ingresar mandar a pagina de productos :

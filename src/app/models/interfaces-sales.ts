@@ -8,9 +8,11 @@ export interface IUser {
         email: string;
         password: string;
         idrol: string;
+        rolname: string;
         date_add: number;   
         company: number;   
         token:string;
+        modules:any[];
 }
 export interface IProducts {
     idproducts: number;
