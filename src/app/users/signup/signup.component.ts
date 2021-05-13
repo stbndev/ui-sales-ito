@@ -43,11 +43,11 @@ export class SignupComponent implements OnInit {
 
   onSignin() {
     let flag: boolean = false;
+
     this.service
       .Login("auth/login", this.loginForm.value)
       .subscribe(
         (rsps) => {
-          debugger;
           if (rsps.flag == eCSTATUS.OK) {
             flag = true;
             // this.router.navigateByUrl("/products");
@@ -71,7 +71,6 @@ export class SignupComponent implements OnInit {
 
   redirectTo(uri: string) {
     this.router.navigateByUrl("/", { skipLocationChange: false }).then(() => {
-      debugger;
       this.router.navigate([uri]);
     });
   }

@@ -35,8 +35,10 @@ export class MainNavComponent {
     });
     this.service.userSubject.subscribe(
       (rspns) => {
-        this.user = rspns;
-        this.model.username = rspns.name;
+        if (rspns) {
+          this.user = rspns;
+          this.model.username = rspns.name;
+        }
       },
       (error) => {
         console.dir(error);
@@ -44,9 +46,9 @@ export class MainNavComponent {
     );
   }
 
-  logout(){
+  logout() {
     this.service.Logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(["/login"]);
   }
 
   ngOnInit() {}
